@@ -1,8 +1,14 @@
+import { Box, ThemeProvider } from "@mui/material";
+import Home from "./pages/Home";
+import { darkTheme } from "./theme";
+
 function App() {
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <Box>
+        <Home />
+      </Box>
+    </ThemeProvider>
   );
 }
 
