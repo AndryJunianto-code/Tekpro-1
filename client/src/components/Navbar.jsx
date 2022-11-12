@@ -58,7 +58,7 @@ const Navbar = () => {
         <InputBase placeholder="Search..." sx={{ paddingLeft: "1.5rem" }} />
       </Search>
 
-      <Box>
+      <Box marginRight={2}>
         <Button variant="text">
           <Typography mr={0.5} color="white">
             Log in
