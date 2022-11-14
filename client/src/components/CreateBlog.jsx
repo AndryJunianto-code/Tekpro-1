@@ -1,30 +1,8 @@
-import {
-  Box,
-  Button,
-  InputBase,
-  styled,
-  Typography,
-  Stack,
-  Card,
-} from "@mui/material";
+import { Box, Button, Typography, Stack, Card } from "@mui/material";
 import React from "react";
+import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 
 const CreateBlog = () => {
-  const CustomBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-  const BoxWrapper = styled(Box)(({ theme }) => ({
-    width: "90%",
-    [theme.breakpoints.up("md")]: {
-      width: "75%",
-      maxWidth: "700px",
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "100%",
-    },
-  }));
   return (
     <CustomBox flex={4} mt={"3rem"} sx={{ overflowX: "hidden" }}>
       <BoxWrapper>
@@ -59,17 +37,18 @@ const CreateBlog = () => {
             />
           </Stack>
         </Card>
-
         <Box
           p={"1rem"}
           sx={{ backgroundColor: "white" }}
           borderRadius={2}
           height="12rem"
-          my={4}
+          mt={4}
+          mb={2}
           border={"1px solid #bdbebf"}
         ></Box>
-
-        <Button variant="contained">Publish</Button>
+        <Button variant="contained" sx={{ textTransform: "capitalize" }}>
+          Publish
+        </Button>
       </BoxWrapper>
     </CustomBox>
   );

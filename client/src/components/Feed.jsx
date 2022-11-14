@@ -1,32 +1,21 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardHeader,
-  styled,
-  Typography,
-  Stack,
-  CardMedia,
-  CardActions,
-  ButtonGroup,
-  Button,
-  ExpandMore,
-  IconButton,
-} from "@mui/material";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { Stack } from "@mui/material";
 import React from "react";
-import Post from "./Post";
+import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
+import IndividualPost from "./individual/IndividualPost";
 
 const Feed = () => {
   return (
-    <Box flex={4} pt={2}>
-      <Stack>
-        <Post />
-        <Post />
-        <Post />
-      </Stack>
-    </Box>
+    <CustomBox flex={4} pt={2}>
+      <BoxWrapper>
+        <Stack>
+          <IndividualPost />
+          <IndividualPost />
+          <IndividualPost />
+          <IndividualPost />
+          <IndividualPost />
+        </Stack>
+      </BoxWrapper>
+    </CustomBox>
   );
 };
 

@@ -31,11 +31,11 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <HomeOutlined style={{ color: "#292929" }} />
+                  <HomeOutlined sx={{ color: "#292929" }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={
-                    <Typography type="body2" style={{ color: "#292929" }}>
+                    <Typography type="body2" sx={{ color: "#292929" }}>
                       Home
                     </Typography>
                   }
@@ -44,37 +44,41 @@ const Leftbar = () => {
             </ListItem>
           </Link>
 
-          <ListItem disablePadding>
-            <ListItemButton className="leftbarButton">
-              <ListItemIcon>
-                <BookmarksOutlined style={{ color: "#292929" }} />
-              </ListItemIcon>
-              <ListItemText
-                disableTypography
-                primary={
-                  <Typography type="body2" style={{ color: "#292929" }}>
-                    Reading List
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
+          <Link to="/lists" className="link">
+            <ListItem disablePadding>
+              <ListItemButton className="leftbarButton">
+                <ListItemIcon>
+                  <BookmarksOutlined style={{ color: "#292929" }} />
+                </ListItemIcon>
+                <ListItemText
+                  disableTypography
+                  primary={
+                    <Typography type="body2" style={{ color: "#292929" }}>
+                      Reading List
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
 
-          <ListItem disablePadding>
-            <ListItemButton className="leftbarButton">
-              <ListItemIcon>
-                <ArticleOutlined style={{ color: "#292929" }} />
-              </ListItemIcon>
-              <ListItemText
-                disableTypography
-                primary={
-                  <Typography type="body2" style={{ color: "#292929" }}>
-                    Your Stories
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
+          <Link to="/stories" className="link">
+            <ListItem disablePadding>
+              <ListItemButton className="leftbarButton">
+                <ListItemIcon>
+                  <ArticleOutlined style={{ color: "#292929" }} />
+                </ListItemIcon>
+                <ListItemText
+                  disableTypography
+                  primary={
+                    <Typography type="body2" style={{ color: "#292929" }}>
+                      Your Stories
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
 
           <Link to="/write" className="link">
             <ListItem disablePadding>

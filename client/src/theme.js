@@ -7,6 +7,7 @@ export const theme = createTheme({
     },
     mainBlue: "#026aa7",
     mainWhite: "#f9fbfd",
+    darkGrey: "#707070",
   },
 });
 
