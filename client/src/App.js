@@ -8,6 +8,7 @@ import ReadingList from "./pages/ReadingList";
 import YourStories from "./pages/YourStories";
 import AuthProvider from "./auth/AuthProvider";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import SinglePost from "./pages/SinglePost";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <AuthProvider>
           <div className="bigBackground">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<SinglePost />} />
               <Route path="/write" element={<Write />} />
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
