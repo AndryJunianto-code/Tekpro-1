@@ -61,9 +61,7 @@ const Navbar = () => {
   return (
     <StyledNavbar>
       <Toolbar>
-        <Typography variant="h6">
-          <LogoutButton />
-        </Typography>
+        <Typography variant="h6">{/* <LogoutButton /> */}LOGO</Typography>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />

@@ -17,10 +17,11 @@ function App() {
         <AuthProvider>
           <div className="bigBackground">
             <Routes>
-              <Route path="/" element={<SinglePost />} />
+              <Route path="/" element={<Home />} />
               <Route path="/write" element={<Write />} />
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
+              <Route path="/:postId" element={<SinglePost />} />
             </Routes>
           </div>
         </AuthProvider>
