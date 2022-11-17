@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const { UploadImage } = require("../utils/UploadImage");
+const parser = require("../utils/cloudinary");
 
+router.post("/image", parser.single("image"), UploadImage);
 //get all post
 router.get("/", async (req, res) => {
   let posts;
