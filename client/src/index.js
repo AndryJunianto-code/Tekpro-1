@@ -4,7 +4,8 @@ import App from "./App";
 import axios from "axios";
 import { QueryClientProvider, QueryClient } from "react-query";
 
-const baseUrl = "http://localhost:5000/api";
+const baseUrl =
+  "https://tekpro-1-production.up.railway.app/api/"; /*"http://localhost:5000/api"*/
 axios.defaults.baseURL = baseUrl;
 
 const client = new QueryClient({
