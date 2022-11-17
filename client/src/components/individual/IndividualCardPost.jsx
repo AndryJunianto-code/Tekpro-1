@@ -7,13 +7,17 @@ import {
   Typography,
   Stack,
   IconButton,
+  unstable_useId,
 } from "@mui/material";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import React from "react";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 
-const IndividualPost = () => {
+const IndividualCardPost = ({ post }) => {
+  const { authorImage, authorName, caption, title, postImage, tags, _id } =
+    post;
   return (
     <Card
       sx={{
@@ -25,13 +29,7 @@ const IndividualPost = () => {
       }}
     >
       <CardHeader
-        avatar={
-          <Avatar
-            src={
-              "https://images.pexels.com/photos/13270850/pexels-photo-13270850.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-            }
-          />
-        }
+        avatar={<Avatar src={authorImage} />}
         action={
           <>
             <IconButton>
@@ -42,10 +40,10 @@ const IndividualPost = () => {
             </IconButton>
           </>
         }
-        title="Andry Junianto"
+        title={authorName}
         subheader="7 hours ago"
       />
-      <Link to="/123" className="link">
+      <Link to={`/p/${_id}`} className="link">
         <Stack
           justifyContent="space-between"
           direction="row"
@@ -53,35 +51,29 @@ const IndividualPost = () => {
         >
           <Box marginRight={2}>
             <Typography sx={{ fontWeight: "700", fontSize: { lg: "1.2rem" } }}>
-              How to be a programmer
+              {title}
             </Typography>
             <Typography
               className="postDesc"
               fontSize={"0.7rem"}
               display={{ xs: "none", sm: "-webkit-box" }}
             >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-              odio molestias ex vero esse quos vel, iusto excepturi culpa.
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint est
-              neque, alias magnam reprehenderit asperiores. Exercitationem nobis
-              ut saepe!
+              {caption}
             </Typography>
 
             <Box mt={"0.2rem"}>
-              <button className="buttonTag">Python</button>
-              <button className="buttonTag">Data Science</button>
-              <button className="buttonTag">Css</button>
-              <button className="buttonTag">AI</button>
+              {tags.map((tag) => (
+                <button className="buttonTag" key={v4()}>
+                  {tag}
+                </button>
+              ))}
             </Box>
           </Box>
-          <img
-            className="postImage"
-            src="https://images.pexels.com/photos/5245865/pexels-photo-5245865.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          />
+          <img alt={title} className="postImage" src={postImage} />
         </Stack>
       </Link>
     </Card>
   );
 };
 
-export default IndividualPost;
+export default IndividualCardPost;

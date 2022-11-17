@@ -34,7 +34,7 @@ const PostRightbar = () => {
           mb="0.8rem"
           fontSize="0.65rem"
           color={theme.palette.darkGrey}
-          fontWeigth={100}
+          fontWeight={300}
         >
           I am a professional writer and content creator with a passion for
           health and wellness. I enjoy writing about the latest in fitness,

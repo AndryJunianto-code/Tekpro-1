@@ -21,7 +21,7 @@ function App() {
               <Route path="/write" element={<Write />} />
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
-              <Route path="/:postId" element={<SinglePost />} />
+              <Route path="/p/:postId" element={<SinglePost />} />
             </Routes>
           </div>
         </AuthProvider>

@@ -1,11 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import axios from "axios";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const baseUrl = "http://localhost:5000/api";
+axios.defaults.baseURL = baseUrl;
+
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={client}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

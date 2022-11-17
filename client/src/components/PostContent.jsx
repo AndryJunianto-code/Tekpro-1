@@ -6,7 +6,9 @@ import { useTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-const PostContent = () => {
+const PostContent = ({ singlePostData }) => {
+  const { title, subtitle, caption, postImage, authorImage, authorName } =
+    singlePostData;
   const theme = useTheme();
   return (
     <CustomBox flex={4} mt={5}>
@@ -17,14 +19,9 @@ const PostContent = () => {
           alignItems={"center"}
         >
           <Stack direction={"row"}>
-            <Avatar
-              src={
-                "https://images.pexels.com/photos/13270850/pexels-photo-13270850.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-              }
-              alt="profile"
-            />
+            <Avatar src={authorImage} alt="profile" />
             <Stack ml={2}>
-              <Typography fontSize={"0.75rem"}>Andry Junianto</Typography>
+              <Typography fontSize={"0.75rem"}>{authorName}</Typography>
               <Typography fontSize={"0.7rem"} color={theme.palette.darkGrey}>
                 Nov 9
               </Typography>
@@ -43,83 +40,16 @@ const PostContent = () => {
 
         {/*  */}
         <Box mt={2}>
-          <Typography fontSize={"1.5rem"} fontWeight="900">
-            How to Build an Income Stream with APIs
+          <Typography fontSize={"1.5rem"} height={"1.9rem"} fontWeight="900">
+            {title}
           </Typography>
-          <img
-            className="singlePostImage"
-            src="https://images.pexels.com/photos/13270850/pexels-photo-13270850.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-          />
-          <Typography mb={2}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse vel
-            et officia explicabo distinctio architecto quos iste odit, quidem
-            sapiente repudiandae debitis voluptates molestiae vitae porro alias
-            incidunt possimus reiciendis eaque autem. Itaque incidunt corrupti
-            vel odio veritatis dolores repudiandae cupiditate eligendi tenetur
-            laudantium quaerat cum quas delectus quae commodi non, aperiam ut,
-            esse error dignissimos at perspiciatis facere numquam? Harum
-            consequatur ea magni incidunt sequi, omnis aliquam doloremque
-            commodi perferendis placeat sit dolor similique soluta, quasi vel
-            assumenda eum eligendi, culpa esse amet voluptatum expedita
-            dignissimos nihil. Perferendis alias accusamus quasi culpa iusto,
-            mollitia ipsam. Hic praesentium sint impedit?
+          <Typography fontSize={"1.2rem"} fontWeight="500" color="#757575">
+            {subtitle}
           </Typography>
-          <Typography mb={2}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse vel
-            et officia explicabo distinctio architecto quos iste odit, quidem
-            sapiente repudiandae debitis voluptates molestiae vitae porro alias
-            incidunt possimus reiciendis eaque autem. Itaque incidunt corrupti
-            vel odio veritatis dolores repudiandae cupiditate eligendi tenetur
-            laudantium quaerat cum quas delectus quae commodi non, aperiam ut,
-            esse error dignissimos at perspiciatis facere numquam? Harum
-            consequatur ea magni incidunt sequi, omnis aliquam doloremque
-            commodi perferendis placeat sit dolor similique soluta, quasi vel
-            assumenda eum eligendi, culpa esse amet voluptatum expedita
-            dignissimos nihil. Perferendis alias accusamus quasi culpa iusto,
-            mollitia ipsam. Hic praesentium sint impedit?
-          </Typography>
-          <Typography mb={2}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse vel
-            et officia explicabo distinctio architecto quos iste odit, quidem
-            sapiente repudiandae debitis voluptates molestiae vitae porro alias
-            incidunt possimus reiciendis eaque autem. Itaque incidunt corrupti
-            vel odio veritatis dolores repudiandae cupiditate eligendi tenetur
-            laudantium quaerat cum quas delectus quae commodi non, aperiam ut,
-            esse error dignissimos at perspiciatis facere numquam? Harum
-            consequatur ea magni incidunt sequi, omnis aliquam doloremque
-            commodi perferendis placeat sit dolor similique soluta, quasi vel
-            assumenda eum eligendi, culpa esse amet voluptatum expedita
-            dignissimos nihil. Perferendis alias accusamus quasi culpa iusto,
-            mollitia ipsam. Hic praesentium sint impedit?
-          </Typography>
-          <Typography mb={2}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse vel
-            et officia explicabo distinctio architecto quos iste odit, quidem
-            sapiente repudiandae debitis voluptates molestiae vitae porro alias
-            incidunt possimus reiciendis eaque autem. Itaque incidunt corrupti
-            vel odio veritatis dolores repudiandae cupiditate eligendi tenetur
-            laudantium quaerat cum quas delectus quae commodi non, aperiam ut,
-            esse error dignissimos at perspiciatis facere numquam? Harum
-            consequatur ea magni incidunt sequi, omnis aliquam doloremque
-            commodi perferendis placeat sit dolor similique soluta, quasi vel
-            assumenda eum eligendi, culpa esse amet voluptatum expedita
-            dignissimos nihil. Perferendis alias accusamus quasi culpa iusto,
-            mollitia ipsam. Hic praesentium sint impedit?
-          </Typography>
-          <Typography>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse vel
-            et officia explicabo distinctio architecto quos iste odit, quidem
-            sapiente repudiandae debitis voluptates molestiae vitae porro alias
-            incidunt possimus reiciendis eaque autem. Itaque incidunt corrupti
-            vel odio veritatis dolores repudiandae cupiditate eligendi tenetur
-            laudantium quaerat cum quas delectus quae commodi non, aperiam ut,
-            esse error dignissimos at perspiciatis facere numquam? Harum
-            consequatur ea magni incidunt sequi, omnis aliquam doloremque
-            commodi perferendis placeat sit dolor similique soluta, quasi vel
-            assumenda eum eligendi, culpa esse amet voluptatum expedita
-            dignissimos nihil. Perferendis alias accusamus quasi culpa iusto,
-            mollitia ipsam. Hic praesentium sint impedit?
-          </Typography>
+          <img className="singlePostImage" src={postImage} />
+          <Typography mb={2}>{caption}</Typography>
+          <Typography mb={2}>{caption}</Typography>
+          <Typography mb={2}>{caption}</Typography>
         </Box>
 
         {/*  */}
