@@ -3,11 +3,9 @@ import {
   Box,
   Card,
   CardHeader,
-  styled,
   Typography,
   Stack,
   IconButton,
-  unstable_useId,
 } from "@mui/material";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -16,7 +14,7 @@ import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 
 const IndividualCardPost = ({ post }) => {
-  const { authorImage, authorName, caption, title, postImage, tags, _id } =
+  const { authorImage, authorName, subtitle, title, postImage, tags, _id } =
     post;
   return (
     <Card
@@ -57,9 +55,8 @@ const IndividualCardPost = ({ post }) => {
               className="postDesc"
               fontSize={"0.7rem"}
               display={{ xs: "none", sm: "-webkit-box" }}
-            >
-              {caption}
-            </Typography>
+              dangerouslySetInnerHTML={{ __html: subtitle }}
+            ></Typography>
 
             <Box mt={"0.2rem"}>
               {tags.map((tag) => (

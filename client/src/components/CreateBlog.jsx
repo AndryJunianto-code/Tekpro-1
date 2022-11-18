@@ -1,13 +1,14 @@
 import { Box, Button, Typography, Stack, Card, InputBase } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import { useMutation } from "react-query";
 import { publishImage, publishPost } from "../request/postRequest";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
+import RichTextEditor from "./RichTextEditor";
 
 const CreateBlog = () => {
   const { user } = useAuth0();
+  const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [fileData, setFileData] = useState();
   const [title, setTitle] = useState("");
@@ -38,7 +39,7 @@ const CreateBlog = () => {
       mutatePost({
         title,
         subtitle,
-        caption: "1231213",
+        caption: content,
         postImage: data.image,
         authorName: user?.name,
       });
@@ -114,15 +115,7 @@ const CreateBlog = () => {
             />
           </Stack>
         </Card>
-        <Box
-          p={"1rem"}
-          sx={{ backgroundColor: "white" }}
-          borderRadius={2}
-          height="12rem"
-          mt={4}
-          mb={2}
-          border={"1px solid #bdbebf"}
-        ></Box>
+        <RichTextEditor content={content} setContent={setContent} />
         <Button
           onClick={buttonPost}
           variant="contained"

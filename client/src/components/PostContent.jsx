@@ -40,16 +40,13 @@ const PostContent = ({ singlePostData }) => {
 
         {/*  */}
         <Box mt={2}>
-          <Typography fontSize={"1.5rem"} height={"1.9rem"} fontWeight="900">
+          <Typography fontSize={"2rem"} fontWeight="900">
             {title}
           </Typography>
-          <Typography fontSize={"1.2rem"} fontWeight="500" color="#757575">
-            {subtitle}
-          </Typography>
           <img className="singlePostImage" src={postImage} />
-          <Typography mb={2}>{caption}</Typography>
-          <Typography mb={2}>{caption}</Typography>
-          <Typography mb={2}>{caption}</Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: caption }}
+          ></Typography>
         </Box>
 
         {/*  */}
