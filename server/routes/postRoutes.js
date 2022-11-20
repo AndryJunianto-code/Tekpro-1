@@ -38,13 +38,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-//post action, liked, bookmarked
+//post action, liked
 router.put("/like", async (req, res) => {
   const action = req.query.action;
 
   try {
     let updatedPost;
-    let updatedUser;
     if (action == "like") {
       updatedPost = await Post.findByIdAndUpdate(
         req.body.postId,
@@ -79,6 +78,50 @@ router.put("/like", async (req, res) => {
         {
           $pull: {
             likedPosts: req.body.postId,
+          },
+        },
+        { new: true }
+      );
+    }
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/", async (req, res) => {
+  const newPost = new Post(req.body);
+  try {
+    const savedPost = await newPost.save();
+    res.status(200).json(savedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//post action, liked
+router.put("/bookmark", async (req, res) => {
+  const action = req.query.action;
+
+  try {
+    let updatedPost;
+
+    if (action == "bookmark") {
+      updatedPost = await Post.findByIdAndUpdate(
+        req.body.postId,
+        {
+          $push: {
+            userIdBookmarked: req.body.userId,
+          },
+        },
+        { new: true }
+      );
+    } else if (action == "disbookmark") {
+      updatedPost = await Post.findByIdAndUpdate(
+        req.body.postId,
+        {
+          $pull: {
+            userIdBookmarked: req.body.userId,
           },
         },
         { new: true }

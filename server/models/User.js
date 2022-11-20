@@ -13,10 +13,6 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    bookmarkPosts: {
-      type: Array,
-      default: [],
-    },
     description: {
       type: String,
     },

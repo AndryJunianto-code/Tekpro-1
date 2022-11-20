@@ -39,3 +39,13 @@ export const likedPost = async (obj) => {
   });
   return data;
 };
+
+export const bookmarkedPost = async (obj) => {
+  const action = obj.action;
+  const { data } = await axios.put(`/posts/bookmark/?action=${action}`, {
+    postId: obj.postId,
+    userId: obj.userId,
+    action,
+  });
+  return data;
+};

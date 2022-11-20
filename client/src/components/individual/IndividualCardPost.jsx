@@ -11,11 +11,12 @@ import {
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import React from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
-import { likedPost } from "../../request/postRequest";
+import { bookmarkedPost, likedPost } from "../../request/postRequest";
 import { useMutation, useQuery } from "react-query";
 import { fetchUser } from "../../request/userRequest";
 import { useState } from "react";
@@ -26,6 +27,7 @@ const IndividualCardPost = ({ post }) => {
   const { user } = useAuth0();
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
+  const [isPostBookmarked, setIsPostBookmarked] = useState(false);
   const {
     authorImage,
     authorName,
@@ -36,6 +38,7 @@ const IndividualCardPost = ({ post }) => {
     _id,
     authorId,
     createdAt,
+    userIdBookmarked,
   } = post;
 
   const { data: userData, isSuccess: userSuccess } = useQuery(
@@ -45,6 +48,7 @@ const IndividualCardPost = ({ post }) => {
   );
 
   const { mutate: mutateLike } = useMutation(likedPost);
+  const { mutate: mutateBookmark } = useMutation(bookmarkedPost);
 
   const handleLikePost = () => {
     setIsPostLiked(true);
@@ -62,10 +66,38 @@ const IndividualCardPost = ({ post }) => {
       userId: user?.sub,
     });
   };
+  const handleBookmarkPost = () => {
+    setIsPostBookmarked(true);
+    mutateBookmark(
+      {
+        action: "bookmark",
+        postId: _id,
+        userId: user?.sub,
+      },
+      {
+        onSuccess: (data) => console.log(data),
+      }
+    );
+  };
+
+  const handleDisbookmarkPost = () => {
+    setIsPostBookmarked(false);
+    mutateBookmark(
+      {
+        action: "disbookmark",
+        postId: _id,
+        userId: user?.sub,
+      },
+      {
+        onSuccess: (data) => console.log(data),
+      }
+    );
+  };
 
   useEffect(() => {
     if (userData != null) {
       setIsPostLiked(userData[0]?.likedPosts.includes(_id));
+      setIsPostBookmarked(userIdBookmarked.includes(user?.sub));
     }
   }, [userSuccess]);
   return (
@@ -82,9 +114,27 @@ const IndividualCardPost = ({ post }) => {
         avatar={<Avatar src={authorImage} />}
         action={
           <>
-            <IconButton>
-              <BookmarkBorderOutlinedIcon />
-            </IconButton>
+            {isPostBookmarked ? (
+              <IconButton onClick={handleDisbookmarkPost}>
+                <BookmarkIcon
+                  sx={{
+                    width: "23px",
+                  }}
+                />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleBookmarkPost}>
+                <BookmarkBorderOutlinedIcon
+                  sx={{
+                    color: theme.palette.darkGrey,
+                    width: "24px",
+                    ":hover": {
+                      color: "black",
+                    },
+                  }}
+                />
+              </IconButton>
+            )}
             {isPostLiked ? (
               <IconButton onClick={handleDislikePost}>
                 <FavoriteIcon
@@ -112,7 +162,10 @@ const IndividualCardPost = ({ post }) => {
         title={user?.sub === authorId ? `${authorName} (You)` : authorName}
         subheader={new Date(createdAt).toDateString()}
       />
-      <Link to={`/p/${_id}?liked=${isPostLiked}`} className="link">
+      <Link
+        to={`/p/${_id}?liked=${isPostLiked}&bookmarked=${isPostBookmarked}`}
+        className="link"
+      >
         <Stack
           justifyContent="space-between"
           direction="row"

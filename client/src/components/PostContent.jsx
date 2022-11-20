@@ -13,9 +13,10 @@ import { useTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
-import { likedPost } from "../request/postRequest";
+import { bookmarkedPost, likedPost } from "../request/postRequest";
 
 const PostContent = ({ singlePostData }) => {
   const { user } = useAuth0();
@@ -23,10 +24,14 @@ const PostContent = ({ singlePostData }) => {
     singlePostData;
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
+  const [isPostBookmarked, setIsPostBookmarked] = useState();
   const link = new URLSearchParams(window.location.search);
   const linkQueryLiked = link.get("liked");
+  const linkQueryBookmarked = link.get("bookmarked");
 
   const { mutate: mutateLike } = useMutation(likedPost);
+  const { mutate: mutateBookmark } = useMutation(bookmarkedPost);
+
   const handleLikePost = () => {
     setIsPostLiked("true");
     mutateLike({
@@ -43,8 +48,37 @@ const PostContent = ({ singlePostData }) => {
       userId: user?.sub,
     });
   };
+  const handleBookmarkPost = () => {
+    setIsPostBookmarked("true");
+    mutateBookmark(
+      {
+        action: "bookmark",
+        postId: _id,
+        userId: user?.sub,
+      },
+      {
+        onSuccess: (data) => console.log(data),
+      }
+    );
+  };
+
+  const handleDisbookmarkPost = () => {
+    setIsPostBookmarked("false");
+    mutateBookmark(
+      {
+        action: "disbookmark",
+        postId: _id,
+        userId: user?.sub,
+      },
+      {
+        onSuccess: (data) => console.log(data),
+      }
+    );
+  };
+
   useEffect(() => {
     setIsPostLiked(linkQueryLiked);
+    setIsPostBookmarked(linkQueryBookmarked);
   }, []);
 
   return (
@@ -64,15 +98,29 @@ const PostContent = ({ singlePostData }) => {
               </Typography>
             </Stack>
           </Stack>
-          <BookmarksOutlined
-            sx={{
-              color: theme.palette.darkGrey,
-              width: "23px",
-              ":hover": {
-                color: "black",
-              },
-            }}
-          />
+          {isPostBookmarked === "true" ? (
+            <BookmarkIcon
+              onClick={handleDisbookmarkPost}
+              sx={{
+                color: theme.palette.darkGrey,
+                width: "25px",
+                ":hover": {
+                  color: "black",
+                },
+              }}
+            />
+          ) : (
+            <BookmarksOutlined
+              onClick={handleBookmarkPost}
+              sx={{
+                color: theme.palette.darkGrey,
+                width: "23px",
+                ":hover": {
+                  color: "black",
+                },
+              }}
+            />
+          )}
         </Box>
 
         {/*  */}

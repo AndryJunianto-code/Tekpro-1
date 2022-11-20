@@ -22,7 +22,6 @@ const Home = () => {
       for (let i = 0; i < res.data?.length; i++) {
         if (res.data[i].userId === user.sub) {
           setUserExistBefore(true);
-          console.log("user exist");
           break;
         }
       }
