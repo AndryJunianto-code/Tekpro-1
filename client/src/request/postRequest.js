@@ -22,8 +22,20 @@ export const publishPost = async (obj) => {
     title: obj.title,
     subtitle: obj.subtitle,
     authorName: obj.authorName,
+    authorImage: obj.authorImage,
+    authorId: obj.authorId,
     postImage: obj.postImage,
     caption: obj.caption,
+  });
+  return data;
+};
+
+export const likedPost = async (obj) => {
+  const action = obj.action;
+  const { data } = await axios.put(`/posts/like/?action=${action}`, {
+    postId: obj.postId,
+    userId: obj.userId,
+    action,
   });
   return data;
 };

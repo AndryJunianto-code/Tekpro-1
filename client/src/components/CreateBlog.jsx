@@ -42,6 +42,8 @@ const CreateBlog = () => {
         caption: content,
         postImage: data.image,
         authorName: user?.name,
+        authorImage: user?.picture,
+        authorId: user?.sub,
       });
     },
   });

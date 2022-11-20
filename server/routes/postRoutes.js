@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
 const { UploadImage } = require("../utils/UploadImage");
 const parser = require("../utils/cloudinary");
 
@@ -43,6 +44,7 @@ router.put("/like", async (req, res) => {
 
   try {
     let updatedPost;
+    let updatedUser;
     if (action == "like") {
       updatedPost = await Post.findByIdAndUpdate(
         req.body.postId,
@@ -53,12 +55,30 @@ router.put("/like", async (req, res) => {
         },
         { new: true }
       );
+      await User.findOneAndUpdate(
+        { userId: req.body.userId },
+        {
+          $push: {
+            likedPosts: req.body.postId,
+          },
+        },
+        { new: true }
+      );
     } else if (action == "dislike") {
       updatedPost = await Post.findByIdAndUpdate(
         req.body.postId,
         {
           $inc: {
             numOfLike: -1,
+          },
+        },
+        { new: true }
+      );
+      await User.findOneAndUpdate(
+        { userId: req.body.userId },
+        {
+          $pull: {
+            likedPosts: req.body.postId,
           },
         },
         { new: true }

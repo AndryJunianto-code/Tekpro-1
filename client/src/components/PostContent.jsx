@@ -1,15 +1,52 @@
-import { BookmarksOutlined, ThreeMp } from "@mui/icons-material";
-import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
-import React from "react";
+import { BookmarksOutlined } from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useState, useEffect } from "react";
 import { BoxWrapper, CustomBox } from "../utilities/CustomBox";
 import { useTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "react-query";
+import { likedPost } from "../request/postRequest";
 
 const PostContent = ({ singlePostData }) => {
-  const { title, subtitle, caption, postImage, authorImage, authorName } =
+  const { user } = useAuth0();
+  const { title, _id, caption, postImage, authorImage, authorName } =
     singlePostData;
   const theme = useTheme();
+  const [isPostLiked, setIsPostLiked] = useState();
+  const link = new URLSearchParams(window.location.search);
+  const linkQueryLiked = link.get("liked");
+
+  const { mutate: mutateLike } = useMutation(likedPost);
+  const handleLikePost = () => {
+    setIsPostLiked("true");
+    mutateLike({
+      action: "like",
+      postId: _id,
+      userId: user?.sub,
+    });
+  };
+  const handleDislikePost = () => {
+    setIsPostLiked("false");
+    mutateLike({
+      action: "dislike",
+      postId: _id,
+      userId: user?.sub,
+    });
+  };
+  useEffect(() => {
+    setIsPostLiked(linkQueryLiked);
+  }, []);
+
   return (
     <CustomBox flex={4} mt={5}>
       <BoxWrapper>
@@ -52,16 +89,30 @@ const PostContent = ({ singlePostData }) => {
         {/*  */}
         <Stack direction="row" mt={5}>
           <Box display="flex" alignItems="center" mr={3}>
-            <FavoriteBorderOutlinedIcon
-              sx={{
-                mr: "0.3rem",
-                color: theme.palette.darkGrey,
-                width: "23px",
-                ":hover": {
-                  color: "black",
-                },
-              }}
-            />
+            {isPostLiked === "true" ? (
+              <IconButton onClick={handleDislikePost}>
+                <FavoriteIcon
+                  sx={{
+                    mr: "0.3rem",
+                    color: "red",
+                    width: "23px",
+                  }}
+                />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleLikePost}>
+                <FavoriteBorderOutlinedIcon
+                  sx={{
+                    mr: "0.3rem",
+                    color: theme.palette.darkGrey,
+                    width: "23px",
+                    ":hover": {
+                      color: "black",
+                    },
+                  }}
+                />
+              </IconButton>
+            )}
             <Typography color={theme.palette.darkGrey} fontSize={"0.7rem"}>
               922
             </Typography>

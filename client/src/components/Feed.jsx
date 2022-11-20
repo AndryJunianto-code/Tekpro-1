@@ -14,7 +14,7 @@ const Feed = () => {
   );
 
   useEffect(() => {
-    console.log(feedData);
+    /* console.log(feedData); */
   }, [feedSuccess]);
 
   return (

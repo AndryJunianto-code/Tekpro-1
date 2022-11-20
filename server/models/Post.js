@@ -20,9 +20,11 @@ const PostSchema = new mongoose.Schema(
     },
     authorImage: {
       type: String,
+      required: true,
     },
     authorId: {
       type: String,
+      required: true,
     },
     postImage: {
       type: String,

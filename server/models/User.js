@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
+    username: {
+      type: String,
+    },
     userId: {
       type: String,
       unique: true,
@@ -11,6 +14,17 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
     bookmarkPosts: {
+      type: Array,
+      default: [],
+    },
+    description: {
+      type: String,
+    },
+    followers: {
+      type: Array,
+      default: [],
+    },
+    following: {
       type: Array,
       default: [],
     },

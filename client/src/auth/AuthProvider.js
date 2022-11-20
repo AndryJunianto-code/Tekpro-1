@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
   const onRedirectCallback = (appState) => {
     navigate(window.location.pathname);
   };
+
   return (
     <Auth0Provider
       domain={domain}
