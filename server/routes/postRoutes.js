@@ -27,6 +27,17 @@ router.get("/:postId", async (req, res) => {
   }
 });
 
+//find posts published by owner
+router.get("/author/:userId", async (req, res) => {
+  let post;
+  try {
+    post = await Post.find({ authorId: req.params.userId });
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //make a post
 router.post("/", async (req, res) => {
   const newPost = new Post(req.body);
@@ -112,6 +123,7 @@ router.put("/bookmark", async (req, res) => {
         {
           $push: {
             userIdBookmarked: req.body.userId,
+            bookmarkListId: req.body.bookmarkListId,
           },
         },
         { new: true }
@@ -122,6 +134,7 @@ router.put("/bookmark", async (req, res) => {
         {
           $pull: {
             userIdBookmarked: req.body.userId,
+            bookmarkListId: req.body.bookmarkListId,
           },
         },
         { new: true }

@@ -9,6 +9,7 @@ import YourStories from "./pages/YourStories";
 import AuthProvider from "./auth/AuthProvider";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import SinglePost from "./pages/SinglePost";
+import ReadingListPosts from "./pages/ReadingListPosts";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
               <Route path="/p/:postId" element={<SinglePost />} />
+              <Route path="/list/:bookmarkId" element={<ReadingListPosts />} />
             </Routes>
           </div>
         </AuthProvider>

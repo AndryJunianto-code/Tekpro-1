@@ -1,13 +1,26 @@
 import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { theme } from "../../theme";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+const IndividualStory = ({ story, userData }) => {
+  const { title, caption, _id, userIdBookmarked } = story;
+  const [isPostLiked, setIsPostLiked] = useState();
+  const [isPostBookmarked, setIsPostBookmarked] = useState(false);
 
-const IndividualStory = () => {
+  useEffect(() => {
+    setIsPostLiked(userData[0]?.likedPosts.includes(_id));
+    setIsPostBookmarked(userIdBookmarked.includes(userData[0]?.userId));
+  }, []);
   return (
-    <>
+    <Link
+      to={`/p/${_id}?liked=${isPostLiked}&bookmarked=${isPostBookmarked}`}
+      className="link"
+    >
       <Box>
         <Typography variant="body2" fontWeight={700} mb={"0.2rem"}>
-          How to code
+          {title}
         </Typography>
         <Typography
           className="storyDesc"
@@ -16,17 +29,14 @@ const IndividualStory = () => {
           fontWeight={400}
           marginBottom={"0.8rem"}
           lineHeight={"17px"}
-        >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-          optio rerum ducimus rem esse? Aliquam natus eos accusantium sapiente
-          ratione eum error! Maiores, ipsa placeat. Iste,
-        </Typography>
+          dangerouslySetInnerHTML={{ __html: caption }}
+        />
         <Typography fontSize={"0.7rem"} color={theme.palette.darkGrey}>
           Published on Oct 23
         </Typography>
       </Box>
       <Divider variant="fullWidth" sx={{ my: "1.2rem" }} />
-    </>
+    </Link>
   );
 };
 

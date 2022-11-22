@@ -5,6 +5,7 @@ import IndividualCardPost from "./individual/IndividualCardPost";
 import { useQuery } from "react-query";
 import { fetchAllPost } from "../request/postRequest";
 import { useEffect } from "react";
+import BottomBar from "./BottomBar";
 
 const Feed = () => {
   const { data: feedData, isSuccess: feedSuccess } = useQuery(
@@ -26,6 +27,7 @@ const Feed = () => {
               <IndividualCardPost post={post} key={post._id} />
             ))}
         </Stack>
+        <BottomBar />
       </BoxWrapper>
     </CustomBox>
   );

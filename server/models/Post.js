@@ -41,6 +41,10 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    bookmarkListId: {
+      type: Array,
+      default: [],
+    },
     authorFollowed: {
       type: Boolean,
       default: false,

@@ -5,6 +5,11 @@ export const fetchAllPost = async () => {
   return data;
 };
 
+export const fetchPostByAuthor = async (obj) => {
+  const { data } = await axios.get(`/posts/author/${obj.queryKey[1]}`);
+  return data;
+};
+
 export const fetchSinglePost = async (obj) => {
   const postId = obj.queryKey[1];
   const { data } = await axios.get(`/posts/${postId}`);

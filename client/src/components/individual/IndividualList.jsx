@@ -7,8 +7,11 @@ import {
   Button,
   CardMedia,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const IndividualList = () => {
+const IndividualList = ({ list }) => {
+  const { name } = list;
+
   return (
     <Card
       sx={{
@@ -19,15 +22,17 @@ const IndividualList = () => {
     >
       <CardContent sx={{ paddingY: "1.1rem", paddingX: "1.5rem" }}>
         <Typography fontWeight={900} fontSize={"1.2rem"} mb={"3rem"}>
-          Reading List
+          {name}
         </Typography>
         <Stack direction="row" display={"flex"} alignItems="center">
-          <Button
-            variant="outlined"
-            sx={{ borderRadius: "8px", marginRight: "1rem" }}
-          >
-            View list
-          </Button>
+          <Link className="link" to={`/list/${list._id}`}>
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: "8px", marginRight: "1rem" }}
+            >
+              View list
+            </Button>
+          </Link>
           <Typography variant="caption">2 stories</Typography>
         </Stack>
       </CardContent>
