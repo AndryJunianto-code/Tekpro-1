@@ -6,6 +6,7 @@ import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import Rightbar from "../components/Rightbar";
 import axios from "axios";
+import BottomBar from "../components/BottomBar";
 
 const Home = () => {
   const { user } = useAuth0();
@@ -55,6 +56,7 @@ const Home = () => {
         <Feed />
         <Rightbar />
       </Stack>
+      <BottomBar />
     </>
   );
 };

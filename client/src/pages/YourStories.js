@@ -1,5 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
+import BottomBar from "../components/BottomBar";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import Stories from "../components/Stories";
@@ -18,6 +19,7 @@ const YourStories = () => {
           }}
         />
       </Stack>
+      <BottomBar />
     </>
   );
 };

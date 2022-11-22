@@ -1,5 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import React from "react";
+import BottomBar from "../components/BottomBar";
 import CreateBlog from "../components/CreateBlog";
 import Leftbar from "../components/Leftbar";
 
@@ -16,6 +17,7 @@ const Write = () => {
           }}
         />
       </Stack>
+      <BottomBar />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import BottomBar from "../components/BottomBar";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import YourList from "../components/YourList";
@@ -19,6 +20,7 @@ const ReadingList = () => {
           }}
         />
       </Stack>
+      <BottomBar />
     </>
   );
 };

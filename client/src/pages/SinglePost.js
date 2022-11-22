@@ -8,6 +8,7 @@ import { fetchSinglePost } from "../request/postRequest";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import BottomBar from "../components/BottomBar";
 
 const SinglePost = () => {
   let { postId } = useParams();
@@ -35,6 +36,7 @@ const SinglePost = () => {
           </>
         )}
       </Stack>
+      <BottomBar />
     </>
   );
 };
