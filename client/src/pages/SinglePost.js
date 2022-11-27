@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import PostContent from "../components/PostContent";
@@ -9,9 +9,12 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import BottomBar from "../components/BottomBar";
+import CommentModal from "../components/CommentModal";
+import BlackShadow from "../components/BlackShadow";
 
 const SinglePost = () => {
   let { postId } = useParams();
+  const [isOpenCommentModal, setIsOpenCommentModal] = useState(false);
   const {
     data: singlePostData,
     isSuccess,
@@ -31,12 +34,25 @@ const SinglePost = () => {
 
         {isSuccess && (
           <>
-            <PostContent singlePostData={singlePostData} />
+            <PostContent
+              singlePostData={singlePostData}
+              setIsOpenCommentModal={setIsOpenCommentModal}
+              isOpenCommentModal={isOpenCommentModal}
+            />
             <PostRightbar />
           </>
         )}
       </Stack>
       <BottomBar />
+      {isOpenCommentModal && (
+        <>
+          <CommentModal
+            postId={postId}
+            setIsOpenCommentModal={setIsOpenCommentModal}
+          />
+          <BlackShadow setIsOpenCommentModal={setIsOpenCommentModal} />
+        </>
+      )}
     </>
   );
 };

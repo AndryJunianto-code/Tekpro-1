@@ -27,7 +27,6 @@ const Feed = () => {
               <IndividualCardPost post={post} key={post._id} />
             ))}
         </Stack>
-        <BottomBar />
       </BoxWrapper>
     </CustomBox>
   );

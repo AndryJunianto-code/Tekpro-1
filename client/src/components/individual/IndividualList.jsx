@@ -25,7 +25,7 @@ const IndividualList = ({ list }) => {
           {name}
         </Typography>
         <Stack direction="row" display={"flex"} alignItems="center">
-          <Link className="link" to={`/list/${list._id}`}>
+          <Link className="link" to={`/list/${list._id}/${name}`}>
             <Button
               variant="outlined"
               sx={{ borderRadius: "8px", marginRight: "1rem" }}
@@ -33,7 +33,9 @@ const IndividualList = ({ list }) => {
               View list
             </Button>
           </Link>
-          <Typography variant="caption">2 stories</Typography>
+          <Typography variant="caption">
+            {list?.postsId.length} stories
+          </Typography>
         </Stack>
       </CardContent>
       <CardMedia

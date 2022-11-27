@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 import IndividualCardPost from "./individual/IndividualCardPost";
 
 const YourListPosts = () => {
-  const { bookmarkId } = useParams();
+  const { bookmarkId, name } = useParams();
   const { data: listsData, isSuccess: listsSuccess } = useQuery(
     ["fetchOneList", bookmarkId],
     fetchOneList,
@@ -33,7 +33,13 @@ const YourListPosts = () => {
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
       <BoxWrapper>
-        <Stack>
+        <Typography fontWeight={900} fontSize={"1.8rem"}>
+          {name}
+        </Typography>
+        <Typography variant="caption">
+          {listsData?.posts.length} stories
+        </Typography>
+        <Stack mt={"1rem"}>
           {listsSuccess &&
             listsData?.posts.map((post) => (
               <IndividualCardPost post={post} key={post._id} />

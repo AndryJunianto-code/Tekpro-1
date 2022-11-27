@@ -23,7 +23,10 @@ function App() {
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
               <Route path="/p/:postId" element={<SinglePost />} />
-              <Route path="/list/:bookmarkId" element={<ReadingListPosts />} />
+              <Route
+                path="/list/:bookmarkId/:name"
+                element={<ReadingListPosts />}
+              />
             </Routes>
           </div>
         </AuthProvider>

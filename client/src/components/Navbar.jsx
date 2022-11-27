@@ -83,7 +83,7 @@ const Navbar = () => {
           >
             <NotificationsNoneOutlinedIcon sx={{ color: "#fafafa" }} />
           </IconButton>
-          <Avatar alt={user?.name} src={user.picture} />
+          <Avatar alt={user?.name} src={user?.picture} />
         </Stack>
       ) : (
         <Box>

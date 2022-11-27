@@ -5,6 +5,7 @@ const cors = require("cors");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
 const bookmarkListRoutes = require("./routes/bookmarkListRoutes.js");
+const commentRoutes = require("./routes/commentRoutes.js");
 
 const app = express();
 dotenv.config();
@@ -27,6 +28,7 @@ mongoose
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/bookmarkLists", bookmarkListRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("backend is running");

@@ -8,17 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { BoxWrapper, CustomBox } from "../utilities/CustomBox";
-import { useTheme } from "@mui/material/styles";
+import { BoxWrapper } from "../utilities/CustomBox";
+import { styled, useTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { bookmarkedPost, likedPost } from "../request/postRequest";
 
-const PostContent = ({ singlePostData }) => {
+const PostContent = ({
+  singlePostData,
+  setIsOpenCommentModal,
+  isOpenCommentModal,
+}) => {
   const { user } = useAuth0();
   const { title, _id, caption, postImage, authorImage, authorName } =
     singlePostData;
@@ -31,6 +36,14 @@ const PostContent = ({ singlePostData }) => {
 
   const { mutate: mutateLike } = useMutation(likedPost);
   const { mutate: mutateBookmark } = useMutation(bookmarkedPost);
+
+  const CustomPostBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflowY: isOpenCommentModal ? "hidden" : "",
+    height: isOpenCommentModal ? "80vh" : "",
+  }));
 
   const handleLikePost = () => {
     setIsPostLiked("true");
@@ -76,13 +89,17 @@ const PostContent = ({ singlePostData }) => {
     );
   };
 
+  const handleOpenCommentModal = () => {
+    setIsOpenCommentModal(!isOpenCommentModal);
+  };
+
   useEffect(() => {
     setIsPostLiked(linkQueryLiked);
     setIsPostBookmarked(linkQueryBookmarked);
   }, []);
 
   return (
-    <CustomBox flex={4} mt={5}>
+    <CustomPostBox flex={4} mt={5}>
       <BoxWrapper>
         <Box
           display={"flex"}
@@ -98,7 +115,7 @@ const PostContent = ({ singlePostData }) => {
               </Typography>
             </Stack>
           </Stack>
-          {isPostBookmarked === "true" ? (
+          {/* {isPostBookmarked === "true" ? (
             <BookmarkIcon
               onClick={handleDisbookmarkPost}
               sx={{
@@ -110,7 +127,7 @@ const PostContent = ({ singlePostData }) => {
               }}
             />
           ) : (
-            <BookmarksOutlined
+            <BookmarkBorderOutlinedIcon
               onClick={handleBookmarkPost}
               sx={{
                 color: theme.palette.darkGrey,
@@ -120,7 +137,7 @@ const PostContent = ({ singlePostData }) => {
                 },
               }}
             />
-          )}
+          )} */}
         </Box>
 
         {/*  */}
@@ -151,7 +168,6 @@ const PostContent = ({ singlePostData }) => {
               <IconButton onClick={handleLikePost}>
                 <FavoriteBorderOutlinedIcon
                   sx={{
-                    mr: "0.3rem",
                     color: theme.palette.darkGrey,
                     width: "23px",
                     ":hover": {
@@ -162,10 +178,14 @@ const PostContent = ({ singlePostData }) => {
               </IconButton>
             )}
             <Typography color={theme.palette.darkGrey} fontSize={"0.7rem"}>
-              922
+              921
             </Typography>
           </Box>
-          <Box display="flex" alignItems="center">
+          <Box
+            onClick={handleOpenCommentModal}
+            display="flex"
+            alignItems="center"
+          >
             <ChatBubbleOutlineIcon
               sx={{
                 mr: "0.3rem",
@@ -186,9 +206,8 @@ const PostContent = ({ singlePostData }) => {
         <Divider variant="fullWidth" sx={{ background: "black" }} />
 
         {/* COMMENTS SECTION */}
-        <p>comments section</p>
       </BoxWrapper>
-    </CustomBox>
+    </CustomPostBox>
   );
 };
 

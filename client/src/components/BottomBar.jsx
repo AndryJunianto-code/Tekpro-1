@@ -30,6 +30,10 @@ const BottomBar = () => {
         left: "0px",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 1100,
+        boxShadow: 12,
+        border: "1px solid #fafafa",
+        paddingBottom: "0.2rem",
       }}
     >
       <CustomStack direction="row" justifyContent="space-between">

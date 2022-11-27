@@ -18,7 +18,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
-import { bookmarkedPost, likedPost } from "../../request/postRequest";
+import { likedPost } from "../../request/postRequest";
 import { useMutation, useQuery } from "react-query";
 import { fetchUser } from "../../request/userRequest";
 import { useState } from "react";
@@ -65,13 +65,9 @@ const IndividualCardPost = ({ post }) => {
   );
 
   const { mutate: mutateLike } = useMutation(likedPost);
-  const { mutate: mutateBookmark } = useMutation(bookmarkedPost);
 
   const handleClose = () => {
     setBookmarkAnchor(null);
-    if (checked?.length > 0) {
-      handleBookmarkPostToList();
-    }
   };
 
   const handleLikePost = () => {
@@ -93,34 +89,6 @@ const IndividualCardPost = ({ post }) => {
   const handleBookmarkPost = (e) => {
     setIsPostBookmarked(true);
     setBookmarkAnchor(e.currentTarget);
-    mutateBookmark(
-      {
-        action: "bookmark",
-        postId: _id,
-        userId: user?.sub,
-      },
-      {
-        /* onSuccess: (data) => console.log(data), */
-      }
-    );
-  };
-
-  const handleDisbookmarkPost = () => {
-    setIsPostBookmarked(false);
-    mutateBookmark(
-      {
-        action: "disbookmark",
-        postId: _id,
-        userId: user?.sub,
-      },
-      {
-        onSuccess: (data) => console.log(data),
-      }
-    );
-  };
-
-  const handleBookmarkPostToList = async () => {
-    checked.map((c) => {});
   };
 
   useEffect(() => {
@@ -137,7 +105,6 @@ const IndividualCardPost = ({ post }) => {
         console.log(_id);
         if (list.postsId.includes(_id)) {
           newChecked.push(list._id);
-          console.log(list.name);
         }
       });
     setChecked(newChecked);
@@ -156,7 +123,7 @@ const IndividualCardPost = ({ post }) => {
         avatar={<Avatar src={authorImage} />}
         action={
           <>
-            {isPostBookmarked ? (
+            {checked?.length > 0 ? (
               <IconButton onClick={handleBookmarkPost}>
                 <BookmarkIcon
                   sx={{
