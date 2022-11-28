@@ -54,3 +54,10 @@ export const bookmarkedPost = async (obj) => {
   });
   return data;
 };
+
+export const increasePostView = async (obj) => {
+  const { data } = await axios.put(`/posts/view`, {
+    postId: obj.postId,
+  });
+  return data;
+};

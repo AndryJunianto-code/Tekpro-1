@@ -15,11 +15,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../auth/LogoutButton";
+import UserModal from "./UserModal";
+import { useState } from "react";
+import TransparentShadow from "./TransparentShadow";
 
 const Navbar = () => {
   const StyledNavbar = styled(AppBar)(({ theme }) => ({
     backgroundColor: theme.palette.mainBlue,
     position: "sticky",
+  }));
+  const CustomToolbar = styled(Toolbar)(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -58,9 +63,15 @@ const Navbar = () => {
   }));
 
   const { loginWithRedirect, user } = useAuth0();
+  const [openUserModal, setOpenUserModal] = useState(false);
+
+  const handleUserModal = () => {
+    setOpenUserModal(!openUserModal);
+  };
   return (
-    <StyledNavbar>
-      <Toolbar>
+    <StyledNavbar onClick={() => setOpenUserModal(false)}>
+      {openUserModal && <TransparentShadow />}
+      <CustomToolbar onClick={(e) => e.stopPropagation()}>
         <Typography variant="h6">
           <LogoutButton />{" "}
         </Typography>
@@ -70,40 +81,45 @@ const Navbar = () => {
           </SearchIconWrapper>
           <InputBase placeholder="Search..." sx={{ paddingLeft: "1.5rem" }} />
         </Search>
-      </Toolbar>
 
-      {user ? (
-        <Stack direction="row" mr={"2rem"}>
-          <IconButton
-            sx={{
-              width: "2rem",
-              height: "2rem",
-              mr: "0.5rem",
-            }}
-          >
-            <NotificationsNoneOutlinedIcon sx={{ color: "#fafafa" }} />
-          </IconButton>
-          <Avatar alt={user?.name} src={user?.picture} />
-        </Stack>
-      ) : (
-        <Box>
-          <Button variant="text" onClick={() => loginWithRedirect()}>
-            <Typography
-              mr={0.5}
-              color="white"
-              fontSize={{ xs: "0.7rem", md: "1rem" }}
+        {user ? (
+          <Stack direction="row" mr={"2rem"}>
+            <IconButton
+              sx={{
+                width: "2rem",
+                height: "2rem",
+                mr: "0.5rem",
+              }}
             >
-              Log in
-            </Typography>
-          </Button>
-          <OutlinedButton
-            variant="outlined"
-            onClick={() => loginWithRedirect({ screen_hint: "signup" })}
-          >
-            <Typography color="white">Sign up</Typography>
-          </OutlinedButton>
-        </Box>
-      )}
+              <NotificationsNoneOutlinedIcon sx={{ color: "#fafafa" }} />
+            </IconButton>
+            <Avatar
+              alt={user?.name}
+              src={user.picture}
+              onClick={handleUserModal}
+            />
+            {openUserModal && <UserModal />}
+          </Stack>
+        ) : (
+          <Box>
+            <Button variant="text" onClick={() => loginWithRedirect()}>
+              <Typography
+                mr={0.5}
+                color="white"
+                fontSize={{ xs: "0.7rem", md: "1rem" }}
+              >
+                Log in
+              </Typography>
+            </Button>
+            <OutlinedButton
+              variant="outlined"
+              onClick={() => loginWithRedirect({ screen_hint: "signup" })}
+            >
+              <Typography color="white">Sign up</Typography>
+            </OutlinedButton>
+          </Box>
+        )}
+      </CustomToolbar>
     </StyledNavbar>
   );
 };

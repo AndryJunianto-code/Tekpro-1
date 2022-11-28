@@ -10,6 +10,7 @@ import AuthProvider from "./auth/AuthProvider";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import SinglePost from "./pages/SinglePost";
 import ReadingListPosts from "./pages/ReadingListPosts";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 path="/list/:bookmarkId/:name"
                 element={<ReadingListPosts />}
               />
+              <Route path="/profile/:userId" element={<Profile />} />
             </Routes>
           </div>
         </AuthProvider>

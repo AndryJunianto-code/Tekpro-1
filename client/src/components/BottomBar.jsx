@@ -14,7 +14,6 @@ const BottomBar = () => {
     bottom: "0px",
     left: "0px",
     width: "85%",
-    zIndex: 10,
 
     [theme.breakpoints.up("md")]: {
       width: "70%",
@@ -28,10 +27,12 @@ const BottomBar = () => {
         position: "fixed",
         bottom: "0px",
         left: "0px",
+
         alignItems: "center",
         justifyContent: "center",
         zIndex: 1100,
         boxShadow: 12,
+        backgroundColor: "white",
         border: "1px solid #fafafa",
         paddingBottom: "0.2rem",
       }}
