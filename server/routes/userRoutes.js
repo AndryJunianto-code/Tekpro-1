@@ -23,4 +23,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+//change biodata
+router.put("/update", async (req, res) => {
+  try {
+    let user = await User.findOneAndUpdate(
+      { userId: req.body.userId },
+      {
+        description: req.body.description,
+      },
+      { new: true }
+    );
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

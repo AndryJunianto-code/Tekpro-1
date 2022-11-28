@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    picture: {
+      type: String,
+    },
     likedPosts: {
       type: Array,
       default: [],

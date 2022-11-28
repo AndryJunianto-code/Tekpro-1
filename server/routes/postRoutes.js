@@ -146,4 +146,22 @@ router.put("/bookmark", async (req, res) => {
   }
 });
 
+//increase num of view
+router.put("/view", async (req, res) => {
+  try {
+    let updatedPost = await Post.findByIdAndUpdate(
+      req.body.postId,
+      {
+        $inc: {
+          numOfView: 1,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

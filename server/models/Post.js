@@ -33,6 +33,10 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    numOfView: {
+      type: Number,
+      default: 0,
+    },
     numOfLike: {
       type: Number,
       default: 0,
@@ -48,10 +52,6 @@ const PostSchema = new mongoose.Schema(
     authorFollowed: {
       type: Boolean,
       default: false,
-    },
-    comments: {
-      type: Array,
-      default: [],
     },
   },
   { timestamps: true }
