@@ -37,13 +37,12 @@ export default function DataGridDemo() {
     let temp = [];
     postSuccess &&
       postData.map((p) => {
-        const { numOfView, _id, title, numOfLike, comments } = p;
+        const { numOfView, _id, title, numOfLike } = p;
         const newObj = {
           numOfView,
           id: _id,
           title,
           numOfLike,
-          numOfComment: comments.length,
         };
         temp.push(newObj);
       });

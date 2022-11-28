@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, styled, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ModalBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#1c2d38",
@@ -29,9 +30,10 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 const UserModal = () => {
+  const { user } = useAuth0();
   return (
     <ModalBox>
-      <Link className="link" to="/profile/123">
+      <Link className="link" to={`/profile/${user?.sub}`}>
         <CustomTypography>Profile</CustomTypography>
       </Link>
       <CustomTypography>Sign out</CustomTypography>

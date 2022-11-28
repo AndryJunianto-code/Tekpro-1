@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 
-const PostRightbar = ({ userQuery, profile }) => {
+const OtherProfileRightbar = () => {
   const theme = useTheme();
   return (
     <Box
@@ -11,7 +11,7 @@ const PostRightbar = ({ userQuery, profile }) => {
         display: { xs: "none", lg: "block" },
         p: 2,
       }}
-      mt={profile ? "3rem" : ""}
+      mt="3rem"
     >
       <Box position="fixed" pr={{ lg: 5, xl: 25 }}>
         <Avatar
@@ -21,14 +21,14 @@ const PostRightbar = ({ userQuery, profile }) => {
           sx={{ width: "80px", height: "80px" }}
         />
         <Typography fontWeight={500} fontSize="0.8rem" mt={"0.5rem"}>
-          {userQuery && userQuery[0].username}
+          Andry Junianto
         </Typography>
         <Typography
           mt="0.2rem"
           fontSize="0.8rem"
           color={theme.palette.darkGrey}
         >
-          {userQuery && userQuery[0]?.followers.length} Followers
+          36 Followers
         </Typography>
         <Typography
           mt="0.4rem"
@@ -37,7 +37,9 @@ const PostRightbar = ({ userQuery, profile }) => {
           color={theme.palette.darkGrey}
           fontWeight={400}
         >
-          {userQuery && userQuery[0]?.description}
+          I am a professional writer and content creator with a passion for
+          health and wellness. I enjoy writing about the latest in fitness,
+          nutrition, and technology.
         </Typography>
         <Button
           variant="contained"
@@ -50,4 +52,4 @@ const PostRightbar = ({ userQuery, profile }) => {
   );
 };
 
-export default PostRightbar;
+export default OtherProfileRightbar;

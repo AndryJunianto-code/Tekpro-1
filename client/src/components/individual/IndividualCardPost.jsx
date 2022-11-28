@@ -120,7 +120,11 @@ const IndividualCardPost = ({ post }) => {
       }}
     >
       <CardHeader
-        avatar={<Avatar src={authorImage} />}
+        avatar={
+          <Link className="link" to={`/profile/${authorId}`}>
+            <Avatar src={authorImage} />
+          </Link>
+        }
         action={
           <>
             {checked?.length > 0 ? (
