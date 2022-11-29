@@ -15,9 +15,13 @@ import { useQuery } from "react-query";
 const Profile = () => {
   const { user } = useAuth0();
   const { userId } = useParams();
-  const { data: userQuery } = useQuery(["fetchUser", userId], fetchUser, {
-    retryDelay: 3000,
-  });
+  const { data: userQuery, refetch: userQueryRefetch } = useQuery(
+    ["fetchUser", userId],
+    fetchUser,
+    {
+      retryDelay: 3000,
+    }
+  );
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
@@ -35,7 +39,11 @@ const Profile = () => {
         ) : (
           <>
             <OtherProfile userQuery={userQuery} />
-            <PostRightbar userQuery={userQuery} profile={true} />
+            <PostRightbar
+              userQuery={userQuery}
+              userQueryRefetch={userQueryRefetch}
+              profile={true}
+            />
           </>
         )}
       </Stack>

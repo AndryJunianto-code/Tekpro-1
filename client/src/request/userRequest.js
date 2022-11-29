@@ -12,3 +12,23 @@ export const updateProfile = async (obj) => {
   });
   return data;
 };
+
+export const followUser = async (obj) => {
+  const { data } = await axios.put(`/users/follow`, {
+    userId: obj.userId,
+    authorId: obj.authorId,
+    authorUsername: obj.authorUsername,
+    authorPicture: obj.authorPicture,
+  });
+  return data;
+};
+
+export const unfollowUser = async (obj) => {
+  const { data } = await axios.put(`/users/unfollow`, {
+    userId: obj.userId,
+    authorId: obj.authorId,
+    authorUsername: obj.authorUsername,
+    authorPicture: obj.authorPicture,
+  });
+  return data;
+};

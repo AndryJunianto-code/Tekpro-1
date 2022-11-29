@@ -39,4 +39,68 @@ router.put("/update", async (req, res) => {
   }
 });
 
+//follow someone
+router.put("/follow", async (req, res) => {
+  try {
+    await User.findOneAndUpdate(
+      { userId: req.body.userId },
+      {
+        $push: {
+          followings: {
+            userId: req.body.authorId,
+            username: req.body.authorUsername,
+            userPicture: req.body.authorPicture,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    await User.findOneAndUpdate(
+      { userId: req.body.authorId },
+      {
+        $push: {
+          followers: req.body.userId,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).json("success");
+  } catch (err) {
+    res.status(500).json("err");
+  }
+});
+
+//unfollow
+router.put("/unfollow", async (req, res) => {
+  try {
+    await User.findOneAndUpdate(
+      { userId: req.body.userId },
+      {
+        $pull: {
+          followings: {
+            userId: req.body.authorId,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    await User.findOneAndUpdate(
+      { userId: req.body.authorId },
+      {
+        $pull: {
+          followers: req.body.userId,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).json("success");
+  } catch (err) {
+    res.status(500).json("err");
+  }
+});
+
 module.exports = router;

@@ -15,7 +15,7 @@ const Home = () => {
   const checkUserExist = async () => {
     try {
       const res = await axios.get(`/users/${user?.sub}`);
-      if (res.data?.length == 0) {
+      if (res.data?.length === 0) {
         setUserExistBefore(false);
         return;
       }
@@ -34,6 +34,7 @@ const Home = () => {
       await axios.post("/users", {
         userId: user?.sub,
         username: user?.name,
+        picture: user?.picture,
       });
     } catch (err) {
       console.log(err);
