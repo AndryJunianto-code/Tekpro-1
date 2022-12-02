@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Feed from "../components/Feed";
 import Leftbar from "../components/Leftbar";
@@ -50,7 +50,7 @@ const Home = () => {
   }, [user]);
 
   return (
-    <>
+    <Box sx={{ overflowX: "hidden" }}>
       <Navbar />
       <Stack direction="row" justifyContent="space-between">
         <Leftbar />
@@ -58,7 +58,7 @@ const Home = () => {
         <Rightbar />
       </Stack>
       <BottomBar />
-    </>
+    </Box>
   );
 };
 

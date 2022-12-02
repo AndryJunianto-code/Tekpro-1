@@ -1,15 +1,16 @@
-import { Box, Button, Typography, Stack, Card, InputBase } from "@mui/material";
-import { useMemo, useState, useEffect } from "react";
+import { Button, Typography, Stack, Card, InputBase } from "@mui/material";
+import { useState, useEffect } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import { useMutation } from "react-query";
 import { publishImage, publishPost } from "../request/postRequest";
 import { useAuth0 } from "@auth0/auth0-react";
 import RichTextEditor from "./RichTextEditor";
 
-const CreateBlog = () => {
+const CreateBlog = ({ setOpen }) => {
   const { user } = useAuth0();
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
   const [fileData, setFileData] = useState();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -18,16 +19,13 @@ const CreateBlog = () => {
   const handleImage = (e) => {
     e.preventDefault();
     setFileData(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.value);
   };
 
   const { mutate: mutatePost, isSuccess: isSuccessPost } = useMutation(
     publishPost,
-    {
-      onSuccess: (data) => {
-        console.log(data);
-      },
-    }
+    {}
   );
 
   const {
@@ -66,12 +64,25 @@ const CreateBlog = () => {
     formdata.append("image", fileData);
     mutateImage({ formdata: formdata });
   };
+
+  useEffect(() => {
+    if (isSuccessPost === true) {
+      setOpen(true);
+      console.log(isSuccessPost);
+    }
+  }, [isSuccessPost]);
   return (
-    <CustomBox flex={4} mt={"3rem"} sx={{ overflowX: "hidden" }}>
+    <CustomBox flex={4} mt={"3rem"} pb={"3rem"} sx={{ overflowX: "hidden" }}>
       <BoxWrapper>
-        <Typography fontWeight="700">Create Article</Typography>
+        <Typography fontWeight="700" mb="0.2rem">
+          Create Article
+        </Typography>
         <Card
-          sx={{ backgroundColor: "white", padding: "1rem" }}
+          sx={{
+            backgroundColor: "white",
+            padding: "1rem",
+            marginBottom: "1.5rem",
+          }}
           border={"1px solid #bdbebf"}
         >
           <Stack direction="column">
@@ -95,12 +106,13 @@ const CreateBlog = () => {
                 style={{ display: "none" }}
               />
             </Button>
+            <img src={previewImage} className="createBlogImage" />
             <InputBase
               onChange={handleTitle}
               placeholder="NEW POST TITLE HERE ..."
               fullWidth={true}
               required={true}
-              sx={{ fontSize: "2rem", fontWeight: 600 }}
+              sx={{ fontSize: "2rem", fontWeight: 600, marginTop: "1rem" }}
             />
             <InputBase
               onChange={handleSubtitle}
@@ -121,7 +133,7 @@ const CreateBlog = () => {
         <Button
           onClick={buttonPost}
           variant="contained"
-          sx={{ textTransform: "capitalize" }}
+          sx={{ textTransform: "capitalize", marginTop: "1rem" }}
         >
           Publish
         </Button>

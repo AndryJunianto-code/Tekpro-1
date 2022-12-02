@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../auth/LogoutButton";
-import UserModal from "./UserModal";
+import UserModal from "../modal/UserModal";
 import { useState } from "react";
 import TransparentShadow from "./TransparentShadow";
 
@@ -73,7 +73,7 @@ const Navbar = () => {
       {openUserModal && <TransparentShadow />}
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
         <Typography variant="h6">
-          <LogoutButton />{" "}
+          <LogoutButton />
         </Typography>
         <Search>
           <SearchIconWrapper>
@@ -83,16 +83,15 @@ const Navbar = () => {
         </Search>
 
         {user ? (
-          <Stack direction="row" mr={"2rem"}>
-            <IconButton
-              sx={{
-                width: "2rem",
-                height: "2rem",
-                mr: "0.5rem",
-              }}
-            >
-              <NotificationsNoneOutlinedIcon sx={{ color: "#fafafa" }} />
-            </IconButton>
+          <Stack
+            direction="row"
+            sx={{
+              marginRight: {
+                xs: "",
+                lg: "2rem",
+              },
+            }}
+          >
             <Avatar
               alt={user?.name}
               src={user.picture}

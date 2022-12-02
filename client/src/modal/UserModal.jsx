@@ -8,14 +8,17 @@ const ModalBox = styled(Box)(({ theme }) => ({
   zIndex: 1100,
   position: "absolute",
   top: "60px",
-  right: "40px",
+  right: "20px",
   width: "130px",
   maxWidth: "90vw",
   paddingTop: "0.8rem",
   paddingBottom: "0.6rem",
   overflowY: "auto",
   borderRadius: "7px",
-  overflow: "hidden",
+  overflowX: "hidden",
+  [theme.breakpoints.up("lg")]: {
+    right: "70px",
+  },
 }));
 
 const CustomTypography = styled(Typography)(({ theme }) => ({
