@@ -11,13 +11,14 @@ import {
   Avatar,
   Stack,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../auth/LogoutButton";
 import UserModal from "../modal/UserModal";
 import { useState } from "react";
 import TransparentShadow from "./TransparentShadow";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const StyledNavbar = styled(AppBar)(({ theme }) => ({
@@ -38,19 +39,13 @@ const Navbar = () => {
     },
     padding: "0 10px",
     borderRadius: theme.shape.borderRadius,
-    width: "60%",
+    width: "100%",
     [theme.breakpoints.down("md")]: {
       width: "40%",
     },
     marginLeft: "2rem",
   }));
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    height: "100%",
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+
   const OutlinedButton = styled(Button)(({ theme }) => ({
     marginRight: "2rem",
     border: "1px solid white",
@@ -72,16 +67,12 @@ const Navbar = () => {
     <StyledNavbar onClick={() => setOpenUserModal(false)}>
       {openUserModal && <TransparentShadow />}
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
-        <Typography variant="h6">
-          <LogoutButton />
-        </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <InputBase placeholder="Search..." sx={{ paddingLeft: "1.5rem" }} />
-        </Search>
-
+        <Stack direction="row">
+          <Typography variant="h6">CodingInk</Typography>
+          <Search>
+            <SearchBar />
+          </Search>
+        </Stack>
         {user ? (
           <Stack
             direction="row"

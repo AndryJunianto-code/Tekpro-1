@@ -50,7 +50,7 @@ const Home = () => {
   }, [user]);
 
   return (
-    <Box sx={{ overflowX: "hidden" }}>
+    <div>
       <Navbar />
       <Stack direction="row" justifyContent="space-between">
         <Leftbar />
@@ -58,7 +58,7 @@ const Home = () => {
         <Rightbar />
       </Stack>
       <BottomBar />
-    </Box>
+    </div>
   );
 };
 

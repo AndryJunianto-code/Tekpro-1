@@ -11,6 +11,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import SinglePost from "./pages/SinglePost";
 import ReadingListPosts from "./pages/ReadingListPosts";
 import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 element={<ReadingListPosts />}
               />
               <Route path="/profile/:userId" element={<Profile />} />
+              <Route path="/search/:query" element={<Search />} />
             </Routes>
           </div>
         </AuthProvider>

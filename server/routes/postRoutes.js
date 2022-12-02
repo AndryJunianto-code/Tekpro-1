@@ -38,6 +38,19 @@ router.get("/author/:userId", async (req, res) => {
   }
 });
 
+//find post by title
+router.get("/search/:title", async (req, res) => {
+  let posts;
+  try {
+    posts = await Post.find({
+      title: { $regex: req.params.title, $options: "i" },
+    });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //make a post
 router.post("/", async (req, res) => {
   const newPost = new Post(req.body);

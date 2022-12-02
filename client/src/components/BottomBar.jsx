@@ -40,22 +40,34 @@ const BottomBar = () => {
       <CustomStack direction="row" justifyContent="space-between">
         <Link to="/" className="link">
           <IconButton flex={1}>
-            <HomeOutlined position="fixed" sx={{ width: "30px" }} />
+            <HomeOutlined
+              position="fixed"
+              sx={{ color: "#707070", width: "23px" }}
+            />
           </IconButton>
         </Link>
         <Link to="/lists" className="link">
           <IconButton flex={1}>
-            <BookmarksOutlined position="fixed" sx={{ width: "23px" }} />
+            <BookmarksOutlined
+              position="fixed"
+              sx={{ color: "#707070", width: "18px" }}
+            />
           </IconButton>
         </Link>
         <Link to="/stories" className="link">
           <IconButton flex={1}>
-            <ArticleOutlined position="fixed" sx={{ width: "25px" }} />
+            <ArticleOutlined
+              position="fixed"
+              sx={{ color: "#707070", width: "20px" }}
+            />
           </IconButton>
         </Link>
         <Link to="/write" className="link">
           <IconButton flex={1}>
-            <ModeOutlined position="fixed" sx={{ width: "25px" }} />
+            <ModeOutlined
+              position="fixed"
+              sx={{ color: "#707070", width: "20px" }}
+            />
           </IconButton>
         </Link>
       </CustomStack>

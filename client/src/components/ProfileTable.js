@@ -25,14 +25,10 @@ const columns = [
   },
 ];
 
-export default function DataGridDemo() {
+export default function DataGridDemo({ postData, postSuccess }) {
   const { user } = useAuth0();
   const [modifyPostData, setModifyPostData] = useState([]);
-  const { data: postData, isSuccess: postSuccess } = useQuery(
-    ["fetchPostByAuthor", user?.sub],
-    fetchPostByAuthor,
-    { retryDelay: 3000 }
-  );
+
   useEffect(() => {
     let temp = [];
     postSuccess &&

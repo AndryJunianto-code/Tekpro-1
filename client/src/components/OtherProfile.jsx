@@ -24,9 +24,6 @@ const OtherProfile = ({ userQuery }) => {
     fetchPostByAuthor,
     { retryDelay: 3000 }
   );
-  useEffect(() => {
-    console.log(postsData);
-  }, [postsData]);
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"} pb="3rem">
       <BoxWrapper>

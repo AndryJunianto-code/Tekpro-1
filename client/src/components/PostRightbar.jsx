@@ -57,11 +57,13 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
     if (userQuery) {
       if (userQuery[0]?.followers.includes(user?.sub)) {
         setIsFollowing(true);
+        console.log(true);
       } else {
         setIsFollowing(false);
+        console.log(false);
       }
     }
-  }, []);
+  }, [userQuery]);
   return (
     <Box
       flex={2}

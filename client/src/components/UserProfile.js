@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { fetchUser, updateProfile } from "../request/userRequest";
 import { useMutation, useQuery } from "react-query";
 import ProfileTable from "./ProfileTable";
+import { fetchPostByAuthor } from "../request/postRequest";
 
 const UserProfile = () => {
   const { user } = useAuth0();
@@ -28,6 +29,11 @@ const UserProfile = () => {
     {
       retryDelay: 3000,
     }
+  );
+  const { data: postData, isSuccess: postSuccess } = useQuery(
+    ["fetchPostByAuthor", user?.sub],
+    fetchPostByAuthor,
+    { retryDelay: 3000 }
   );
   const { mutate: mutateProfile, isSuccess: isSuccessProfile } = useMutation(
     updateProfile,
@@ -61,22 +67,58 @@ const UserProfile = () => {
         />
 
         <Box mb="2rem">
-          <Box mb="1.6rem">
-            <Typography
-              color={theme.palette.darkGrey}
-              fontSize="14px"
-              mb={"0.6rem"}
-            >
-              Profile Picture
-            </Typography>
-            <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="start">
+            <Box mb="1.6rem">
+              <Typography
+                color={theme.palette.darkGrey}
+                fontSize="14px"
+                mb={"0.6rem"}
+              >
+                Profile Picture
+              </Typography>
               <Avatar
                 src={user?.picture}
                 alt="preview"
                 sx={{ width: "100px", height: "100px", marginRight: "1rem" }}
               />
-            </Stack>
-          </Box>
+            </Box>
+            <Box ml="5rem">
+              <Typography
+                color={theme.palette.darkGrey}
+                fontSize="14px"
+                mb={"1rem"}
+              >
+                Posts
+              </Typography>
+              <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                {postData && postData?.length}
+              </Typography>
+            </Box>
+            <Box ml="2.4rem">
+              <Typography
+                color={theme.palette.darkGrey}
+                fontSize="14px"
+                mb={"1rem"}
+              >
+                Followers
+              </Typography>
+              <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                {userData && userData[0]?.followers.length}
+              </Typography>
+            </Box>
+            <Box ml="2rem">
+              <Typography
+                color={theme.palette.darkGrey}
+                fontSize="14px"
+                mb={"1rem"}
+              >
+                Followings
+              </Typography>
+              <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                {userData && userData[0]?.followings.length}
+              </Typography>
+            </Box>
+          </Stack>
           <Box>
             <Typography color={theme.palette.darkGrey} fontSize="14px">
               Username
@@ -123,7 +165,7 @@ const UserProfile = () => {
         <Typography color={theme.palette.darkGrey} fontSize="14px" mb="0.4rem">
           Stats
         </Typography>
-        <ProfileTable />
+        <ProfileTable postData={postData} postSuccess={postSuccess} />
       </BoxWrapper>
     </CustomBox>
   );

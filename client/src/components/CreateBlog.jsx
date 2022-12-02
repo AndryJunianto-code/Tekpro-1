@@ -42,6 +42,7 @@ const CreateBlog = ({ setOpen }) => {
         authorName: user?.name,
         authorImage: user?.picture,
         authorId: user?.sub,
+        tags: tags,
       });
     },
   });
@@ -56,7 +57,7 @@ const CreateBlog = ({ setOpen }) => {
   };
   const handleTags = (e) => {
     e.preventDefault();
-    setTags(e.target.value);
+    setTags(e.target.value.split(","));
   };
   const buttonPost = async (e) => {
     e.preventDefault();

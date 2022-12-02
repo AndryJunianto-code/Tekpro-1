@@ -112,7 +112,7 @@ const IndividualCardPost = ({ post }) => {
   return (
     <Card
       sx={{
-        paddingX: "1.3rem",
+        paddingX: { lg: "1.3rem" },
         paddingBottom: "1rem",
         marginBottom: "0.3rem",
         maxWidth: "100%",
@@ -122,7 +122,13 @@ const IndividualCardPost = ({ post }) => {
       <CardHeader
         avatar={
           <Link className="link" to={`/profile/${authorId}`}>
-            <Avatar src={authorImage} />
+            <Avatar
+              src={authorImage}
+              sx={{
+                width: { xs: "30px", lg: "30px" },
+                height: { xs: "30px", lg: "30px" },
+              }}
+            />
           </Link>
         }
         action={
@@ -131,7 +137,7 @@ const IndividualCardPost = ({ post }) => {
               <IconButton onClick={handleBookmarkPost}>
                 <BookmarkIcon
                   sx={{
-                    width: "23px",
+                    width: "20px",
                   }}
                 />
               </IconButton>
@@ -140,7 +146,7 @@ const IndividualCardPost = ({ post }) => {
                 <BookmarkBorderOutlinedIcon
                   sx={{
                     color: theme.palette.darkGrey,
-                    width: "24px",
+                    width: "20px",
                     ":hover": {
                       color: "black",
                     },
@@ -153,7 +159,7 @@ const IndividualCardPost = ({ post }) => {
                 <FavoriteIcon
                   sx={{
                     color: "red",
-                    width: "23px",
+                    width: "20px",
                   }}
                 />
               </IconButton>
@@ -162,7 +168,7 @@ const IndividualCardPost = ({ post }) => {
                 <FavoriteBorderOutlinedIcon
                   sx={{
                     color: theme.palette.darkGrey,
-                    width: "23px",
+                    width: "20px",
                     ":hover": {
                       color: "black",
                     },
@@ -173,7 +179,9 @@ const IndividualCardPost = ({ post }) => {
           </>
         }
         title={user?.sub === authorId ? `${authorName} (You)` : authorName}
+        titleTypographyProps={{ fontSize: "14px", fontWeight: 500 }}
         subheader={new Date(createdAt).toDateString()}
+        subheaderTypographyProps={{ fontSize: "12px" }}
       />
       <Link
         to={`/p/${_id}?liked=${isPostLiked}&bookmarked=${isPostBookmarked}`}
@@ -183,9 +191,15 @@ const IndividualCardPost = ({ post }) => {
           justifyContent="space-between"
           direction="row"
           alignItems="start"
+          sx={{ paddingX: { xs: "1rem", lg: "0" } }}
         >
           <Box marginRight={2}>
-            <Typography sx={{ fontWeight: "700", fontSize: { lg: "1.2rem" } }}>
+            <Typography
+              sx={{
+                fontWeight: "700",
+                fontSize: { xs: "0.8rem", lg: "1.3rem" },
+              }}
+            >
               {title}
             </Typography>
             <Typography
@@ -195,7 +209,7 @@ const IndividualCardPost = ({ post }) => {
               dangerouslySetInnerHTML={{ __html: subtitle }}
             ></Typography>
 
-            <Box mt={"0.2rem"}>
+            <Box mt={"1.4rem"}>
               {tags.map((tag) => (
                 <button className="buttonTag" key={v4()}>
                   {tag}

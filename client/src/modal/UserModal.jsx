@@ -33,13 +33,21 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 const UserModal = () => {
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
   return (
     <ModalBox>
       <Link className="link" to={`/profile/${user?.sub}`}>
         <CustomTypography>Profile</CustomTypography>
       </Link>
-      <CustomTypography>Sign out</CustomTypography>
+      <CustomTypography
+        onClick={() =>
+          logout({
+            returnTo: window.location.origin,
+          })
+        }
+      >
+        Sign out
+      </CustomTypography>
     </ModalBox>
   );
 };

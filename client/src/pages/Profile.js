@@ -39,11 +39,13 @@ const Profile = () => {
         ) : (
           <>
             <OtherProfile userQuery={userQuery} />
-            <PostRightbar
-              userQuery={userQuery}
-              userQueryRefetch={userQueryRefetch}
-              profile={true}
-            />
+            {userQuery && (
+              <PostRightbar
+                userQuery={userQuery}
+                userQueryRefetch={userQueryRefetch}
+                profile={true}
+              />
+            )}
           </>
         )}
       </Stack>

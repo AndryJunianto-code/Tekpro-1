@@ -16,6 +16,13 @@ export const fetchSinglePost = async (obj) => {
   return data;
 };
 
+export const fetchPostByTitle = async (obj) => {
+  const searchQuery = obj.queryKey[1];
+  console.log(searchQuery);
+  const { data } = await axios.get(`/posts/search/${searchQuery}`);
+  return data;
+};
+
 export const publishImage = async (obj) => {
   const { data } = await axios.post("/posts/image", obj.formdata);
 
@@ -31,6 +38,7 @@ export const publishPost = async (obj) => {
     authorId: obj.authorId,
     postImage: obj.postImage,
     caption: obj.caption,
+    tags: obj.tags,
   });
   return data;
 };

@@ -48,12 +48,16 @@
 }
 
 .buttonTag {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   background-color: #ececec;
-  border-radius: 25%;
+  border-radius: 8px;
   border: none;
-  padding: 5px;
+  padding: 9px;
   margin-right: 0.3rem;
+  letter-spacing: 1px;
+}
+.buttonTag:hover {
+  background-color: #e0e0e0;
 }
 
 .postImage {
