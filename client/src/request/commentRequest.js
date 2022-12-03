@@ -6,6 +6,7 @@ export const createNewComment = async (obj) => {
     image: obj.image,
     comment: obj.comment,
     postId: obj.postId,
+    userId: obj.userId,
   });
 
   return data;

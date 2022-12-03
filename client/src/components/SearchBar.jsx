@@ -17,21 +17,26 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
-  const doSearch = () => {
-    redirect("/search");
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && search !== "") {
+      navigate(`/search/${search}`);
+    }
+  };
+
+  const handleClickIconSearch = () => {
+    if (search !== "") {
+      navigate(`/search/${search}`);
+    }
   };
   return (
     <>
-      <SearchIconWrapper
-        sx={{ zIndex: 1000 }}
-        onClick={() => navigate(`/search/${search}`)}
-      >
+      <SearchIconWrapper sx={{ zIndex: 1000 }} onClick={handleClickIconSearch}>
         <SearchIcon />
       </SearchIconWrapper>
       <InputBase
+        onKeyDown={handleKeyDown}
         onChange={handleSearch}
         placeholder="Search..."
         sx={{ paddingLeft: "1.5rem" }}

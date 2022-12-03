@@ -96,7 +96,7 @@ const Navbar = () => {
               <Typography
                 mr={0.5}
                 color="white"
-                fontSize={{ xs: "0.7rem", md: "1rem" }}
+                fontSize={{ xs: "0.6rem", md: "1rem" }}
               >
                 Log in
               </Typography>

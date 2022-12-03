@@ -62,6 +62,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
         image: user?.picture,
         comment: comment,
         postId: postId,
+        userId: user?.sub,
       },
       {
         onSuccess: () => {

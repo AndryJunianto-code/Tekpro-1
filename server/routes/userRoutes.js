@@ -13,6 +13,18 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+//find single user by name
+router.get("/search/:username", async (req, res) => {
+  try {
+    const user = await User.find({
+      username: { $regex: req.params.username, $options: "i" },
+    });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   const newUser = new User(req.body);
   try {

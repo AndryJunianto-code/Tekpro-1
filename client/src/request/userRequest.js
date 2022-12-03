@@ -5,6 +5,11 @@ export const fetchUser = async (obj) => {
   return data;
 };
 
+export const fetchUserByUsername = async (obj) => {
+  const { data } = await axios.get(`/users/search/${obj.queryKey[1]}`);
+  return data;
+};
+
 export const updateProfile = async (obj) => {
   const { data } = await axios.put(`/users/update`, {
     userId: obj.userId,
