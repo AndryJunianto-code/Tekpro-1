@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" pb="5rem">
         <Leftbar />
         <Feed />
         <Rightbar />

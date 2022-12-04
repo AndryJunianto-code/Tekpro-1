@@ -1,14 +1,17 @@
 import React from "react";
-import { Stack, styled, Box, Typography, IconButton } from "@mui/material";
+import { Stack, styled, Box, IconButton } from "@mui/material";
 import {
   HomeOutlined,
   BookmarksOutlined,
   ArticleOutlined,
   ModeOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const BottomBar = () => {
+  const location = useLocation();
+  const [onWhichSection, setOnWhichSection] = useState(location.pathname);
   const CustomStack = styled(Stack)(({ theme }) => ({
     position: "relative",
     bottom: "0px",
@@ -42,7 +45,10 @@ const BottomBar = () => {
           <IconButton flex={1}>
             <HomeOutlined
               position="fixed"
-              sx={{ color: "#707070", width: "23px" }}
+              sx={{
+                color: onWhichSection === "/" ? "black" : "#707070",
+                width: "23px",
+              }}
             />
           </IconButton>
         </Link>
@@ -50,7 +56,10 @@ const BottomBar = () => {
           <IconButton flex={1}>
             <BookmarksOutlined
               position="fixed"
-              sx={{ color: "#707070", width: "18px" }}
+              sx={{
+                color: onWhichSection === "/lists" ? "black" : "#707070",
+                width: "18px",
+              }}
             />
           </IconButton>
         </Link>
@@ -58,7 +67,10 @@ const BottomBar = () => {
           <IconButton flex={1}>
             <ArticleOutlined
               position="fixed"
-              sx={{ color: "#707070", width: "20px" }}
+              sx={{
+                color: onWhichSection === "/stories" ? "black" : "#707070",
+                width: "20px",
+              }}
             />
           </IconButton>
         </Link>
@@ -66,7 +78,10 @@ const BottomBar = () => {
           <IconButton flex={1}>
             <ModeOutlined
               position="fixed"
-              sx={{ color: "#707070", width: "20px" }}
+              sx={{
+                color: onWhichSection === "/write" ? "black" : "#707070",
+                width: "20px",
+              }}
             />
           </IconButton>
         </Link>

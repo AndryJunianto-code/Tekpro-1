@@ -7,11 +7,12 @@ import SuccessSnackbar from "../modal/SuccessSnackbar";
 
 const Write = () => {
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" py="2rem">
         <Leftbar />
-        <CreateBlog setOpen={setOpen} />
+        <CreateBlog setOpen={setOpen} setMessage={setMessage} />
         <Box
           flex={2}
           sx={{
@@ -19,7 +20,8 @@ const Write = () => {
           }}
         />
       </Stack>
-      <SuccessSnackbar open={open} setOpen={setOpen} />
+      <SuccessSnackbar open={open} setOpen={setOpen} message={message} />
+
       <BottomBar />
     </>
   );

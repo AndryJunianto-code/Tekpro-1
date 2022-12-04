@@ -5,8 +5,9 @@ import { useMutation } from "react-query";
 import { publishImage, publishPost } from "../request/postRequest";
 import { useAuth0 } from "@auth0/auth0-react";
 import RichTextEditor from "./RichTextEditor";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-const CreateBlog = ({ setOpen }) => {
+const CreateBlog = ({ setOpen, setMessage }) => {
   const { user } = useAuth0();
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
@@ -14,7 +15,7 @@ const CreateBlog = ({ setOpen }) => {
   const [fileData, setFileData] = useState();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState(null);
 
   const handleImage = (e) => {
     e.preventDefault();
@@ -23,29 +24,29 @@ const CreateBlog = ({ setOpen }) => {
     setImage(e.target.value);
   };
 
-  const { mutate: mutatePost, isSuccess: isSuccessPost } = useMutation(
-    publishPost,
-    {}
-  );
-
   const {
-    mutate: mutateImage,
-    isSuccess: isSuccessImage,
-    data: postImage,
-  } = useMutation(publishImage, {
-    onSuccess: (data) => {
-      mutatePost({
-        title,
-        subtitle,
-        caption: content,
-        postImage: data.image,
-        authorName: user?.name,
-        authorImage: user?.picture,
-        authorId: user?.sub,
-        tags: tags,
-      });
-    },
-  });
+    mutate: mutatePost,
+    isSuccess: isSuccessPost,
+    isLoading: isLoadingPost,
+  } = useMutation(publishPost, {});
+
+  const { mutate: mutateImage, isLoading: isLoadingImage } = useMutation(
+    publishImage,
+    {
+      onSuccess: (data) => {
+        mutatePost({
+          title,
+          subtitle,
+          caption: content,
+          postImage: data.image,
+          authorName: user?.name,
+          authorImage: user?.picture,
+          authorId: user?.sub,
+          tags: tags,
+        });
+      },
+    }
+  );
 
   const handleTitle = (e) => {
     e.preventDefault();
@@ -61,15 +62,29 @@ const CreateBlog = ({ setOpen }) => {
   };
   const buttonPost = async (e) => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("image", fileData);
-    mutateImage({ formdata: formdata });
+    if (previewImage === null) {
+      setOpen(true);
+      setMessage("Please add an image");
+    } else if (title === "") {
+      setOpen(true);
+      setMessage("Please add a title");
+    } else if (subtitle === "") {
+      setOpen(true);
+      setMessage("Please add a subtitle");
+    } else if (content === "") {
+      setOpen(true);
+      setMessage("Please write a few words as content");
+    } else {
+      const formdata = new FormData();
+      formdata.append("image", fileData);
+      mutateImage({ formdata: formdata });
+    }
   };
 
   useEffect(() => {
     if (isSuccessPost === true) {
       setOpen(true);
-      console.log(isSuccessPost);
+      setMessage("Published");
     }
   }, [isSuccessPost]);
   return (
@@ -131,13 +146,14 @@ const CreateBlog = ({ setOpen }) => {
           </Stack>
         </Card>
         <RichTextEditor content={content} setContent={setContent} />
-        <Button
+        <LoadingButton
           onClick={buttonPost}
           variant="contained"
+          loading={isLoadingPost || isLoadingImage}
           sx={{ textTransform: "capitalize", marginTop: "1rem" }}
         >
           Publish
-        </Button>
+        </LoadingButton>
       </BoxWrapper>
     </CustomBox>
   );

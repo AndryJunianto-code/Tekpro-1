@@ -18,10 +18,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const Leftbar = () => {
   const location = useLocation();
-  const [onWhichSection, setOnWhichSection] = useState("");
-  useEffect(() => {
-    setOnWhichSection(location.pathname);
-  }, []);
+  const [onWhichSection, setOnWhichSection] = useState(location.pathname);
+
   return (
     <Box
       flex={1}

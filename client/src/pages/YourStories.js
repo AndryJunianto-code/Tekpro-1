@@ -9,7 +9,7 @@ const YourStories = () => {
   return (
     <>
       <Navbar />
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" pb="3rem">
         <Leftbar />
         <Stories />
         <Box
