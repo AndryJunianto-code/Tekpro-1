@@ -1,9 +1,16 @@
-import { Avatar, Stack, Typography, Button } from "@mui/material";
+import { Avatar, Stack, Typography, Button, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const IndividualTopWriter = ({ t }) => {
+  const theme = useTheme();
   return (
-    <Stack direction="row" alignItems="center" mb="1rem" key={t.userId}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      mb="1rem"
+      key={t.userId}
+      color={theme.palette.mainWhite}
+    >
       <Avatar
         src={t.picture}
         alt="image"

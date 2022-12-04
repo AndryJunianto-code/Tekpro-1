@@ -1,4 +1,4 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { fetchPostByTag } from "../request/postRequest";
 import { BoxWrapper, CustomBox } from "../utilities/CustomBox";
@@ -8,6 +8,7 @@ import IndividualCardPost from "./individual/IndividualCardPost";
 
 const TagContent = () => {
   const { tagName } = useParams();
+  const theme = useTheme();
   const { data: tagData, isSuccess: tagSuccess } = useQuery(
     ["fetchPostByTag", tagName],
     fetchPostByTag,
@@ -21,7 +22,11 @@ const TagContent = () => {
           <Typography fontSize={"1.8rem"} color="#707070" mr="0.5rem">
             #
           </Typography>
-          <Typography fontSize={"1.8rem"} fontWeight={900}>
+          <Typography
+            color={theme.palette.mainWhite}
+            fontSize={"1.8rem"}
+            fontWeight={900}
+          >
             {tagName}
           </Typography>
         </Stack>

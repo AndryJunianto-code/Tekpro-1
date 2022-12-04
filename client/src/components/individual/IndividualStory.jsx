@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 import { theme } from "../../theme";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const IndividualStory = ({ story, userData }) => {
   const { title, caption, _id, userIdBookmarked } = story;
+  const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
 
@@ -19,7 +20,12 @@ const IndividualStory = ({ story, userData }) => {
       className="link"
     >
       <Box>
-        <Typography variant="body2" fontWeight={700} mb={"0.2rem"}>
+        <Typography
+          color={theme.palette.mainWhite}
+          variant="body2"
+          fontWeight={700}
+          mb={"0.2rem"}
+        >
           {title}
         </Typography>
         <Typography

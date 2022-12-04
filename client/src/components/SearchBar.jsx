@@ -33,7 +33,14 @@ const SearchBar = () => {
   return (
     <>
       <SearchIconWrapper sx={{ zIndex: 1000 }} onClick={handleClickIconSearch}>
-        <SearchIcon />
+        <SearchIcon
+          sx={{
+            width: {
+              xs: "20px",
+              lg: "25px",
+            },
+          }}
+        />
       </SearchIconWrapper>
       <InputBase
         onKeyDown={handleKeyDown}

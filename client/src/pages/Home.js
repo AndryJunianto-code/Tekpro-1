@@ -50,7 +50,7 @@ const Home = () => {
   }, [user]);
 
   return (
-    <div>
+    <Box minHeight="100vh" height="100%">
       <Navbar />
       <Stack direction="row" justifyContent="space-between" pb="5rem">
         <Leftbar />
@@ -58,7 +58,7 @@ const Home = () => {
         <Rightbar />
       </Stack>
       <BottomBar />
-    </div>
+    </Box>
   );
 };
 

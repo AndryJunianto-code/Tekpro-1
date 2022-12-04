@@ -1,4 +1,11 @@
-import { Button, Typography, Stack, Card, InputBase } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Stack,
+  Card,
+  InputBase,
+  useTheme,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import { useMutation } from "react-query";
@@ -9,6 +16,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 
 const CreateBlog = ({ setOpen, setMessage }) => {
   const { user } = useAuth0();
+  const theme = useTheme();
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
@@ -88,14 +96,17 @@ const CreateBlog = ({ setOpen, setMessage }) => {
     }
   }, [isSuccessPost]);
   return (
-    <CustomBox flex={4} mt={"3rem"} pb={"3rem"} sx={{ overflowX: "hidden" }}>
+    <CustomBox flex={4} mt={"3rem"} pb={"15.8rem"} sx={{ overflowX: "hidden" }}>
       <BoxWrapper>
-        <Typography fontWeight="700" mb="0.2rem">
+        <Typography
+          fontWeight="700"
+          mb="0.2rem"
+          color={theme.palette.mainWhite}
+        >
           Create Article
         </Typography>
         <Card
           sx={{
-            backgroundColor: "white",
             padding: "1rem",
             marginBottom: "1.5rem",
           }}

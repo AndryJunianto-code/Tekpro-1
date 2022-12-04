@@ -8,11 +8,6 @@ export const theme = createTheme({
     mainBlue: "#026aa7",
     mainWhite: "#f9fbfd",
     darkGrey: "#707070",
-  },
-});
-
-export const darkTheme = createTheme({
-  palette: {
-    mode: "light",
+    darkModeWhite1: "rgba(255,255,255,0.87)",
   },
 });

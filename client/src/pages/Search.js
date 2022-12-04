@@ -8,7 +8,7 @@ import SearchContent from "../components/SearchContent";
 
 const YourStories = () => {
   return (
-    <>
+    <Box minHeight="100vh" height="100%">
       <Navbar />
       <Stack direction="row" justifyContent="space-between">
         <Leftbar />
@@ -21,7 +21,7 @@ const YourStories = () => {
         />
       </Stack>
       <BottomBar />
-    </>
+    </Box>
   );
 };
 

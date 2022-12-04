@@ -3,26 +3,26 @@ import {
   Toolbar,
   Typography,
   styled,
-  InputBase,
   alpha,
   Button,
   Box,
-  IconButton,
   Avatar,
   Stack,
 } from "@mui/material";
 
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
-import LogoutButton from "../auth/LogoutButton";
 import UserModal from "../modal/UserModal";
 import { useState } from "react";
 import TransparentShadow from "./TransparentShadow";
 import SearchBar from "./SearchBar";
+import { useColorModeContext } from "../context/ColorModeContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const { colorMode } = useColorModeContext();
   const StyledNavbar = styled(AppBar)(({ theme }) => ({
-    backgroundColor: theme.palette.mainBlue,
+    backgroundColor: colorMode === "light" ? "026aa7" : "#222222",
     position: "sticky",
   }));
   const CustomToolbar = styled(Toolbar)(({ theme }) => ({
@@ -44,6 +44,7 @@ const Navbar = () => {
       width: "40%",
     },
     marginLeft: "2rem",
+    height: "100%",
   }));
 
   const OutlinedButton = styled(Button)(({ theme }) => ({
@@ -68,7 +69,9 @@ const Navbar = () => {
       {openUserModal && <TransparentShadow />}
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
         <Stack direction="row">
-          <Typography variant="h6">CodingInk</Typography>
+          <Link className="linkWhite" to="/">
+            <Typography variant="h6">CodingInk</Typography>
+          </Link>
           <Search>
             <SearchBar />
           </Search>

@@ -1,5 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPostByTitle } from "../request/postRequest";
@@ -11,6 +10,7 @@ import IndividualUser from "./individual/IndividualUser";
 
 const Stories = () => {
   const { query } = useParams();
+  const theme = useTheme();
   const [searchNavigation, setSearchNavigation] = useState("");
   const { data: searchData, isSuccess: searchSuccess } = useQuery(
     ["fetchPostByTitle", query],
@@ -30,10 +30,10 @@ const Stories = () => {
     setSearchNavigation("Stories");
   }, []);
   return (
-    <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
-      <BoxWrapper>
+    <CustomBox flex={4} pb="4rem" sx={{ overflowX: "hidden" }} mt={"3rem"}>
+      <BoxWrapper color={theme.palette.mainWhite}>
         <Stack direction="row">
-          <Typography fontSize={"1.8rem"} color="#707070" mr="0.5rem">
+          <Typography fontSize={"1.8rem"} mr="0.5rem">
             Results for
           </Typography>
           <Typography fontSize={"1.8rem"} fontWeight={900}>

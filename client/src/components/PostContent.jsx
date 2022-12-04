@@ -123,7 +123,7 @@ const PostContent = ({
         </Box>
 
         {/*  */}
-        <Box mt={2}>
+        <Box mt={2} color={theme.palette.mainWhite}>
           <Typography fontSize={"2rem"} fontWeight="900">
             {title}
           </Typography>

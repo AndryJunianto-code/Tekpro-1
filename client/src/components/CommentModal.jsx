@@ -8,6 +8,7 @@ import {
   Stack,
   Button,
   TextField,
+  useTheme,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import IndividualComment from "./individual/IndividualComment";
@@ -16,28 +17,31 @@ import { createNewComment, fetchComments } from "../request/commentRequest";
 import { useMutation, useQuery } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import { increasePostComment } from "../request/postRequest";
-
-const ModalBox = styled(Box)(({ theme }) => ({
-  height: "calc(100vh - 4rem)",
-  backgroundColor: "#fafafa",
-  zIndex: 1100,
-  position: "absolute",
-  top: "0",
-  right: "0",
-  width: "350px",
-  maxWidth: "90vw",
-  overflowY: "auto",
-  padding: "2rem 1rem",
-}));
-
-const InputBox = styled(Box)(({ theme }) => ({
-  padding: "0.7rem",
-  marginTop: "1rem",
-}));
+import { useColorModeContext } from "../context/ColorModeContext";
 
 const CommentModal = ({ postId, setIsOpenCommentModal }) => {
   const { user } = useAuth0();
+  const { colorMode } = useColorModeContext();
+  const theme = useTheme();
   const [comment, setComment] = useState("");
+
+  const ModalBox = styled(Box)(({ theme }) => ({
+    height: "calc(100vh - 4rem)",
+    backgroundColor: colorMode === "light" ? "#fafafa" : "#121212",
+    zIndex: 1100,
+    position: "absolute",
+    top: "0",
+    right: "0",
+    width: "350px",
+    maxWidth: "90vw",
+    overflowY: "auto",
+    padding: "2rem 1rem",
+  }));
+
+  const InputBox = styled(Box)(({ theme }) => ({
+    padding: "0.7rem",
+    marginTop: "1rem",
+  }));
 
   const { mutate: mutateComment, isSuccess: isSuccessComment } =
     useMutation(createNewComment);
@@ -52,6 +56,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
   } = useQuery(["fetchComments", postId], fetchComments, { retryDelay: 3000 });
 
   const handleComment = (e) => {
+    e.preventDefault();
     setComment(e.target.value);
   };
 
@@ -81,7 +86,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
   return (
     <ModalBox>
       <Stack direction="row" justifyContent={"space-between"}>
-        <Typography sx={{ fontWeight: "500" }}>
+        <Typography sx={{ fontWeight: "500" }} color={theme.palette.mainWhite}>
           Comments ({commentData?.length})
         </Typography>
         <ClearIcon
@@ -98,7 +103,12 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
             }
             alt="comments"
           />
-          <Typography fontWeight={300} fontSize="0.7rem" ml={"0.5rem"}>
+          <Typography
+            color={theme.palette.mainWhite}
+            fontWeight={300}
+            fontSize="0.7rem"
+            ml={"0.5rem"}
+          >
             {user?.name}
           </Typography>
         </Stack>
@@ -143,7 +153,6 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
           </Button>
         </Stack>
       </InputBox>
-
       <Box>
         {commentSuccess &&
           commentData.map((c) => (

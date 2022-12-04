@@ -25,10 +25,12 @@ import { useTheme } from "@mui/material/styles";
 import BookmarkModal from "../../modal/BookmarkModal";
 import { fetchAllLists } from "../../request/bookmarkListRequest";
 import IndividualTagButton from "./IndividualTagButton";
+import { useColorModeContext } from "../../context/ColorModeContext";
 
 const IndividualCardPost = ({ post }) => {
   const { user } = useAuth0();
   const theme = useTheme();
+  const { colorMode } = useColorModeContext();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
   const [bookmarkAnchor, setBookmarkAnchor] = useState(null);
@@ -141,9 +143,6 @@ const IndividualCardPost = ({ post }) => {
                   sx={{
                     color: theme.palette.darkGrey,
                     width: "20px",
-                    ":hover": {
-                      color: "black",
-                    },
                   }}
                 />
               </IconButton>
@@ -163,9 +162,6 @@ const IndividualCardPost = ({ post }) => {
                   sx={{
                     color: theme.palette.darkGrey,
                     width: "20px",
-                    ":hover": {
-                      color: "black",
-                    },
                   }}
                 />
               </IconButton>
@@ -187,9 +183,11 @@ const IndividualCardPost = ({ post }) => {
           alignItems="start"
           sx={{ paddingX: { xs: "1rem", lg: "0" } }}
         >
-          <Box marginRight={2}>
+          <Box marginRight={2} color={theme.palette.mainWhite}>
             <Typography
+              mb="0.3rem"
               sx={{
+                lineHeight: "30px",
                 fontWeight: "700",
                 fontSize: { xs: "0.8rem", lg: "1.3rem" },
               }}

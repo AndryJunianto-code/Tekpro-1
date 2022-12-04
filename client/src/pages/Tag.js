@@ -8,7 +8,7 @@ import TagContent from "../components/TagContent";
 
 const YourStories = () => {
   return (
-    <>
+    <Box height="100%" minHeight="100vh">
       <Navbar />
       <Stack direction="row" justifyContent="space-between">
         <Leftbar />
@@ -21,7 +21,7 @@ const YourStories = () => {
         />
       </Stack>
       <BottomBar />
-    </>
+    </Box>
   );
 };
 

@@ -1,4 +1,11 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import IndividualStory from "./individual/IndividualStory";
@@ -10,6 +17,7 @@ import { fetchUser } from "../request/userRequest";
 
 const Stories = () => {
   const { user } = useAuth0();
+  const theme = useTheme();
   const { data: storyData, isSuccess: storySuccess } = useQuery(
     ["fetchPostByAuthor", user?.sub],
     fetchPostByAuthor,
@@ -27,7 +35,11 @@ const Stories = () => {
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
       <BoxWrapper>
         <Stack direction="row" justifyContent={"space-between"}>
-          <Typography fontSize={"1.8rem"} fontWeight={900}>
+          <Typography
+            color={theme.palette.mainWhite}
+            fontSize={"1.8rem"}
+            fontWeight={900}
+          >
             Your Stories
           </Typography>
           <Link to="/write" className="link">

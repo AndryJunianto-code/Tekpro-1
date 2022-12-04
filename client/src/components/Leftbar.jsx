@@ -15,11 +15,12 @@ import {
 } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useColorModeContext } from "../context/ColorModeContext";
 
 const Leftbar = () => {
   const location = useLocation();
   const [onWhichSection, setOnWhichSection] = useState(location.pathname);
-
+  const { colorMode } = useColorModeContext();
   return (
     <Box
       flex={1}
@@ -34,15 +35,13 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <HomeOutlined sx={{ color: "#292929", width: "25px" }} />
+                  <HomeOutlined sx={{ width: "25px" }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={
                     <Typography
                       type="body2"
-                      sx={{
-                        color: "#292929",
-                      }}
+                      color={colorMode === "dark" ? "white" : ""}
                       fontWeight={onWhichSection === "/" ? "800" : ""}
                     >
                       Home
@@ -63,16 +62,14 @@ const Leftbar = () => {
             >
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <BookmarksOutlined
-                    style={{ color: "#292929", width: "21px" }}
-                  />
+                  <BookmarksOutlined style={{ width: "21px" }} />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
                     <Typography
                       type="body2"
-                      style={{ color: "#292929" }}
+                      color={colorMode === "dark" ? "white" : ""}
                       fontWeight={onWhichSection === "/lists" ? "800" : ""}
                     >
                       Reading List
@@ -87,16 +84,14 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <ArticleOutlined
-                    style={{ color: "#292929", width: "21px" }}
-                  />
+                  <ArticleOutlined style={{ width: "21px" }} />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
                     <Typography
                       type="body2"
-                      style={{ color: "#292929" }}
+                      color={colorMode === "dark" ? "white" : ""}
                       fontWeight={onWhichSection === "/stories" ? "800" : ""}
                     >
                       Your Stories
@@ -111,14 +106,14 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <ModeOutlined style={{ color: "#292929", width: "22px" }} />
+                  <ModeOutlined style={{ width: "22px" }} />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
                     <Typography
                       type="body2"
-                      sx={{ color: "#292929" }}
+                      color={colorMode === "dark" ? "white" : ""}
                       fontWeight={onWhichSection === "/write" ? "800" : ""}
                     >
                       Write

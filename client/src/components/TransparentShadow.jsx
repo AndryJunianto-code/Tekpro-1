@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, styled } from "@mui/material";
 
-const TransparentShadow = ({ setIsOpenCommentModal }) => {
+const TransparentShadow = () => {
   const TransparentShadowBox = styled(Box)(({ theme }) => ({
     width: "99vw",
     height: "100vh",
@@ -12,11 +12,7 @@ const TransparentShadow = ({ setIsOpenCommentModal }) => {
     left: "0",
     overflowX: "hidden",
   }));
-  return (
-    <TransparentShadowBox
-      onClick={() => setIsOpenCommentModal(false)}
-    ></TransparentShadowBox>
-  );
+  return <TransparentShadowBox></TransparentShadowBox>;
 };
 
 export default TransparentShadow;

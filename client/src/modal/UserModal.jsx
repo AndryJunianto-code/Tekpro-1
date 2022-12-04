@@ -2,6 +2,7 @@ import React from "react";
 import { Box, styled, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useColorModeContext } from "../context/ColorModeContext";
 
 const ModalBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#1c2d38",
@@ -34,6 +35,7 @@ const CustomTypography = styled(Typography)(({ theme }) => ({
 }));
 const UserModal = () => {
   const { user, logout } = useAuth0();
+  const { toggleColorMode, colorMode } = useColorModeContext();
   return (
     <ModalBox>
       <Link className="link" to={`/profile/${user?.sub}`}>
@@ -48,6 +50,7 @@ const UserModal = () => {
       >
         Sign out
       </CustomTypography>
+      <CustomTypography onClick={toggleColorMode}>{colorMode}</CustomTypography>
     </ModalBox>
   );
 };

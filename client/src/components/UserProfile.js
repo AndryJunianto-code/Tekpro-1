@@ -55,8 +55,11 @@ const UserProfile = () => {
 
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"} pb="3rem">
-      <BoxWrapper>
-        <Stack direction="row" justifyContent={"space-between"}>
+      <BoxWrapper color={theme.palette.mainWhite}>
+        <Stack
+          direction={{ xs: "column", lg: "row" }}
+          justifyContent={"space-between"}
+        >
           <Typography fontSize={"1.8rem"} fontWeight={900}>
             Profile
           </Typography>
@@ -67,7 +70,7 @@ const UserProfile = () => {
         />
 
         <Box mb="2rem">
-          <Stack direction="row" alignItems="start">
+          <Stack direction={{ lg: "row" }} alignItems="start">
             <Box mb="1.6rem">
               <Typography
                 color={theme.palette.darkGrey}
@@ -82,42 +85,44 @@ const UserProfile = () => {
                 sx={{ width: "100px", height: "100px", marginRight: "1rem" }}
               />
             </Box>
-            <Box ml="5rem">
-              <Typography
-                color={theme.palette.darkGrey}
-                fontSize="14px"
-                mb={"1rem"}
-              >
-                Posts
-              </Typography>
-              <Typography fontSize="24px" fontWeight="500" textAlign="center">
-                {postData && postData?.length}
-              </Typography>
-            </Box>
-            <Box ml="2.4rem">
-              <Typography
-                color={theme.palette.darkGrey}
-                fontSize="14px"
-                mb={"1rem"}
-              >
-                Followers
-              </Typography>
-              <Typography fontSize="24px" fontWeight="500" textAlign="center">
-                {userData && userData[0]?.followers.length}
-              </Typography>
-            </Box>
-            <Box ml="2rem">
-              <Typography
-                color={theme.palette.darkGrey}
-                fontSize="14px"
-                mb={"1rem"}
-              >
-                Followings
-              </Typography>
-              <Typography fontSize="24px" fontWeight="500" textAlign="center">
-                {userData && userData[0]?.followings.length}
-              </Typography>
-            </Box>
+            <Stack direction="row" mb="1.5rem">
+              <Box ml={{ lg: "5rem" }}>
+                <Typography
+                  color={theme.palette.darkGrey}
+                  fontSize="14px"
+                  mb={"1rem"}
+                >
+                  Posts
+                </Typography>
+                <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                  {postData && postData?.length}
+                </Typography>
+              </Box>
+              <Box ml="2.4rem">
+                <Typography
+                  color={theme.palette.darkGrey}
+                  fontSize="14px"
+                  mb={"1rem"}
+                >
+                  Followers
+                </Typography>
+                <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                  {userData && userData[0]?.followers.length}
+                </Typography>
+              </Box>
+              <Box ml="2rem">
+                <Typography
+                  color={theme.palette.darkGrey}
+                  fontSize="14px"
+                  mb={"1rem"}
+                >
+                  Followings
+                </Typography>
+                <Typography fontSize="24px" fontWeight="500" textAlign="center">
+                  {userData && userData[0]?.followings.length}
+                </Typography>
+              </Box>
+            </Stack>
           </Stack>
           <Box>
             <Typography color={theme.palette.darkGrey} fontSize="14px">

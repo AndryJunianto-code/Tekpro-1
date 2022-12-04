@@ -31,13 +31,23 @@
   text-decoration: none;
   color: #292929;
 }
+.linkWhite {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.ql-container.ql-snow {
+  border: none !important;
+}
+.ql-toolbar.ql-snow {
+  border: none !important;
+}
 
 .leftbarButton:hover {
   border-radius: 5px;
 }
 
 .bigBackground {
-  background-color: #ffffff;
   min-height: 100vh;
 }
 

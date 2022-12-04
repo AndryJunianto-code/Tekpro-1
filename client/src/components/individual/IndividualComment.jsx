@@ -1,9 +1,17 @@
-import { Avatar, Box, Typography, Stack, Divider } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Typography,
+  Stack,
+  Divider,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const IndividualComment = ({ commentData }) => {
   const { username, image, comment, createdAt, userId } = commentData;
+  const theme = useTheme();
   return (
     <>
       <Divider sx={{ marginBottom: "1.2rem", marginTop: "1.2rem" }} />
@@ -15,7 +23,7 @@ const IndividualComment = ({ commentData }) => {
               alt="comments"
               sx={{ width: "33px", height: "33px" }}
             />
-            <Stack display="flex" ml={"0.5rem"}>
+            <Stack display="flex" ml={"0.5rem"} color={theme.palette.mainWhite}>
               <Typography fontWeight={400} fontSize="0.7rem">
                 {username}
               </Typography>
@@ -25,7 +33,9 @@ const IndividualComment = ({ commentData }) => {
             </Stack>
           </Stack>
         </Link>
-        <Typography variant="caption">{comment}</Typography>
+        <Typography variant="caption" color={theme.palette.mainWhite}>
+          {comment}
+        </Typography>
       </Box>
     </>
   );

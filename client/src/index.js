@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import axios from "axios";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ColorModeContextProvider } from "./context/ColorModeContext";
 
 const baseUrl = "http://localhost:5000/api";
 /* "https://tekpro-1-production.up.railway.app/api/"; */
@@ -21,7 +22,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
-      <App />
+      <ColorModeContextProvider>
+        <App />
+      </ColorModeContextProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

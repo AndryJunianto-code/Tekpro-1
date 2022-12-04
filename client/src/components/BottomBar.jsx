@@ -8,9 +8,11 @@ import {
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useColorModeContext } from "../context/ColorModeContext";
 
 const BottomBar = () => {
   const location = useLocation();
+  const { colorMode } = useColorModeContext();
   const [onWhichSection, setOnWhichSection] = useState(location.pathname);
   const CustomStack = styled(Stack)(({ theme }) => ({
     position: "relative",
@@ -34,10 +36,9 @@ const BottomBar = () => {
         alignItems: "center",
         justifyContent: "center",
         zIndex: 1100,
-        boxShadow: 12,
-        backgroundColor: "white",
-        border: "1px solid #fafafa",
-        paddingBottom: "0.2rem",
+        boxShadow: 14,
+        backgroundColor: colorMode === "light" ? "white" : "#121212",
+        paddingBottom: "0.25rem",
       }}
     >
       <CustomStack direction="row" justifyContent="space-between">
@@ -46,7 +47,7 @@ const BottomBar = () => {
             <HomeOutlined
               position="fixed"
               sx={{
-                color: onWhichSection === "/" ? "black" : "#707070",
+                opacity: onWhichSection === "/" ? "90%" : "65%",
                 width: "23px",
               }}
             />
@@ -57,7 +58,7 @@ const BottomBar = () => {
             <BookmarksOutlined
               position="fixed"
               sx={{
-                color: onWhichSection === "/lists" ? "black" : "#707070",
+                opacity: onWhichSection === "/lists" ? "90%" : "65%",
                 width: "18px",
               }}
             />
@@ -68,7 +69,7 @@ const BottomBar = () => {
             <ArticleOutlined
               position="fixed"
               sx={{
-                color: onWhichSection === "/stories" ? "black" : "#707070",
+                opacity: onWhichSection === "/stories" ? "90%" : "65%",
                 width: "20px",
               }}
             />
@@ -79,7 +80,7 @@ const BottomBar = () => {
             <ModeOutlined
               position="fixed"
               sx={{
-                color: onWhichSection === "/write" ? "black" : "#707070",
+                opacity: onWhichSection === "/write" ? "90%" : "65%",
                 width: "20px",
               }}
             />
