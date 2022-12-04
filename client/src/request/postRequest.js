@@ -18,8 +18,13 @@ export const fetchSinglePost = async (obj) => {
 
 export const fetchPostByTitle = async (obj) => {
   const searchQuery = obj.queryKey[1];
-  console.log(searchQuery);
   const { data } = await axios.get(`/posts/search/${searchQuery}`);
+  return data;
+};
+
+export const fetchPostByTag = async (obj) => {
+  const searchQuery = obj.queryKey[1];
+  const { data } = await axios.get(`/posts/tag/${searchQuery}`);
   return data;
 };
 
@@ -65,6 +70,13 @@ export const bookmarkedPost = async (obj) => {
 
 export const increasePostView = async (obj) => {
   const { data } = await axios.put(`/posts/view`, {
+    postId: obj.postId,
+  });
+  return data;
+};
+
+export const increasePostComment = async (obj) => {
+  const { data } = await axios.put(`/posts/comment`, {
     postId: obj.postId,
   });
   return data;

@@ -15,6 +15,7 @@ import { useState } from "react";
 import { createNewComment, fetchComments } from "../request/commentRequest";
 import { useMutation, useQuery } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
+import { increasePostComment } from "../request/postRequest";
 
 const ModalBox = styled(Box)(({ theme }) => ({
   height: "calc(100vh - 4rem)",
@@ -40,6 +41,9 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
 
   const { mutate: mutateComment, isSuccess: isSuccessComment } =
     useMutation(createNewComment);
+
+  const { mutate: mutateNumOfComment, isSuccess: isSuccessNumOfComment } =
+    useMutation(increasePostComment);
 
   const {
     data: commentData,
@@ -68,6 +72,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
         onSuccess: () => {
           refetchComment();
           setComment("");
+          mutateNumOfComment({ postId: postId });
         },
       }
     );

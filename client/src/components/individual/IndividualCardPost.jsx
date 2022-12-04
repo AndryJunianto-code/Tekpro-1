@@ -25,10 +25,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import BookmarkModal from "../../modal/BookmarkModal";
-import {
-  addPostToBookmark,
-  fetchAllLists,
-} from "../../request/bookmarkListRequest";
+import { fetchAllLists } from "../../request/bookmarkListRequest";
 
 const IndividualCardPost = ({ post }) => {
   const { user } = useAuth0();
@@ -101,8 +98,6 @@ const IndividualCardPost = ({ post }) => {
     const newChecked = [...checked];
     listsSuccess &&
       listsData.map((list) => {
-        console.log(list.postsId);
-        console.log(_id);
         if (list.postsId.includes(_id)) {
           newChecked.push(list._id);
         }
@@ -211,9 +206,11 @@ const IndividualCardPost = ({ post }) => {
 
             <Box mt={"1.4rem"}>
               {tags.map((tag) => (
-                <button className="buttonTag" key={v4()}>
-                  {tag}
-                </button>
+                <Link to={`/tag/${tag}`} className="link">
+                  <button className="buttonTag" key={v4()}>
+                    {tag}
+                  </button>
+                </Link>
               ))}
             </Box>
           </Box>

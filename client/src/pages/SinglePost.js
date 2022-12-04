@@ -19,6 +19,7 @@ const SinglePost = () => {
     data: singlePostData,
     isSuccess,
     isLoading,
+    refetch: refetchSinglePostData,
   } = useQuery(["fetchSinglePost", postId], fetchSinglePost, {
     retryDelay: 3000,
   });
@@ -44,6 +45,7 @@ const SinglePost = () => {
               singlePostData={singlePostData}
               setIsOpenCommentModal={setIsOpenCommentModal}
               isOpenCommentModal={isOpenCommentModal}
+              refetchSinglePostData={refetchSinglePostData}
             />
             <PostRightbar />
           </>

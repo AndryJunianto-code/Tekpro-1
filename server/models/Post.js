@@ -41,6 +41,10 @@ const PostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    numOfComment: {
+      type: Number,
+      default: 0,
+    },
     userIdBookmarked: {
       type: Array,
       default: [],

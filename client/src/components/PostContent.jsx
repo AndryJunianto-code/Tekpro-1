@@ -1,4 +1,3 @@
-import { BookmarksOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -13,8 +12,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { bookmarkedPost, likedPost } from "../request/postRequest";
@@ -23,10 +20,19 @@ const PostContent = ({
   singlePostData,
   setIsOpenCommentModal,
   isOpenCommentModal,
+  refetchSinglePostData,
 }) => {
   const { user } = useAuth0();
-  const { title, _id, caption, postImage, authorImage, authorName } =
-    singlePostData;
+  const {
+    title,
+    _id,
+    caption,
+    postImage,
+    authorImage,
+    authorName,
+    numOfLike,
+    numOfComment,
+  } = singlePostData;
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState();
@@ -34,8 +40,11 @@ const PostContent = ({
   const linkQueryLiked = link.get("liked");
   const linkQueryBookmarked = link.get("bookmarked");
 
-  const { mutate: mutateLike } = useMutation(likedPost);
-  const { mutate: mutateBookmark } = useMutation(bookmarkedPost);
+  const { mutate: mutateLike } = useMutation(likedPost, {
+    onSuccess: () => {
+      refetchSinglePostData();
+    },
+  });
 
   const CustomPostBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -61,33 +70,6 @@ const PostContent = ({
       userId: user?.sub,
     });
   };
-  const handleBookmarkPost = () => {
-    setIsPostBookmarked("true");
-    mutateBookmark(
-      {
-        action: "bookmark",
-        postId: _id,
-        userId: user?.sub,
-      },
-      {
-        onSuccess: (data) => console.log(data),
-      }
-    );
-  };
-
-  const handleDisbookmarkPost = () => {
-    setIsPostBookmarked("false");
-    mutateBookmark(
-      {
-        action: "disbookmark",
-        postId: _id,
-        userId: user?.sub,
-      },
-      {
-        onSuccess: (data) => console.log(data),
-      }
-    );
-  };
 
   const handleOpenCommentModal = () => {
     setIsOpenCommentModal(!isOpenCommentModal);
@@ -99,7 +81,7 @@ const PostContent = ({
   }, []);
 
   return (
-    <CustomPostBox flex={4} mt={5}>
+    <CustomPostBox flex={4} mt={5} pb="5rem">
       <BoxWrapper>
         <Box
           display={"flex"}
@@ -152,15 +134,14 @@ const PostContent = ({
         </Box>
 
         {/*  */}
-        <Stack direction="row" mt={5}>
+        <Stack direction="row" alignItems="center" mt={5}>
           <Box display="flex" alignItems="center" mr={3}>
             {isPostLiked === "true" ? (
               <IconButton onClick={handleDislikePost}>
                 <FavoriteIcon
                   sx={{
-                    mr: "0.3rem",
                     color: "red",
-                    width: "23px",
+                    width: "20px",
                   }}
                 />
               </IconButton>
@@ -169,7 +150,7 @@ const PostContent = ({
                 <FavoriteBorderOutlinedIcon
                   sx={{
                     color: theme.palette.darkGrey,
-                    width: "23px",
+                    width: "20px",
                     ":hover": {
                       color: "black",
                     },
@@ -178,7 +159,7 @@ const PostContent = ({
               </IconButton>
             )}
             <Typography color={theme.palette.darkGrey} fontSize={"0.7rem"}>
-              921
+              {numOfLike}
             </Typography>
           </Box>
           <Box
@@ -190,20 +171,23 @@ const PostContent = ({
               sx={{
                 mr: "0.3rem",
                 color: theme.palette.darkGrey,
-                width: "21px",
+                width: "18px",
                 ":hover": {
                   color: "black",
                 },
               }}
             />
             <Typography color={theme.palette.darkGrey} fontSize={"0.7rem"}>
-              20
+              {numOfComment}
             </Typography>
           </Box>
         </Stack>
 
         {/*  */}
-        <Divider variant="fullWidth" sx={{ background: "black" }} />
+        <Divider
+          variant="fullWidth"
+          sx={{ background: "white", marginTop: "2rem" }}
+        />
 
         {/* COMMENTS SECTION */}
       </BoxWrapper>

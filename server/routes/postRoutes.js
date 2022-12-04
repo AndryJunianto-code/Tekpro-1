@@ -51,6 +51,21 @@ router.get("/search/:title", async (req, res) => {
   }
 });
 
+//find post by title
+router.get("/tag/:tagName", async (req, res) => {
+  let posts;
+  try {
+    posts = await Post.find({
+      tags: {
+        $in: req.params.tagName,
+      },
+    });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //make a post
 router.post("/", async (req, res) => {
   const newPost = new Post(req.body);
@@ -167,6 +182,24 @@ router.put("/view", async (req, res) => {
       {
         $inc: {
           numOfView: 1,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//increase num of comment
+router.put("/comment", async (req, res) => {
+  try {
+    let updatedPost = await Post.findByIdAndUpdate(
+      req.body.postId,
+      {
+        $inc: {
+          numOfComment: 1,
         },
       },
       { new: true }

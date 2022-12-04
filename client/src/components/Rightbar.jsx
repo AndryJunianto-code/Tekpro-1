@@ -1,5 +1,7 @@
-import { Box, Typography, Grid, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+import RightbarTopicSection from "./RightbarTopicSection";
+import RightbarWriterSection from "./RightbarWriterSection";
 
 const Rightbar = () => {
   return (
@@ -11,49 +13,8 @@ const Rightbar = () => {
       p={2}
     >
       <Box position="fixed">
-        <Typography variant="h6" fontSize={"0.8rem"}>
-          Recommended Topics
-        </Typography>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={1}
-          width={{ lg: "70%", xl: "65%" }}
-        >
-          <Grid item lg={6}>
-            <Button
-              variant="contained"
-              sx={{ textTransform: "capitalize", fontSize: "0.75rem" }}
-            >
-              Data Science
-            </Button>
-          </Grid>
-          <Grid item lg={6}>
-            <Button
-              variant="contained"
-              sx={{ textTransform: "capitalize", fontSize: "0.75rem" }}
-            >
-              Data Science
-            </Button>
-          </Grid>
-
-          <Grid item lg={6}>
-            <Button
-              variant="contained"
-              sx={{ textTransform: "capitalize", fontSize: "0.75rem" }}
-            >
-              Data Science
-            </Button>
-          </Grid>
-          <Grid item lg={6}>
-            <Button
-              variant="contained"
-              sx={{ textTransform: "capitalize", fontSize: "0.75rem" }}
-            >
-              Data Science
-            </Button>
-          </Grid>
-        </Grid>
+        <RightbarTopicSection />
+        <RightbarWriterSection />
       </Box>
     </Box>
   );

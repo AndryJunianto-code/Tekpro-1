@@ -37,7 +37,11 @@ const OtherProfile = ({ userQuery }) => {
           sx={{ marginBottom: "3rem", mt: "1.4rem" }}
         />
         {postsDataSuccess &&
-          postsData.map((post) => <IndividualCardPost post={post} />)}
+          (postsData?.length > 0 ? (
+            postsData.map((p) => <IndividualCardPost key={p._id} post={p} />)
+          ) : (
+            <p>No Stories</p>
+          ))}
       </BoxWrapper>
     </CustomBox>
   );

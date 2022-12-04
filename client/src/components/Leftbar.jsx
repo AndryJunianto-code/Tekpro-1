@@ -13,10 +13,15 @@ import {
   ArticleOutlined,
   ModeOutlined,
 } from "@mui/icons-material";
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Leftbar = () => {
+  const location = useLocation();
+  const [onWhichSection, setOnWhichSection] = useState("");
+  useEffect(() => {
+    setOnWhichSection(location.pathname);
+  }, []);
   return (
     <Box
       flex={1}
@@ -31,11 +36,17 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <HomeOutlined sx={{ color: "#292929" }} />
+                  <HomeOutlined sx={{ color: "#292929", width: "25px" }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={
-                    <Typography type="body2" sx={{ color: "#292929" }}>
+                    <Typography
+                      type="body2"
+                      sx={{
+                        color: "#292929",
+                      }}
+                      fontWeight={onWhichSection === "/" ? "800" : ""}
+                    >
                       Home
                     </Typography>
                   }
@@ -45,15 +56,27 @@ const Leftbar = () => {
           </Link>
 
           <Link to="/lists" className="link">
-            <ListItem disablePadding>
+            <ListItem
+              sx={{
+                borderRadius: "7px",
+                backgroundColor: onWhichSection === "List" ? "#e0e0e0" : "",
+              }}
+              disablePadding
+            >
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <BookmarksOutlined style={{ color: "#292929" }} />
+                  <BookmarksOutlined
+                    style={{ color: "#292929", width: "21px" }}
+                  />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
-                    <Typography type="body2" style={{ color: "#292929" }}>
+                    <Typography
+                      type="body2"
+                      style={{ color: "#292929" }}
+                      fontWeight={onWhichSection === "/lists" ? "800" : ""}
+                    >
                       Reading List
                     </Typography>
                   }
@@ -66,12 +89,18 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <ArticleOutlined style={{ color: "#292929" }} />
+                  <ArticleOutlined
+                    style={{ color: "#292929", width: "21px" }}
+                  />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
-                    <Typography type="body2" style={{ color: "#292929" }}>
+                    <Typography
+                      type="body2"
+                      style={{ color: "#292929" }}
+                      fontWeight={onWhichSection === "/stories" ? "800" : ""}
+                    >
                       Your Stories
                     </Typography>
                   }
@@ -84,12 +113,16 @@ const Leftbar = () => {
             <ListItem disablePadding>
               <ListItemButton className="leftbarButton">
                 <ListItemIcon>
-                  <ModeOutlined style={{ color: "#292929" }} />
+                  <ModeOutlined style={{ color: "#292929", width: "22px" }} />
                 </ListItemIcon>
                 <ListItemText
                   disableTypography
                   primary={
-                    <Typography type="body2" sx={{ color: "#292929" }}>
+                    <Typography
+                      type="body2"
+                      sx={{ color: "#292929" }}
+                      fontWeight={onWhichSection === "/write" ? "800" : ""}
+                    >
                       Write
                     </Typography>
                   }

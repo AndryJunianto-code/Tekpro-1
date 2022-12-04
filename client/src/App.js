@@ -12,6 +12,7 @@ import SinglePost from "./pages/SinglePost";
 import ReadingListPosts from "./pages/ReadingListPosts";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
+import Tag from "./pages/Tag";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               />
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/search/:query" element={<Search />} />
+              <Route path="/tag/:tagName" element={<Tag />} />
             </Routes>
           </div>
         </AuthProvider>
