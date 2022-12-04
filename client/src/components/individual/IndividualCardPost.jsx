@@ -6,16 +6,14 @@ import {
   Typography,
   Stack,
   IconButton,
-  Icon,
   Menu,
-  MenuItem,
 } from "@mui/material";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
 import { likedPost } from "../../request/postRequest";
@@ -30,6 +28,7 @@ import { fetchAllLists } from "../../request/bookmarkListRequest";
 const IndividualCardPost = ({ post }) => {
   const { user } = useAuth0();
   const theme = useTheme();
+  const navigate = useNavigate();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
   const [bookmarkAnchor, setBookmarkAnchor] = useState(null);
@@ -62,6 +61,10 @@ const IndividualCardPost = ({ post }) => {
   );
 
   const { mutate: mutateLike } = useMutation(likedPost);
+
+  const handleClickTag = () => {
+    navigate("/tag/");
+  };
 
   const handleClose = () => {
     setBookmarkAnchor(null);
@@ -206,11 +209,13 @@ const IndividualCardPost = ({ post }) => {
 
             <Box mt={"1.4rem"}>
               {tags.map((tag) => (
-                <Link to={`/tag/${tag}`} className="link">
-                  <button className="buttonTag" key={v4()}>
-                    {tag}
-                  </button>
-                </Link>
+                <button
+                  className="buttonTag"
+                  key={v4()}
+                  onClick={() => navigate(`/tag/${tag}`)}
+                >
+                  {tag}
+                </button>
               ))}
             </Box>
           </Box>
