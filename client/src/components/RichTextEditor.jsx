@@ -10,7 +10,8 @@ export default function RichTextEditor({ content, setContent }) {
       id="editor"
       className="quill"
       style={{
-        background: colorMode === "light" ? "white" : "#1e1e1e",
+        borderRadius: "5px",
+        background: colorMode === "light" ? "#faf7f7" : "#1e1e1e",
         color: colorMode === "light" ? "black" : "white",
       }}
       theme="snow"

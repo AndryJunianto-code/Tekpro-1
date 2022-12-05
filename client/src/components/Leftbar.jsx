@@ -27,7 +27,10 @@ const Leftbar = () => {
       sx={{
         display: { xs: "none", lg: "flex" },
         justifyContent: "end",
+        borderRight:
+          colorMode === "light" ? "1px solid #e3e3e3" : "1px solid #292929",
       }}
+      pr="1rem"
     >
       <Box position="fixed" top="4rem">
         <List>

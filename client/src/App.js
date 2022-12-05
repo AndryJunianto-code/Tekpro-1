@@ -36,7 +36,7 @@ function App() {
               <Route path="/write" element={<Write />} />
               <Route path="/lists" element={<ReadingList />} />
               <Route path="/stories" element={<YourStories />} />
-              <Route path="/p/:postId" element={<SinglePost />} />
+              <Route path="/p/:postId/:authorId" element={<SinglePost />} />
               <Route
                 path="/list/:bookmarkId/:name"
                 element={<ReadingListPosts />}

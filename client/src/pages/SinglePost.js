@@ -11,10 +11,20 @@ import { useEffect } from "react";
 import BottomBar from "../components/BottomBar";
 import CommentModal from "../components/CommentModal";
 import BlackShadow from "../components/BlackShadow";
+import { fetchUser } from "../request/userRequest";
 
 const SinglePost = () => {
-  let { postId } = useParams();
+  let { postId, authorId } = useParams();
   const [isOpenCommentModal, setIsOpenCommentModal] = useState(false);
+
+  const { data: userQuery, refetch: userQueryRefetch } = useQuery(
+    ["fetchUser", authorId],
+    fetchUser,
+    {
+      retryDelay: 3000,
+    }
+  );
+
   const {
     data: singlePostData,
     isSuccess,
@@ -32,6 +42,7 @@ const SinglePost = () => {
   useEffect(() => {
     mutatePostView({ postId });
   }, []);
+
   if (isLoading) return <div>Loading...</div>;
   return (
     <>
@@ -47,7 +58,10 @@ const SinglePost = () => {
               isOpenCommentModal={isOpenCommentModal}
               refetchSinglePostData={refetchSinglePostData}
             />
-            <PostRightbar />
+            <PostRightbar
+              userQuery={userQuery}
+              userQueryRefetch={userQueryRefetch}
+            />
           </>
         )}
       </Stack>

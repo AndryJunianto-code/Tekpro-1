@@ -9,7 +9,18 @@ router.post("/image", parser.single("image"), UploadImage);
 router.get("/", async (req, res) => {
   let posts;
   try {
-    posts = await Post.find();
+    posts = await Post.find().sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get recently posted post with limit
+router.get("/postWithLimit", async (req, res) => {
+  let posts;
+  try {
+    posts = await Post.find().sort({ createdAt: -1 }).limit(3);
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
@@ -31,7 +42,9 @@ router.get("/:postId", async (req, res) => {
 router.get("/author/:userId", async (req, res) => {
   let post;
   try {
-    post = await Post.find({ authorId: req.params.userId });
+    post = await Post.find({ authorId: req.params.userId }).sort({
+      createdAt: -1,
+    });
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
@@ -44,7 +57,7 @@ router.get("/search/:title", async (req, res) => {
   try {
     posts = await Post.find({
       title: { $regex: req.params.title, $options: "i" },
-    });
+    }).sort({ createdAt: -1 });
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
@@ -59,7 +72,7 @@ router.get("/tag/:tagName", async (req, res) => {
       tags: {
         $in: req.params.tagName,
       },
-    });
+    }).sort({ createdAt: -1 });
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);

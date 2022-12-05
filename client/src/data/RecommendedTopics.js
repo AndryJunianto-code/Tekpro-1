@@ -2,11 +2,11 @@ import { v4 } from "uuid";
 
 const recommendedTopics = [
   {
-    tagName: "Data Science",
+    tagName: "Algorithm",
     id: v4(),
   },
   {
-    tagName: "Machine Learning",
+    tagName: "React",
     id: v4(),
   },
   {
@@ -18,11 +18,11 @@ const recommendedTopics = [
     id: v4(),
   },
   {
-    tagName: "Data Visualisation",
+    tagName: "Software",
     id: v4(),
   },
   {
-    tagName: "Data Analysis",
+    tagName: "Data",
     id: v4(),
   },
 ];

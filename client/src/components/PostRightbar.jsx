@@ -5,6 +5,7 @@ import { followUser, unfollowUser } from "../request/userRequest";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import { useColorModeContext } from "../context/ColorModeContext";
 
 export const FollowingBox = styled(Box)(({ theme }) => ({
   height: "150px",
@@ -17,6 +18,7 @@ export const FollowingBox = styled(Box)(({ theme }) => ({
 const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
   const { user } = useAuth0();
   const theme = useTheme();
+  const { colorMode } = useColorModeContext();
   const [isFollowing, setIsFollowing] = useState(null);
 
   const { mutate: mutateFollow } = useMutation(followUser, {
@@ -67,12 +69,18 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
       flex={2}
       sx={{
         display: { xs: "none", lg: "block" },
-        p: 2,
+        pl: "1rem",
+        borderLeft:
+          colorMode === "light" ? "1px solid #e3e3e3" : "1px solid #292929",
+        paddingTop: "5rem",
       }}
-      mt={profile ? "3rem" : ""}
     >
       {userQuery && (
-        <Box position="fixed" pr={{ lg: 5, xl: 25 }}>
+        <Box
+          position="fixed"
+          pr={{ lg: 5, xl: 25 }}
+          color={theme.palette.mainWhite}
+        >
           <Avatar
             src={userQuery[0]?.picture}
             sx={{ width: "80px", height: "80px" }}
@@ -132,7 +140,12 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
                             marginRight: "0.4rem",
                           }}
                         />
-                        <Typography fontSize="0.6rem">{f.username}</Typography>
+                        <Typography
+                          color={theme.palette.mainWhite}
+                          fontSize="0.6rem"
+                        >
+                          {f.username}
+                        </Typography>
                       </Stack>
                     </Link>
                   ))}

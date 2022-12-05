@@ -5,6 +5,11 @@ export const fetchAllPost = async () => {
   return data;
 };
 
+export const fetchAllPostByLimit = async () => {
+  const { data } = await axios.get("/posts/postWithLimit");
+  return data;
+};
+
 export const fetchPostByAuthor = async (obj) => {
   const { data } = await axios.get(`/posts/author/${obj.queryKey[1]}`);
   return data;

@@ -63,6 +63,7 @@ router.put("/follow", async (req, res) => {
             username: req.body.authorUsername,
             userPicture: req.body.authorPicture,
           },
+          followingsId: req.body.authorId,
         },
       },
       { new: true }
@@ -94,6 +95,7 @@ router.put("/unfollow", async (req, res) => {
           followings: {
             userId: req.body.authorId,
           },
+          followingsId: req.body.authorId,
         },
       },
       { new: true }

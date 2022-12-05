@@ -174,7 +174,7 @@ const IndividualCardPost = ({ post }) => {
         subheaderTypographyProps={{ fontSize: "12px" }}
       />
       <Link
-        to={`/p/${_id}?liked=${isPostLiked}&bookmarked=${isPostBookmarked}`}
+        to={`/p/${_id}/${authorId}?liked=${isPostLiked}&bookmarked=${isPostBookmarked}`}
         className="link"
       >
         <Stack
