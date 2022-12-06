@@ -1,14 +1,14 @@
+import { Outlet, Navigate } from "react-router-dom";
 import React from "react";
-import { Route } from "react-router-dom";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const ProtectedRoute = ({ element, ...args }) => (
-  <Route
-    element={withAuthenticationRequired(element, {
-      onRedirecting: () => <div>Loading...</div>,
-    })}
-    {...args}
-  />
-);
+const ProtectedRoute = () => {
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  if (isAuthenticated) {
+    return <Outlet />;
+  } else {
+    return <Navigate to={loginWithRedirect()} />;
+  }
+};
 
 export default ProtectedRoute;

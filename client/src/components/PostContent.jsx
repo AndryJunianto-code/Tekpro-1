@@ -22,7 +22,7 @@ const PostContent = ({
   isOpenCommentModal,
   refetchSinglePostData,
 }) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const {
     title,
     _id,
@@ -51,10 +51,14 @@ const PostContent = ({
     alignItems: "center",
     justifyContent: "center",
     overflowY: isOpenCommentModal ? "hidden" : "",
-    height: isOpenCommentModal ? "80vh" : "",
+    height: isOpenCommentModal ? "100%" : "",
   }));
 
   const handleLikePost = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
     setIsPostLiked("true");
     mutateLike({
       action: "like",
@@ -81,7 +85,7 @@ const PostContent = ({
   }, []);
 
   return (
-    <CustomPostBox flex={4} mt={5} pb="5rem">
+    <CustomPostBox flex={4} mt={5} pb="7rem">
       <BoxWrapper>
         <Box
           display={"flex"}

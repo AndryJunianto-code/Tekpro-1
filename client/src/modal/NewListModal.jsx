@@ -19,7 +19,7 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  borderRadius: "7px",
+  borderRadius: "5px",
 };
 
 export default function BasicModal({ listsRefetch }) {

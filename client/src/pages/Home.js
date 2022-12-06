@@ -7,10 +7,18 @@ import Navbar from "../components/Navbar";
 import Rightbar from "../components/Rightbar";
 import axios from "axios";
 import BottomBar from "../components/BottomBar";
+import { createNewBookmarkList } from "../request/bookmarkListRequest";
+import { useMutation } from "react-query";
+import CommentModal from "../components/CommentModal";
 
 const Home = () => {
   const { user } = useAuth0();
   const [userExistBefore, setUserExistBefore] = useState(null);
+
+  const { mutate: mutateBookmark, isSuccess: isSuccessPost } = useMutation(
+    createNewBookmarkList,
+    {}
+  );
 
   const checkUserExist = async () => {
     try {
@@ -31,11 +39,12 @@ const Home = () => {
   };
   const savedUser = async () => {
     try {
-      await axios.post("/users", {
+      const res = await axios.post("/users", {
         userId: user?.sub,
         username: user?.name,
         picture: user?.picture,
       });
+      mutateBookmark({ name: "Reading List", userId: res.data?.userId });
     } catch (err) {
       console.log(err);
     }

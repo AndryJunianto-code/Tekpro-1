@@ -1,11 +1,4 @@
-import {
-  Button,
-  Typography,
-  Stack,
-  Card,
-  InputBase,
-  useTheme,
-} from "@mui/material";
+import { Typography, Stack, Card, InputBase, useTheme } from "@mui/material";
 import { useState, useEffect } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import { useMutation } from "react-query";
@@ -13,11 +6,13 @@ import { publishImage, publishPost } from "../request/postRequest";
 import { useAuth0 } from "@auth0/auth0-react";
 import RichTextEditor from "./RichTextEditor";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog = ({ setOpen, setMessage }) => {
   const { user } = useAuth0();
   const theme = useTheme();
-  const [content, setContent] = useState("");
+  const navigate = useNavigate();
+  const [content, setContent] = useState("Write your story here :)");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
   const [fileData, setFileData] = useState();
@@ -93,6 +88,9 @@ const CreateBlog = ({ setOpen, setMessage }) => {
     if (isSuccessPost === true) {
       setOpen(true);
       setMessage("Published");
+      setTimeout(() => {
+        navigate("/");
+      }, 1200);
     }
   }, [isSuccessPost]);
   return (
@@ -113,26 +111,18 @@ const CreateBlog = ({ setOpen, setMessage }) => {
           border={"1px solid #bdbebf"}
         >
           <Stack direction="column">
-            <Button
-              variant="contained"
-              sx={{
-                textTransform: "capitalize",
-                fontSize: "0.75rem",
-                width: "10rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <label htmlFor="fileInput">Add a cover image</label>
-              <input
-                onChange={handleImage}
-                value={image}
-                name="file"
-                type="file"
-                accept="image/*"
-                id="fileInput"
-                style={{ display: "none" }}
-              />
-            </Button>
+            <label htmlFor="fileInput" className="imageButton">
+              Add a cover image
+            </label>
+            <input
+              onChange={handleImage}
+              value={image}
+              name="file"
+              type="file"
+              accept="image/*"
+              id="fileInput"
+              style={{ display: "none" }}
+            />
             <img src={previewImage} className="createBlogImage" />
             <InputBase
               onChange={handleTitle}

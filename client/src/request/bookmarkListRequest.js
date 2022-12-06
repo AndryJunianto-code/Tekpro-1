@@ -34,3 +34,9 @@ export const removePostToBookmark = async (obj) => {
   });
   return data;
 };
+
+//delete bookmark
+export const deleteBookmark = async (obj) => {
+  await axios.delete(`/bookmarkLists/delete/${obj.bookmarkId}`);
+  return "Success";
+};

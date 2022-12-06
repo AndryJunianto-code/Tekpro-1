@@ -16,7 +16,7 @@ export const FollowingBox = styled(Box)(({ theme }) => ({
 }));
 
 const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const theme = useTheme();
   const { colorMode } = useColorModeContext();
   const [isFollowing, setIsFollowing] = useState(null);
@@ -36,6 +36,10 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
   });
 
   const handleFollowUser = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
     setIsFollowing(true);
     mutateFollow({
       userId: user?.sub,
@@ -104,7 +108,18 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
           >
             {userQuery && userQuery[0]?.description}
           </Typography>
-          {isFollowing ? (
+          {userQuery[0]?.userId === user?.sub && (
+            <Link className="link" to={`/profile/${user?.sub}`}>
+              <Button
+                variant="text"
+                sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+              >
+                Edit Profile
+              </Button>
+            </Link>
+          )}
+
+          {isFollowing && userQuery[0]?.userId !== user?.sub && (
             <Button
               onClick={handleUnfollowUser}
               variant="outlined"
@@ -112,7 +127,9 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
             >
               Following
             </Button>
-          ) : (
+          )}
+
+          {!isFollowing && userQuery[0]?.userId !== user?.sub && (
             <Button
               onClick={handleFollowUser}
               variant="contained"

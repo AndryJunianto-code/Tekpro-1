@@ -28,7 +28,7 @@ import IndividualTagButton from "./IndividualTagButton";
 import { useColorModeContext } from "../../context/ColorModeContext";
 
 const IndividualCardPost = ({ post }) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const theme = useTheme();
   const { colorMode } = useColorModeContext();
   const [isPostLiked, setIsPostLiked] = useState();
@@ -69,6 +69,10 @@ const IndividualCardPost = ({ post }) => {
   };
 
   const handleLikePost = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
     setIsPostLiked(true);
     mutateLike({
       action: "like",
@@ -85,6 +89,10 @@ const IndividualCardPost = ({ post }) => {
     });
   };
   const handleBookmarkPost = (e) => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
     setIsPostBookmarked(true);
     setBookmarkAnchor(e.currentTarget);
   };

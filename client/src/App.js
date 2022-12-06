@@ -33,9 +33,11 @@ function App() {
           <Box backgroundColor={theme.palette.background.default}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/write" element={<Write />} />
-              <Route path="/lists" element={<ReadingList />} />
-              <Route path="/stories" element={<YourStories />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/write" element={<Write />} />
+                <Route path="/lists" element={<ReadingList />} />
+                <Route path="/stories" element={<YourStories />} />
+              </Route>
               <Route path="/p/:postId/:authorId" element={<SinglePost />} />
               <Route
                 path="/list/:bookmarkId/:name"

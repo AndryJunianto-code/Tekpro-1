@@ -129,7 +129,7 @@ const UserProfile = () => {
               Username
             </Typography>
             <Typography fontSize="20px" mb="1.4rem">
-              Andry Junianto
+              {user?.name}
             </Typography>
           </Box>
           <Box mb={"1.4rem"}>

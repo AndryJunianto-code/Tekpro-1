@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { followUser, unfollowUser } from "../../request/userRequest";
 const IndividualUser = ({ u, userSearchRefetch }) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const { username, description, userId, picture, followers } = u;
   const [isFollowing, setIsFollowing] = useState(null);
 
@@ -24,6 +24,10 @@ const IndividualUser = ({ u, userSearchRefetch }) => {
   });
 
   const handleFollowUser = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
     setIsFollowing(true);
     mutateFollow({
       userId: user?.sub,

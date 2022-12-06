@@ -1,25 +1,18 @@
-import {
-  Typography,
-  Stack,
-  Divider,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  useTheme,
-} from "@mui/material";
-import React from "react";
+import { Typography, Stack, Divider, useTheme } from "@mui/material";
+import { useState } from "react";
 import { CustomBox, BoxWrapper } from "../utilities/CustomBox";
 import IndividualList from "./individual/IndividualList";
 import NewListModal from "../modal/NewListModal";
 import { fetchAllLists } from "../request/bookmarkListRequest";
-import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const YourList = () => {
   const theme = useTheme();
   const { user } = useAuth0();
+  const [openBookmarkModal, setOpenBookmarkModal] = useState(false);
+  const handleOpenBookmarkModal = () => setOpenBookmarkModal(true);
+  const handleCloseBookmarkModal = () => setOpenBookmarkModal(false);
   const {
     data: listsData,
     isSuccess: listsSuccess,
@@ -42,8 +35,16 @@ const YourList = () => {
         </Stack>
         <Divider variant="fullWidth" sx={{ marginBottom: "3rem" }} />
         {listsSuccess &&
-          listsData?.map((list) => (
-            <IndividualList key={list._id} list={list} />
+          listsData?.map((list, index) => (
+            <IndividualList
+              index={index}
+              key={list._id}
+              list={list}
+              openBookmarkModal={openBookmarkModal}
+              handleCloseBookmarkModal={handleCloseBookmarkModal}
+              handleOpenBookmarkModal={handleOpenBookmarkModal}
+              listsRefetch={listsRefetch}
+            />
           ))}
       </BoxWrapper>
     </CustomBox>

@@ -73,4 +73,14 @@ router.put("/remove/:bookmarkId", async (req, res) => {
   }
 });
 
+//delete bookmark
+router.delete("/delete/:bookmarkId", async (req, res) => {
+  try {
+    await BookmarkList.findByIdAndDelete(req.params.bookmarkId);
+    res.status(200).json("Success");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

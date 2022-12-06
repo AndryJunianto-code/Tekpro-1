@@ -18,9 +18,10 @@ import { useMutation, useQuery } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import { increasePostComment } from "../request/postRequest";
 import { useColorModeContext } from "../context/ColorModeContext";
+import CommentInput from "../input/CommentInput";
 
 const CommentModal = ({ postId, setIsOpenCommentModal }) => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const { colorMode } = useColorModeContext();
   const theme = useTheme();
   const [comment, setComment] = useState("");
@@ -64,7 +65,8 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
     setIsOpenCommentModal(false);
   };
 
-  const handleSubmitComment = () => {
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
     mutateComment(
       {
         username: user?.name,
@@ -94,65 +96,79 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
           onClick={handleCloseModal}
         />
       </Stack>
-      <InputBox sx={{ bgcolor: "background.paper" }}>
-        <Stack direction="row" display="flex" alignItems="center" mb={"0.6rem"}>
-          <Avatar
-            src={
-              user?.picture ||
-              "https://images.pexels.com/photos/8388229/pexels-photo-8388229.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-            }
-            alt="comments"
-          />
-          <Typography
-            color={theme.palette.mainWhite}
-            fontWeight={300}
-            fontSize="0.7rem"
-            ml={"0.5rem"}
+      {isAuthenticated ? (
+        <InputBox sx={{ bgcolor: "background.paper" }}>
+          <Stack
+            direction="row"
+            display="flex"
+            alignItems="center"
+            mb={"0.6rem"}
           >
-            {user?.name}
-          </Typography>
-        </Stack>
-        <TextField
-          variant="outlined"
-          placeholder="What are your thoughts"
-          multiline
-          fullWidth
-          maxRows={4}
-          onChange={handleComment}
-          value={comment}
-          sx={{
-            size: "small",
-            marginTop: "0.4rem",
-            marginLeft: "0.2rem",
-          }}
-        />
-        <Stack
-          direction="row"
-          display="flex"
-          justifyContent="right"
-          mt={"1rem"}
-        >
-          <Button
-            size="small"
+            <Avatar
+              src={
+                user?.picture ||
+                "https://images.pexels.com/photos/8388229/pexels-photo-8388229.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+              }
+              alt="comments"
+            />
+            <Typography
+              color={theme.palette.mainWhite}
+              fontWeight={300}
+              fontSize="0.7rem"
+              ml={"0.5rem"}
+            >
+              {user?.name}
+            </Typography>
+          </Stack>
+          <TextField
+            variant="outlined"
+            placeholder="What are your thoughts"
+            multiline
+            fullWidth
+            maxRows={4}
+            onChange={handleComment}
+            value={comment}
             sx={{
-              textTransform: "capitalize",
-              marginRight: "0.5rem",
-              fontSize: "0.7rem",
+              size: "small",
+              marginTop: "0.4rem",
+              marginLeft: "0.2rem",
             }}
-            onClick={() => setComment("")}
+          />
+          <Stack
+            direction="row"
+            display="flex"
+            justifyContent="right"
+            mt={"1rem"}
           >
-            Cancel
-          </Button>
-          <Button
-            size="small"
-            sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
-            variant="contained"
-            onClick={handleSubmitComment}
-          >
-            Respond
-          </Button>
-        </Stack>
-      </InputBox>
+            <Button
+              size="small"
+              sx={{
+                textTransform: "capitalize",
+                marginRight: "0.5rem",
+                fontSize: "0.7rem",
+              }}
+              onClick={() => setComment("")}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="small"
+              sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+              variant="contained"
+              onClick={handleSubmitComment}
+            >
+              Respond
+            </Button>
+          </Stack>
+        </InputBox>
+      ) : (
+        <Typography mt="2rem">
+          <p onClick={loginWithRedirect} style={{ color: "green" }}>
+            Log in
+          </p>{" "}
+          to comment !
+        </Typography>
+      )}
       <Box>
         {commentSuccess &&
           commentData.map((c) => (

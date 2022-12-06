@@ -98,10 +98,28 @@
   height: 100%;
   max-height: 600px;
   border-radius: 5px;
+  margin-top: 1.3rem;
 }
 
 .underline {
   text-decoration: underline;
+}
+
+.imageButton {
+  font-size: 0.75rem;
+  width: 8rem;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  border-radius: 5px;
+  margin-bottom: "1rem";
+  background-color: #1976d2;
+}
+
+.imageButton:hover {
+  background-color: #1565c0;
 }
 
 @media only screen and (max-width: 600px) {
