@@ -11,6 +11,7 @@ import OtherProfileRightbar from "../components/OtherProfileRightbar";
 import PostRightbar from "../components/PostRightbar";
 import { fetchUser } from "../request/userRequest";
 import { useQuery } from "react-query";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const Profile = () => {
   const { user } = useAuth0();
@@ -22,6 +23,7 @@ const Profile = () => {
       retryDelay: 3000,
     }
   );
+  useDocumentTitle(userQuery && userQuery[0]?.username);
   return (
     <>
       <Stack direction="row" justifyContent="space-between">

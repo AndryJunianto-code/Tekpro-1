@@ -5,6 +5,7 @@ import { fetchOneList } from "../request/bookmarkListRequest";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import IndividualCardPost from "./individual/IndividualCardPost";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const YourListPosts = () => {
   const { bookmarkId, name } = useParams();
@@ -16,7 +17,7 @@ const YourListPosts = () => {
       retryDelay: 3000,
     }
   );
-
+  useDocumentTitle(listsData?.posts.length + " stories in " + name + " list");
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
       <BoxWrapper

@@ -5,8 +5,10 @@ import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import Stories from "../components/Stories";
 import SearchContent from "../components/SearchContent";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const YourStories = () => {
+  useDocumentTitle("CodingInk");
   return (
     <Box minHeight="100vh" height="100%">
       <Navbar />

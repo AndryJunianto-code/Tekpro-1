@@ -15,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import { bookmarkedPost, likedPost } from "../request/postRequest";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const PostContent = ({
   singlePostData,
@@ -33,6 +34,7 @@ const PostContent = ({
     numOfLike,
     numOfComment,
   } = singlePostData;
+  useDocumentTitle(title);
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState();

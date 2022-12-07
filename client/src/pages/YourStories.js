@@ -4,8 +4,10 @@ import BottomBar from "../components/BottomBar";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import Stories from "../components/Stories";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const YourStories = () => {
+  useDocumentTitle("Your stories");
   return (
     <>
       <Navbar />

@@ -9,10 +9,11 @@ import axios from "axios";
 import BottomBar from "../components/BottomBar";
 import { createNewBookmarkList } from "../request/bookmarkListRequest";
 import { useMutation } from "react-query";
-import CommentModal from "../components/CommentModal";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const Home = () => {
   const { user } = useAuth0();
+  useDocumentTitle("CodingInk");
   const [userExistBefore, setUserExistBefore] = useState(null);
 
   const { mutate: mutateBookmark, isSuccess: isSuccessPost } = useMutation(

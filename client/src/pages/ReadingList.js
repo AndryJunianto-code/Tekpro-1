@@ -5,8 +5,10 @@ import BottomBar from "../components/BottomBar";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import YourList from "../components/YourList";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const ReadingList = () => {
+  useDocumentTitle("Your lists");
   return (
     <>
       <Navbar />

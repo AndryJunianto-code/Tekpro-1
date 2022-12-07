@@ -4,10 +4,12 @@ import BottomBar from "../components/BottomBar";
 import CreateBlog from "../components/CreateBlog";
 import Leftbar from "../components/Leftbar";
 import SuccessSnackbar from "../modal/SuccessSnackbar";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const Write = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  useDocumentTitle("New story - CodingInk");
   return (
     <>
       <Stack direction="row" justifyContent="space-between" py="2rem">

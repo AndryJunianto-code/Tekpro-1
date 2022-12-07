@@ -140,7 +140,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
             <InputBase
               onChange={handleTags}
               className="tagsInput"
-              placeholder="ADD UP TO 4 TAGS  ex: coding,css,java "
+              placeholder="ADD UP TO 4 TAGS COMMA SEPERATED  ex: coding,css,java "
               fullWidth={true}
               sx={{ fontSize: "0.8rem" }}
             />

@@ -5,6 +5,7 @@ import { BoxWrapper, CustomBox } from "../utilities/CustomBox";
 import IndividualTag from "./individual/IndividualTag";
 import { useQuery } from "react-query";
 import IndividualCardPost from "./individual/IndividualCardPost";
+import useDocumentTitle from "../hook/useDocumentTitle";
 
 const TagContent = () => {
   const { tagName } = useParams();
@@ -14,7 +15,7 @@ const TagContent = () => {
     fetchPostByTag,
     { retryDelay: 3000 }
   );
-
+  useDocumentTitle("Topic about " + tagName);
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
       <BoxWrapper>

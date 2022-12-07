@@ -22,7 +22,7 @@ const YourList = () => {
   });
   return (
     <CustomBox flex={4} sx={{ overflowX: "hidden" }} mt={"3rem"}>
-      <BoxWrapper>
+      <BoxWrapper sx={{ minHeight: "100vh", height: "100%" }}>
         <Stack direction="row" justifyContent={"space-between"}>
           <Typography
             color={theme.palette.mainWhite}
