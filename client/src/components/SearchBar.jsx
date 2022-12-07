@@ -2,6 +2,7 @@ import { InputBase, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   height: "100%",
@@ -20,8 +21,8 @@ const SearchBar = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && search !== "") {
-      navigate(`/search/${search}`);
+    if (e.key === "Enter" && search.replace(/[#\\/?|]/g, "") !== "") {
+      navigate(`/search/${search.replace(/[#\\/?|]/g, "")}`);
     }
   };
 
@@ -30,6 +31,7 @@ const SearchBar = () => {
       navigate(`/search/${search}`);
     }
   };
+
   return (
     <>
       <SearchIconWrapper sx={{ zIndex: 1000 }} onClick={handleClickIconSearch}>
