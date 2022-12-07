@@ -218,7 +218,12 @@ const IndividualCardPost = ({ post }) => {
         </Stack>
       </Link>
 
-      <Menu open={open} anchorEl={bookmarkAnchor} onClose={handleClose}>
+      <Menu
+        disableScrollLock={true}
+        open={open}
+        anchorEl={bookmarkAnchor}
+        onClose={handleClose}
+      >
         <BookmarkModal checked={checked} setChecked={setChecked} post={post} />
       </Menu>
     </Card>

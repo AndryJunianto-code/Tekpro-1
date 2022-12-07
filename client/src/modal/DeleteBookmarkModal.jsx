@@ -7,6 +7,7 @@ import { Stack } from "@mui/material";
 import { deleteBookmark } from "../request/bookmarkListRequest";
 import { useMutation } from "react-query";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useTheme } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -27,16 +28,16 @@ export default function BasicModal({
   bookmarkId,
   listsRefetch,
 }) {
-  const {
-    mutate: mutateDeleteBookmark,
-    isSuccess,
-    isLoading,
-  } = useMutation(deleteBookmark, {
-    onSuccess: () => {
-      handleCloseBookmarkModal();
-      listsRefetch();
-    },
-  });
+  const theme = useTheme();
+  const { mutate: mutateDeleteBookmark, isLoading } = useMutation(
+    deleteBookmark,
+    {
+      onSuccess: () => {
+        handleCloseBookmarkModal();
+        listsRefetch();
+      },
+    }
+  );
 
   const handleDeleteBookmark = () => {
     mutateDeleteBookmark({ bookmarkId });
@@ -55,6 +56,7 @@ export default function BasicModal({
             variant="h5"
             component="h1"
             mb="1rem"
+            color={theme.palette.mainWhite}
           >
             Delete List ?
           </Typography>

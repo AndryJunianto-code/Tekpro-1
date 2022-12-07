@@ -23,22 +23,27 @@ const columns = [
     headerName: "Likes",
     width: 80,
   },
+  {
+    field: "numOfComment",
+    headerName: "Comments",
+    width: 110,
+  },
 ];
 
 export default function DataGridDemo({ postData, postSuccess }) {
-  const { user } = useAuth0();
   const [modifyPostData, setModifyPostData] = useState([]);
 
   useEffect(() => {
     let temp = [];
     postSuccess &&
       postData.map((p) => {
-        const { numOfView, _id, title, numOfLike } = p;
+        const { numOfView, _id, title, numOfLike, numOfComment } = p;
         const newObj = {
           numOfView,
           id: _id,
           title,
           numOfLike,
+          numOfComment,
         };
         temp.push(newObj);
       });
