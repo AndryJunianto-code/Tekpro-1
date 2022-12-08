@@ -70,7 +70,19 @@ const Navbar = () => {
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
         <Stack direction="row">
           <Link className="linkWhite" to="/">
-            <Typography variant="h6">CodingInk</Typography>
+            <Stack direction="row">
+              <Avatar
+                src="https://res.cloudinary.com/de1r7z9bw/image/upload/v1670521416/Post%20Image/dlmrkypk8wuqnimmks7v.png"
+                alt="logo"
+              />
+              <Typography
+                variant="h6"
+                ml="0.3rem"
+                display={{ xs: "none", md: "block" }}
+              >
+                CodingInk
+              </Typography>
+            </Stack>
           </Link>
           <Search>
             <SearchBar />
