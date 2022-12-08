@@ -19,11 +19,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { increasePostComment } from "../request/postRequest";
 import { useColorModeContext } from "../context/ColorModeContext";
 import CommentInput from "../input/CommentInput";
+import { useRef } from "react";
 
 const CommentModal = ({ postId, setIsOpenCommentModal }) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const { colorMode } = useColorModeContext();
   const theme = useTheme();
+  const inputRef = useRef("");
   const [comment, setComment] = useState("");
 
   const ModalBox = styled(Box)(({ theme }) => ({
@@ -56,11 +58,6 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
     refetch: refetchComment,
   } = useQuery(["fetchComments", postId], fetchComments, { retryDelay: 3000 });
 
-  const handleComment = (e) => {
-    e.preventDefault();
-    setComment(e.target.value);
-  };
-
   const handleCloseModal = () => {
     setIsOpenCommentModal(false);
   };
@@ -71,7 +68,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
       {
         username: user?.name,
         image: user?.picture,
-        comment: comment,
+        comment: inputRef.current.value,
         postId: postId,
         userId: user?.sub,
       },
@@ -84,7 +81,10 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
       }
     );
   };
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <ModalBox>
       <Stack direction="row" justifyContent={"space-between"}>
@@ -120,14 +120,16 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
               {user?.name}
             </Typography>
           </Stack>
-          <TextField
+          <input
+            className={
+              colorMode === "dark" ? "commentDarkInput" : "commentInput"
+            }
+            ref={inputRef}
             variant="outlined"
             placeholder="What are your thoughts"
             multiline
             fullWidth
             maxRows={4}
-            onChange={handleComment}
-            value={comment}
             sx={{
               size: "small",
               marginTop: "0.4rem",
@@ -147,7 +149,7 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
                 marginRight: "0.5rem",
                 fontSize: "0.7rem",
               }}
-              onClick={() => setComment("")}
+              onClick={() => (inputRef.current.value = "")}
             >
               Cancel
             </Button>

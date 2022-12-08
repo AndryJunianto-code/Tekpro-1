@@ -122,6 +122,28 @@
   background-color: #1565c0;
 }
 
+.commentInput {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+}
+
+.commentDarkInput {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+  background-color: #333333;
+  color: white;
+}
+
+.commentInput:focus {
+  outline: 1px solid #1976d2;
+}
+
+.commentDarkInput:focus {
+  outline: 1px solid #90caf9;
+}
+
 @media only screen and (max-width: 600px) {
   .postImage {
     width: 60px;

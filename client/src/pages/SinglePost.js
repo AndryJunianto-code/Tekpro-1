@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
@@ -47,24 +47,31 @@ const SinglePost = () => {
   return (
     <>
       <Navbar />
-      <Stack direction="row" justifyContent="space-between">
-        <Leftbar />
+      <Box
+        sx={{
+          overflowY: isOpenCommentModal ? "hidden" : "",
+          height: isOpenCommentModal ? "94vh" : "100%",
+        }}
+      >
+        <Stack direction="row" justifyContent="space-between">
+          <Leftbar />
 
-        {isSuccess && (
-          <>
-            <PostContent
-              singlePostData={singlePostData}
-              setIsOpenCommentModal={setIsOpenCommentModal}
-              isOpenCommentModal={isOpenCommentModal}
-              refetchSinglePostData={refetchSinglePostData}
-            />
-            <PostRightbar
-              userQuery={userQuery}
-              userQueryRefetch={userQueryRefetch}
-            />
-          </>
-        )}
-      </Stack>
+          {isSuccess && (
+            <>
+              <PostContent
+                singlePostData={singlePostData}
+                setIsOpenCommentModal={setIsOpenCommentModal}
+                isOpenCommentModal={isOpenCommentModal}
+                refetchSinglePostData={refetchSinglePostData}
+              />
+              <PostRightbar
+                userQuery={userQuery}
+                userQueryRefetch={userQueryRefetch}
+              />
+            </>
+          )}
+        </Stack>
+      </Box>
       <BottomBar />
       {isOpenCommentModal && (
         <>

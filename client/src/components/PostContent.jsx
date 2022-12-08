@@ -157,9 +157,6 @@ const PostContent = ({
                   sx={{
                     color: theme.palette.darkGrey,
                     width: "20px",
-                    ":hover": {
-                      color: "black",
-                    },
                   }}
                 />
               </IconButton>
@@ -178,9 +175,6 @@ const PostContent = ({
                 mr: "0.3rem",
                 color: theme.palette.darkGrey,
                 width: "18px",
-                ":hover": {
-                  color: "black",
-                },
               }}
             />
             <Typography color={theme.palette.darkGrey} fontSize={"0.7rem"}>
