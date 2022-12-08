@@ -86,3 +86,9 @@ export const increasePostComment = async (obj) => {
   });
   return data;
 };
+
+//delete post
+export const deletePost = async (obj) => {
+  await axios.delete(`/posts/delete/${obj.postId}`);
+  return "Success";
+};

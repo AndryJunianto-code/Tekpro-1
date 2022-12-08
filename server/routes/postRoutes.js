@@ -223,4 +223,14 @@ router.put("/comment", async (req, res) => {
   }
 });
 
+//delete
+router.delete("/delete/:postId", async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.postId);
+    res.status(200).json("Success");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
