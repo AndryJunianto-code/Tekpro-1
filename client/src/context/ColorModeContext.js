@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import React, { useContext, useState, useEffect } from "react";
 
 const ColorModeContext = React.createContext({});
 
@@ -8,13 +7,18 @@ const ColorModeContextProvider = ({ children }) => {
 
   const toggleColorMode = () => {
     if (colorMode === "light") {
+      localStorage.setItem("isDarkMode", true);
       setColorMode("dark");
     } else {
+      localStorage.setItem("isDarkMode", false);
       setColorMode("light");
     }
   };
+
   return (
-    <ColorModeContext.Provider value={{ colorMode, toggleColorMode }}>
+    <ColorModeContext.Provider
+      value={{ colorMode, toggleColorMode, setColorMode }}
+    >
       {children}
     </ColorModeContext.Provider>
   );

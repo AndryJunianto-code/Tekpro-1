@@ -14,9 +14,10 @@ import Search from "./pages/Search";
 import Tag from "./pages/Tag";
 import { useColorModeContext } from "./context/ColorModeContext";
 import { createTheme } from "@mui/material";
+import { useEffect } from "react";
 
 function App() {
-  const { colorMode } = useColorModeContext();
+  const { colorMode, setColorMode } = useColorModeContext();
   const theme = createTheme({
     palette: {
       mode: colorMode,
@@ -26,6 +27,16 @@ function App() {
       darkGrey: colorMode === "light" ? "#707070" : "rgba(255,255,255,0.6)",
     },
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("isDarkMode") === null) {
+      localStorage.setItem("isDarkMode", "light");
+      return;
+    }
+    setColorMode(
+      localStorage.getItem("isDarkMode") === "true" ? "dark" : "light"
+    );
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Router>
