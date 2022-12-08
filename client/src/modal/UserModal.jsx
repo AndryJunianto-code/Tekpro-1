@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, IconButton, Stack, styled, Typography } from "@mui/material";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useColorModeContext } from "../context/ColorModeContext";
@@ -25,7 +27,6 @@ const ModalBox = styled(Box)(({ theme }) => ({
 const CustomTypography = styled(Typography)(({ theme }) => ({
   fontSize: "0.8rem",
   width: "100%",
-  marginBottom: "0.2rem",
   padding: "0 1rem",
   color: "white",
 
@@ -39,7 +40,7 @@ const UserModal = () => {
   return (
     <ModalBox>
       <Link className="link" to={`/profile/${user?.sub}`}>
-        <CustomTypography>Profile</CustomTypography>
+        <CustomTypography mb="0.2rem">Profile</CustomTypography>
       </Link>
       <CustomTypography
         onClick={() =>
@@ -50,7 +51,18 @@ const UserModal = () => {
       >
         Sign out
       </CustomTypography>
-      <CustomTypography onClick={toggleColorMode}>{colorMode}</CustomTypography>
+      <Stack direction="row" alignItems="center" paddingX="0.6rem">
+        <IconButton onClick={toggleColorMode}>
+          {colorMode === "dark" ? (
+            <LightModeOutlinedIcon sx={{ width: "20px", height: "20px" }} />
+          ) : (
+            <DarkModeOutlinedIcon
+              sx={{ width: "20px", height: "20px", color: "white" }}
+            />
+          )}
+        </IconButton>
+        <Typography fontSize="0.8rem">{colorMode}</Typography>
+      </Stack>
     </ModalBox>
   );
 };
