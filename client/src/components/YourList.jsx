@@ -6,12 +6,17 @@ import NewListModal from "../modal/NewListModal";
 import { fetchAllLists } from "../request/bookmarkListRequest";
 import { useQuery } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
+import DeleteBookmarkModal from "../modal/DeleteBookmarkModal";
 
 const YourList = () => {
   const theme = useTheme();
   const { user } = useAuth0();
   const [openBookmarkModal, setOpenBookmarkModal] = useState(false);
-  const handleOpenBookmarkModal = () => setOpenBookmarkModal(true);
+  const [currentBookmarkId, setCurrentBookmarkId] = useState("");
+  const handleOpenBookmarkModal = (bookmarkId) => {
+    setOpenBookmarkModal(true);
+    setCurrentBookmarkId(bookmarkId);
+  };
   const handleCloseBookmarkModal = () => setOpenBookmarkModal(false);
   const {
     data: listsData,
@@ -40,13 +45,16 @@ const YourList = () => {
               index={index}
               key={list._id}
               list={list}
-              openBookmarkModal={openBookmarkModal}
-              handleCloseBookmarkModal={handleCloseBookmarkModal}
               handleOpenBookmarkModal={handleOpenBookmarkModal}
-              listsRefetch={listsRefetch}
             />
           ))}
       </BoxWrapper>
+      <DeleteBookmarkModal
+        openBookmarkModal={openBookmarkModal}
+        handleCloseBookmarkModal={handleCloseBookmarkModal}
+        listsRefetch={listsRefetch}
+        currentBookmarkId={currentBookmarkId}
+      />
     </CustomBox>
   );
 };

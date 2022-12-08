@@ -25,7 +25,7 @@ const style = {
 export default function BasicModal({
   openBookmarkModal,
   handleCloseBookmarkModal,
-  bookmarkId,
+  currentBookmarkId,
   listsRefetch,
 }) {
   const theme = useTheme();
@@ -40,7 +40,7 @@ export default function BasicModal({
   );
 
   const handleDeleteBookmark = () => {
-    mutateDeleteBookmark({ bookmarkId });
+    mutateDeleteBookmark({ bookmarkId: currentBookmarkId });
   };
   return (
     <div>

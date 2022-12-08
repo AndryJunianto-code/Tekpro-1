@@ -10,16 +10,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import DeleteBookmarkModal from "../../modal/DeleteBookmarkModal";
 
-const IndividualList = ({
-  list,
-  index,
-  handleOpenBookmarkModal,
-  handleCloseBookmarkModal,
-  openBookmarkModal,
-  listsRefetch,
-}) => {
+const IndividualList = ({ list, index, handleOpenBookmarkModal }) => {
   const { name, _id } = list;
 
   return (
@@ -52,7 +44,7 @@ const IndividualList = ({
               <IconButton
                 size="small"
                 color="error"
-                onClick={handleOpenBookmarkModal}
+                onClick={() => handleOpenBookmarkModal(_id)}
               >
                 <RemoveCircleOutlineOutlinedIcon
                   sx={{ width: "23px", height: "23px" }}
@@ -72,12 +64,6 @@ const IndividualList = ({
           alt="Image"
         />
       </Card>
-      <DeleteBookmarkModal
-        openBookmarkModal={openBookmarkModal}
-        handleCloseBookmarkModal={handleCloseBookmarkModal}
-        bookmarkId={_id}
-        listsRefetch={listsRefetch}
-      />
     </>
   );
 };
