@@ -65,7 +65,7 @@ const Navbar = () => {
     setOpenUserModal(!openUserModal);
   };
   return (
-    <StyledNavbar onClick={() => setOpenUserModal(false)}>
+    <StyledNavbar onClick={() => setOpenUserModal(!openUserModal)}>
       {openUserModal && <TransparentShadow />}
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
         <Stack direction="row">
