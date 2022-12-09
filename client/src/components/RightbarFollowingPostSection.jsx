@@ -42,7 +42,7 @@ const RightbarFollowingPostSection = () => {
       <Typography
         color={theme.palette.mainWhite}
         variant="h6"
-        fontSize={"0.8rem"}
+        fontSize={"0.9rem"}
         mb="0.6rem"
       >
         Recently Posted

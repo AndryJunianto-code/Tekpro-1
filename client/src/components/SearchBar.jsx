@@ -48,7 +48,9 @@ const SearchBar = () => {
         onKeyDown={handleKeyDown}
         onChange={handleSearch}
         placeholder="Search..."
-        sx={{ paddingLeft: "1.5rem" }}
+        sx={{
+          paddingLeft: "1.5rem",
+        }}
       />
     </>
   );

@@ -97,8 +97,8 @@ const PostContent = ({
           <Stack direction={"row"}>
             <Avatar src={authorImage} alt="profile" />
             <Stack ml={2}>
-              <Typography fontSize={"0.75rem"}>{authorName}</Typography>
-              <Typography fontSize={"0.7rem"} color={theme.palette.darkGrey}>
+              <Typography fontSize={"0.9rem"}>{authorName}</Typography>
+              <Typography fontSize={"0.8rem"} color={theme.palette.darkGrey}>
                 Nov 9
               </Typography>
             </Stack>
@@ -130,7 +130,7 @@ const PostContent = ({
 
         {/*  */}
         <Box mt={2} color={theme.palette.mainWhite}>
-          <Typography fontSize={"2rem"} fontWeight="900">
+          <Typography fontSize={"2rem"} fontWeight="900" lineHeight={"37px"}>
             {title}
           </Typography>
           <img className="singlePostImage" src={postImage} />

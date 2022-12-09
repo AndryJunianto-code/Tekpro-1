@@ -10,7 +10,7 @@ const RightbarWriterSection = () => {
       <Typography
         variant="h6"
         color={theme.palette.mainWhite}
-        fontSize={"0.8rem"}
+        fontSize={"0.9rem"}
         mb="0.6rem"
       >
         Top Writers

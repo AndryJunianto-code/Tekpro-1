@@ -89,14 +89,10 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
             src={userQuery[0]?.picture}
             sx={{ width: "80px", height: "80px" }}
           />
-          <Typography fontWeight={500} fontSize="0.8rem" mt={"0.5rem"}>
+          <Typography fontWeight={500} mt={"0.5rem"}>
             {userQuery[0]?.username}
           </Typography>
-          <Typography
-            mt="0.2rem"
-            fontSize="0.8rem"
-            color={theme.palette.darkGrey}
-          >
+          <Typography mt="0.2rem" color={theme.palette.darkGrey}>
             {userQuery[0]?.followers.length} Followers
           </Typography>
           <Typography
@@ -123,7 +119,7 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
             <Button
               onClick={handleUnfollowUser}
               variant="outlined"
-              sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+              sx={{ textTransform: "capitalize" }}
             >
               Following
             </Button>
@@ -133,7 +129,7 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
             <Button
               onClick={handleFollowUser}
               variant="contained"
-              sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+              sx={{ textTransform: "capitalize" }}
             >
               Follow
             </Button>

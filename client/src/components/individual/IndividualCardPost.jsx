@@ -193,19 +193,22 @@ const IndividualCardPost = ({ post }) => {
         >
           <Box marginRight={2} color={theme.palette.mainWhite}>
             <Typography
-              mb="0.3rem"
+              mb="0.5rem"
               sx={{
-                lineHeight: "30px",
+                lineHeight: { xs: "20px", lg: "25px" },
                 fontWeight: "700",
-                fontSize: { xs: "0.8rem", lg: "1.3rem" },
+                fontSize: { xs: "1rem", lg: "1.3rem" },
               }}
             >
               {title}
             </Typography>
             <Typography
               className="postDesc"
-              fontSize={"0.7rem"}
+              fontSize={"1rem"}
+              fontFamily={("Times New Roman", "Times", "serif")}
               display={{ xs: "none", sm: "-webkit-box" }}
+              lineHeight={"20px"}
+              fontWeight="100"
               dangerouslySetInnerHTML={{ __html: subtitle }}
             ></Typography>
 

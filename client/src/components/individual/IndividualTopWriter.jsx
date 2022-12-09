@@ -17,12 +17,12 @@ const IndividualTopWriter = ({ t }) => {
         sx={{ width: "45px", height: "45px" }}
       />
       <Stack ml="1rem" width="50%">
-        <Typography fontSize="0.8rem" fontWeight="600">
+        <Typography fontSize="0.9rem" fontWeight="600">
           {t.username}
         </Typography>
         <Typography
           className="topWriterDesc"
-          fontSize="0.7rem"
+          fontSize="0.8rem"
           fontWeight="300"
           lineHeight="16px"
         >

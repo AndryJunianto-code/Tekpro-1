@@ -68,17 +68,22 @@ const Navbar = () => {
     <StyledNavbar onClick={() => setOpenUserModal(!openUserModal)}>
       {openUserModal && <TransparentShadow />}
       <CustomToolbar onClick={(e) => e.stopPropagation()}>
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center">
           <Link className="linkWhite" to="/">
-            <Stack direction="row">
+            <Stack direction="row" alignItems="center">
               <Avatar
                 src="https://res.cloudinary.com/de1r7z9bw/image/upload/v1670521416/Post%20Image/dlmrkypk8wuqnimmks7v.png"
                 alt="logo"
+                sx={{ width: "30px", height: "30px" }}
               />
               <Typography
-                variant="h6"
-                ml="0.3rem"
+                ml="0.5rem"
                 display={{ xs: "none", md: "block" }}
+                color="white"
+                fontFamily={"Abril Fatface"}
+                fontWeight="500"
+                letterSpacing={"1.2px"}
+                fontSize={"1.4rem"}
               >
                 CodingInk
               </Typography>

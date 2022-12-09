@@ -32,7 +32,7 @@ const Leftbar = () => {
       }}
       pr="1rem"
     >
-      <Box position="fixed" top="4rem">
+      <Box position="fixed" top="7rem">
         <List>
           <Link to="/" className="link">
             <ListItem disablePadding>
