@@ -5,9 +5,8 @@ import axios from "axios";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ColorModeContextProvider } from "./context/ColorModeContext";
 
-const baseUrl =
-  /* "http://localhost:5000/api"; */
-  "https://tekpro-1-production.up.railway.app/api/";
+const baseUrl = "http://localhost:5000/api";
+/* "https://tekpro-1-production.up.railway.app/api/"; */
 
 axios.defaults.baseURL = baseUrl;
 

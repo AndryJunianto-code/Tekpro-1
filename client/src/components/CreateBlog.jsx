@@ -100,6 +100,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
           fontWeight="700"
           mb="0.2rem"
           color={theme.palette.mainWhite}
+          fontSize="1.2rem"
         >
           Create Article
         </Typography>
@@ -142,7 +143,6 @@ const CreateBlog = ({ setOpen, setMessage }) => {
               className="tagsInput"
               placeholder="ADD UP TO 4 TAGS COMMA SEPERATED  ex: coding,css,java "
               fullWidth={true}
-              sx={{ fontSize: "0.8rem" }}
             />
           </Stack>
         </Card>

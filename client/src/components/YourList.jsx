@@ -31,7 +31,7 @@ const YourList = () => {
         <Stack direction="row" justifyContent={"space-between"}>
           <Typography
             color={theme.palette.mainWhite}
-            fontSize={"1.8rem"}
+            fontSize={"2rem"}
             fontWeight={900}
           >
             Your Lists

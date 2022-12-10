@@ -54,6 +54,7 @@ export default function BasicModal({ listsRefetch }) {
           borderRadius: "8px",
           textTransform: "capitalize",
           marginBottom: "2rem",
+          marginTop: "0.2rem",
         }}
       >
         New list

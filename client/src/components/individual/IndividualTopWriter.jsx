@@ -17,9 +17,7 @@ const IndividualTopWriter = ({ t }) => {
         sx={{ width: "45px", height: "45px" }}
       />
       <Stack ml="1rem" width="50%">
-        <Typography fontSize="0.9rem" fontWeight="600">
-          {t.username}
-        </Typography>
+        <Typography fontWeight="600">{t.username}</Typography>
         <Typography
           className="topWriterDesc"
           fontSize="0.8rem"
@@ -33,7 +31,7 @@ const IndividualTopWriter = ({ t }) => {
         <Button
           ml="1rem"
           variant="outlined"
-          sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+          sx={{ textTransform: "capitalize" }}
         >
           View
         </Button>

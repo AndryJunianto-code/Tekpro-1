@@ -43,7 +43,7 @@ const Stories = () => {
         <Stack direction="row" mt="1rem">
           <Typography
             onClick={() => setSearchNavigation("Stories")}
-            fontSize="0.7rem"
+            fontSize="0.9rem"
             mr="1.5rem"
             sx={{ cursor: "pointer" }}
             fontWeight={searchNavigation === "Stories" && "500"}
@@ -53,7 +53,7 @@ const Stories = () => {
           </Typography>
           <Typography
             onClick={() => setSearchNavigation("People")}
-            fontSize="0.7rem"
+            fontSize="0.9rem"
             sx={{ cursor: "pointer" }}
             fontWeight={searchNavigation === "People" && "500"}
             className={searchNavigation === "People" && "underline"}

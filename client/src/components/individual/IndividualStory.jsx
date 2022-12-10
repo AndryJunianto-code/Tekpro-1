@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteStoryModal from "../../modal/DeleteStoryModal";
 const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
-  const { title, caption, _id, userIdBookmarked, authorId } = story;
+  const { title, subtitle, _id, userIdBookmarked, authorId } = story;
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
@@ -40,27 +40,27 @@ const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
         <Typography
           color={theme.palette.mainWhite}
           variant="body2"
-          fontWeight={700}
+          fontWeight={800}
           mb={"0.2rem"}
         >
           {title}
         </Typography>
         <Typography
           className="storyDesc"
-          variant="caption"
+          variant="body2"
           color={theme.palette.darkGrey}
-          fontWeight={400}
-          marginBottom={"0.8rem"}
+          fontWeight={500}
+          marginBottom={"0.5rem"}
           lineHeight={"17px"}
-          dangerouslySetInnerHTML={{ __html: caption }}
+          dangerouslySetInnerHTML={{ __html: subtitle }}
         />
         <Stack direction="row" alignItems={"center"}>
           <Typography
-            fontSize={"0.7rem"}
+            fontSize={"0.8rem"}
             mr="0.7rem"
             color={theme.palette.darkGrey}
           >
-            Published on Oct 23 {_id}
+            Published on Oct 23
           </Typography>
           <IconButton
             size="small"

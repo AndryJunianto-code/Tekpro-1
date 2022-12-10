@@ -34,11 +34,7 @@ const SinglePost = () => {
     retryDelay: 3000,
   });
 
-  const { mutate: mutatePostView } = useMutation(increasePostView, {
-    onSuccess: (data) => {
-      console.log(data);
-    },
-  });
+  const { mutate: mutatePostView } = useMutation(increasePostView, {});
   useEffect(() => {
     mutatePostView({ postId });
   }, []);
@@ -67,6 +63,7 @@ const SinglePost = () => {
               <PostRightbar
                 userQuery={userQuery}
                 userQueryRefetch={userQueryRefetch}
+                profile={true}
               />
             </>
           )}

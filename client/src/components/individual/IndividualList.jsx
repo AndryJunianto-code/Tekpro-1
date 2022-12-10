@@ -24,7 +24,7 @@ const IndividualList = ({ list, index, handleOpenBookmarkModal }) => {
         }}
       >
         <CardContent sx={{ paddingY: "1.1rem", paddingX: "1.5rem" }}>
-          <Typography fontWeight={900} fontSize={"1.2rem"} mb={"3rem"}>
+          <Typography fontWeight={900} fontSize={"1.5rem"} mb={"3rem"}>
             {name}
           </Typography>
 

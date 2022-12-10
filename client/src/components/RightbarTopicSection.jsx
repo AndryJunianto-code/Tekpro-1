@@ -29,7 +29,6 @@ const RightbarTopicSection = () => {
                 variant="contained"
                 sx={{
                   textTransform: "capitalize",
-                  fontSize: "0.75rem",
                   width: "100%",
                 }}
               >

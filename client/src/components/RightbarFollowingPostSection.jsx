@@ -51,7 +51,7 @@ const RightbarFollowingPostSection = () => {
         {posts?.length > 0 ? (
           posts.map((p) => <IndividualFollowingPost post={p} key={p._id} />)
         ) : (
-          <Typography fontSize="0.6rem" color="gray">
+          <Typography fontSize="0.8rem" color="gray">
             Follow your favourite writers to see their post here !
           </Typography>
         )}

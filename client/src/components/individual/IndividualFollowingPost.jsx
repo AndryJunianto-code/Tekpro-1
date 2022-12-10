@@ -9,13 +9,13 @@ const IndividualFollowingPost = ({ post }) => {
   const theme = useTheme();
   dayjs.extend(relativeTime);
   return (
-    <Box mb="0.8rem">
+    <Box mb="1rem">
       <Link className="link" to={`/profile/${authorId}`}>
         <Stack direction="row" alignItems="center">
           <Avatar
             sx={{
-              width: "30px",
-              height: "30px",
+              width: "22px",
+              height: "22px",
             }}
             src={authorImage}
             alt="image"
@@ -24,7 +24,7 @@ const IndividualFollowingPost = ({ post }) => {
           <Typography
             color={theme.palette.mainWhite}
             ml="0.5rem"
-            fontSize="0.6rem"
+            fontSize="0.73rem"
             fontWeight="500"
           >
             {authorName}
@@ -35,12 +35,12 @@ const IndividualFollowingPost = ({ post }) => {
         <Typography
           color={theme.palette.mainWhite}
           mt="0.3rem"
-          fontSize="0.8rem"
           fontWeight="700"
+          fontSize="1.1rem"
         >
           {title}
         </Typography>
-        <Typography fontSize="0.6rem" color={theme.palette.darkGrey}>
+        <Typography fontSize="0.75rem" color={theme.palette.darkGrey}>
           {dayjs(createdAt).fromNow()}
         </Typography>
       </Link>

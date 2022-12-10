@@ -98,7 +98,7 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
           <Typography
             mt="0.4rem"
             mb="0.8rem"
-            fontSize="0.65rem"
+            fontSize="0.9rem"
             color={theme.palette.darkGrey}
             fontWeight={400}
           >
@@ -108,7 +108,7 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
             <Link className="link" to={`/profile/${user?.sub}`}>
               <Button
                 variant="text"
-                sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+                sx={{ textTransform: "capitalize", padding: "0px" }}
               >
                 Edit Profile
               </Button>
@@ -137,25 +137,29 @@ const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
 
           {profile && userQuery && userQuery[0]?.followings.length > 0 && (
             <Box mt="3rem">
-              <Typography mb="0.8rem" fontSize="0.8rem" fontWeight="600">
+              <Typography mb="0.8rem" fontWeight="600">
                 Following
               </Typography>
               <FollowingBox>
                 {userQuery &&
                   userQuery[0]?.followings.map((f) => (
-                    <Link to={`/profile/${f.userId}`} className="link">
+                    <Link
+                      to={`/profile/${f.userId}`}
+                      className="link"
+                      key={f.userId}
+                    >
                       <Stack mb="0.7rem" direction="row" alignItems="center">
                         <Avatar
                           src={f.userPicture}
                           sx={{
                             width: "20px",
                             height: "20px",
-                            marginRight: "0.4rem",
+                            marginRight: "0.8rem",
                           }}
                         />
                         <Typography
                           color={theme.palette.mainWhite}
-                          fontSize="0.6rem"
+                          fontSize="0.9rem"
                         >
                           {f.username}
                         </Typography>

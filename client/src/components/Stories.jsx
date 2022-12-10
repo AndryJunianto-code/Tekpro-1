@@ -45,7 +45,7 @@ const Stories = () => {
         <Stack direction="row" justifyContent={"space-between"}>
           <Typography
             color={theme.palette.mainWhite}
-            fontSize={"1.8rem"}
+            fontSize={"2rem"}
             fontWeight={900}
           >
             Your Stories
@@ -58,13 +58,14 @@ const Stories = () => {
                 borderRadius: "8px",
                 textTransform: "capitalize",
                 marginBottom: "2rem",
+                marginTop: "0.2rem",
               }}
             >
               Write a story
             </Button>
           </Link>
         </Stack>
-        <Typography variant="caption" fontWeight={300}>
+        <Typography variant="body2" fontWeight={400}>
           Published {storyData?.length}
         </Typography>
         <Divider
