@@ -19,7 +19,6 @@ export default function RichTextEditor({ content, setContent }) {
       }}
       formats={[
         "header",
-        "size",
         "bold",
         "italic",
         "underline",
@@ -31,7 +30,6 @@ export default function RichTextEditor({ content, setContent }) {
       modules={{
         toolbar: [
           [{ header: [1, 2, 3, 4, 5, 6] }],
-          [{ size: [] }],
           ["bold", "italic", "underline", "strike", "blockquote"],
           [{ list: "ordered" }, { list: "bullet" }]["link"],
           ["code-block"],
