@@ -1,16 +1,16 @@
 const topWriter = [
   {
-    username: "A Juno",
-    userId: "google-oauth2|116222292100201286274",
+    username: "Jun Dream",
+    userId: "google-oauth2|109581258392522652292",
     picture:
-      "https://lh3.googleusercontent.com/a/ALm5wu3pSnytjfNF1BDtBtyEUxe4TFdsqwnVkXDQosTE=s96-c",
+      "https://lh3.googleusercontent.com/a/AEdFTp6ehHtz8qb0FW1a_vfMFuNsoiWcXgziTPiRfA-4=s96-c",
     description: "I'm a web developer, educator, freelancer",
   },
   {
-    username: "Agha Khan",
-    userId: "google-oauth2|109097147289951846080",
+    username: "Trial Tester",
+    userId: "google-oauth2|117624378790926264996",
     picture:
-      "https://lh3.googleusercontent.com/a/ALm5wu2HXUV-RN7GV7mYiL1A707C7cKX72fMPaBffY0=s96-c",
+      "https://lh3.googleusercontent.com/a/AEdFTp47nYoIcbW6lLa54A81B4LWxRhWSFQ6DAtzBst9=s96-c",
     description: "SEO Expert",
   },
 ];

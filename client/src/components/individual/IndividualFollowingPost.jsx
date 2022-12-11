@@ -31,7 +31,7 @@ const IndividualFollowingPost = ({ post }) => {
           </Typography>
         </Stack>
       </Link>
-      <Link className="link" to={`/p/${_id}`}>
+      <Link className="link" to={`/p/${_id}/${authorId}`}>
         <Typography
           color={theme.palette.mainWhite}
           mt="0.3rem"

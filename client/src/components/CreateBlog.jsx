@@ -94,7 +94,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
     }
   }, [isSuccessPost]);
   return (
-    <CustomBox flex={4} mt={"3rem"} pb={"15.8rem"} sx={{ overflowX: "hidden" }}>
+    <CustomBox flex={4} mt={"3rem"} pb={"3rem"} sx={{ overflowX: "hidden" }}>
       <BoxWrapper>
         <Typography
           fontWeight="700"

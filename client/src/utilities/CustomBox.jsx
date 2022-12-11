@@ -8,6 +8,8 @@ export const CustomBox = styled(Box)(({ theme }) => ({
 
 export const BoxWrapper = styled(Box)(({ theme }) => ({
   width: "90%",
+  minHeight: "100vh",
+  height: "100%",
   [theme.breakpoints.up("md")]: {
     width: "75%",
     maxWidth: "700px",

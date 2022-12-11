@@ -5,6 +5,7 @@ import CreateBlog from "../components/CreateBlog";
 import Leftbar from "../components/Leftbar";
 import SuccessSnackbar from "../modal/SuccessSnackbar";
 import useDocumentTitle from "../hook/useDocumentTitle";
+import Navbar from "../components/Navbar";
 
 const Write = () => {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,8 @@ const Write = () => {
   useDocumentTitle("New story - CodingInk");
   return (
     <>
-      <Stack direction="row" justifyContent="space-between" py="2rem">
+      <Navbar />
+      <Stack direction="row" justifyContent="space-between" pb="5rem">
         <Leftbar />
         <CreateBlog setOpen={setOpen} setMessage={setMessage} />
         <Box

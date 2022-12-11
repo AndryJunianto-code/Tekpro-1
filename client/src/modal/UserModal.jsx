@@ -55,8 +55,14 @@ const UserModal = () => {
   const { toggleColorMode, colorMode } = useColorModeContext();
   return (
     <ModalBox>
-      <Stack direction="row" alignItems="center" paddingX="0.6rem" mb="0.1rem">
-        <IconButton onClick={toggleColorMode}>
+      <Stack
+        onClick={toggleColorMode}
+        direction="row"
+        alignItems="center"
+        paddingX="0.6rem"
+        mb="0.1rem"
+      >
+        <IconButton>
           {colorMode === "dark" ? (
             <LightModeOutlinedIcon sx={{ width: "20px", height: "20px" }} />
           ) : (

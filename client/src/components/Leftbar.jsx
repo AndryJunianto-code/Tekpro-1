@@ -29,6 +29,7 @@ const Leftbar = () => {
         justifyContent: "end",
         borderRight:
           colorMode === "light" ? "1px solid #e3e3e3" : "1px solid #292929",
+        minHeight: "100vh",
       }}
       pr="1rem"
     >

@@ -18,7 +18,7 @@ const Rightbar = () => {
       py={"0.8rem"}
       pl="1rem"
     >
-      <Box position="fixed" overflowy={"auto"}>
+      <Box position="fixed">
         <RightbarTopicSection />
         <RightbarWriterSection />
         <RightbarFollowingPostSection />
