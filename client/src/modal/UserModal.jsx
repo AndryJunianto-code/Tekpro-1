@@ -33,10 +33,11 @@ const ModalBox = styled(Box)(({ theme }) => ({
 
 const CustomTypography = styled(Typography)(({ theme }) => ({
   width: "100%",
-  fontSize: "0.95rem",
-  padding: "0 1rem",
+  fontSize: "1rem",
+  padding: "0.3rem 1rem",
   color: "white",
   fontFamily: "David Libre",
+  cursor: "pointer",
   "&:hover": {
     backgroundColor: "rgba(255,255,255,0.3)",
   },
@@ -82,9 +83,7 @@ const UserModal = () => {
       <Divider variant="middle" color="#707070" />
 
       <Link className="link" to={`/profile/${user?.sub}`}>
-        <CustomTypography mt="0.4rem" mb="0.4rem">
-          Profile
-        </CustomTypography>
+        <CustomTypography mt="0.4rem">Profile</CustomTypography>
       </Link>
       <CustomTypography
         onClick={() =>

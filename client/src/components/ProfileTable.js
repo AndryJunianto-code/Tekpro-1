@@ -49,18 +49,12 @@ export default function DataGridDemo({ postData, postSuccess }) {
       });
     setModifyPostData(temp);
   }, [postData]);
-  useEffect(() => {
-    console.log(modifyPostData);
-  }, [modifyPostData]);
   return (
     <Box sx={{ height: "400px", width: "100%" }}>
       {postSuccess && postData ? (
         <DataGrid
           rows={modifyPostData}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
         />
       ) : (

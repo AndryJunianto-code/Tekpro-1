@@ -24,16 +24,18 @@ export default function RichTextEditor({ content, setContent }) {
         "underline",
         "strike",
         "blockquote",
-        "link",
+        "list",
+        "bullet",
         "code-block",
       ]}
       modules={{
         toolbar: [
           [{ header: [1, 2, 3, 4, 5, 6] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ list: "ordered" }, { list: "bullet" }]["link"],
-          ["code-block"],
+          ["bold", "italic", "underline", "strike", "bullet"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["blockquote", "code-block"],
         ],
+        syntax: true,
       }}
     />
   );

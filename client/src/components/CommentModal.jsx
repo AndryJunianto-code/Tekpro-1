@@ -114,7 +114,6 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
             <Typography
               color={theme.palette.mainWhite}
               fontWeight={300}
-              fontSize="0.7rem"
               ml={"0.5rem"}
             >
               {user?.name}
@@ -125,37 +124,25 @@ const CommentModal = ({ postId, setIsOpenCommentModal }) => {
               colorMode === "dark" ? "commentDarkInput" : "commentInput"
             }
             ref={inputRef}
-            variant="outlined"
             placeholder="What are your thoughts"
-            multiline
-            fullWidth
-            maxRows={4}
-            sx={{
-              size: "small",
-              marginTop: "0.4rem",
-              marginLeft: "0.2rem",
-            }}
           />
           <Stack
             direction="row"
             display="flex"
             justifyContent="right"
-            mt={"1rem"}
+            mt={"1.3rem"}
           >
             <Button
-              size="small"
               sx={{
                 textTransform: "capitalize",
                 marginRight: "0.5rem",
-                fontSize: "0.7rem",
               }}
               onClick={() => (inputRef.current.value = "")}
             >
               Cancel
             </Button>
             <Button
-              size="small"
-              sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+              sx={{ textTransform: "capitalize" }}
               variant="contained"
               onClick={handleSubmitComment}
             >
