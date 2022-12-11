@@ -17,6 +17,8 @@ import { useMutation } from "react-query";
 import { bookmarkedPost, likedPost } from "../request/postRequest";
 import useDocumentTitle from "../hook/useDocumentTitle";
 import { useColorModeContext } from "../context/ColorModeContext";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
 
 const PostContent = ({
   singlePostData,
@@ -43,6 +45,8 @@ const PostContent = ({
   const link = new URLSearchParams(window.location.search);
   const linkQueryLiked = link.get("liked");
   const linkQueryBookmarked = link.get("bookmarked");
+  dayjs.extend(relativeTime);
+  let date = dayjs(singlePostData.createdAt).format("MMM DD");
 
   const { mutate: mutateLike } = useMutation(likedPost, {
     onSuccess: () => {
@@ -117,7 +121,7 @@ const PostContent = ({
               <Stack ml={2}>
                 <Typography fontSize={"0.9rem"}>{authorName}</Typography>
                 <Typography fontSize={"0.8rem"} color={theme.palette.darkGrey}>
-                  Nov 9
+                  {date}
                 </Typography>
               </Stack>
             </Stack>

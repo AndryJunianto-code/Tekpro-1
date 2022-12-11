@@ -25,16 +25,18 @@ import { useTheme } from "@mui/material/styles";
 import BookmarkModal from "../../modal/BookmarkModal";
 import { fetchAllLists } from "../../request/bookmarkListRequest";
 import IndividualTagButton from "./IndividualTagButton";
-import { useColorModeContext } from "../../context/ColorModeContext";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
 
 const IndividualCardPost = ({ post }) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const theme = useTheme();
-  const { colorMode } = useColorModeContext();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
   const [bookmarkAnchor, setBookmarkAnchor] = useState(null);
   const [checked, setChecked] = useState([]);
+  dayjs.extend(relativeTime);
+  let date = dayjs(post.createdAt).fromNow();
   const open = Boolean(bookmarkAnchor);
   const {
     authorImage,
@@ -178,7 +180,7 @@ const IndividualCardPost = ({ post }) => {
         }
         title={user?.sub === authorId ? `${authorName} (You)` : authorName}
         titleTypographyProps={{ fontSize: "14px", fontWeight: 500 }}
-        subheader={new Date(createdAt).toDateString()}
+        subheader={date}
         subheaderTypographyProps={{ fontSize: "12px" }}
       />
       <Link

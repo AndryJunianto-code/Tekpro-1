@@ -11,13 +11,16 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteStoryModal from "../../modal/DeleteStoryModal";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
 const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
   const { title, subtitle, _id, userIdBookmarked, authorId } = story;
   const theme = useTheme();
   const [isPostLiked, setIsPostLiked] = useState();
   const [isPostBookmarked, setIsPostBookmarked] = useState(false);
   const navigate = useNavigate();
+  dayjs.extend(relativeTime);
+  let date = dayjs(story.createdAt).format("MMM DD");
 
   const handleClickBox = (e) => {
     navigate(
@@ -39,7 +42,6 @@ const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
       <Box onClick={handleClickBox}>
         <Typography
           color={theme.palette.mainWhite}
-          variant="body2"
           fontWeight={800}
           mb={"0.2rem"}
         >
@@ -47,7 +49,6 @@ const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
         </Typography>
         <Typography
           className="storyDesc"
-          variant="body2"
           color={theme.palette.darkGrey}
           fontWeight={500}
           marginBottom={"0.5rem"}
@@ -56,11 +57,11 @@ const IndividualStory = ({ story, userData, handleOpenDeleteStoryModal }) => {
         />
         <Stack direction="row" alignItems={"center"}>
           <Typography
-            fontSize={"0.8rem"}
+            fontSize={"0.85rem"}
             mr="0.7rem"
             color={theme.palette.darkGrey}
           >
-            Published on Oct 23
+            Published on {date}
           </Typography>
           <IconButton
             size="small"
