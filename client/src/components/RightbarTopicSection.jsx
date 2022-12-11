@@ -24,7 +24,7 @@ const RightbarTopicSection = () => {
       >
         {recommendedTopics.map((r) => (
           <Grid item lg={6} key={r.id}>
-            <Link to={`/tag/${r.tagName}`} className="link">
+            <Link to={`/tag/${r.tagName.toLowerCase()}`} className="link">
               <Button
                 variant="contained"
                 sx={{

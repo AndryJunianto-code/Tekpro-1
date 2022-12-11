@@ -11,19 +11,23 @@ import { useEffect } from "react";
 import BottomBar from "../components/BottomBar";
 import CommentModal from "../components/CommentModal";
 import BlackShadow from "../components/BlackShadow";
-import { fetchUser } from "../request/userRequest";
+import { fetchUser, followUser, unfollowUser } from "../request/userRequest";
+import SinglePostLoading from "../components/loading/SinglePostLoading";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SinglePost = () => {
   let { postId, authorId } = useParams();
+  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
   const [isOpenCommentModal, setIsOpenCommentModal] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(null);
 
-  const { data: userQuery, refetch: userQueryRefetch } = useQuery(
-    ["fetchUser", authorId],
-    fetchUser,
-    {
-      retryDelay: 3000,
-    }
-  );
+  const {
+    data: userQuery,
+    isSuccess: userQuerySuccess,
+    refetch: userQueryRefetch,
+  } = useQuery(["fetchUser", authorId], fetchUser, {
+    retryDelay: 3000,
+  });
 
   const {
     data: singlePostData,
@@ -39,7 +43,39 @@ const SinglePost = () => {
     mutatePostView({ postId });
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  const { mutate: mutateFollow } = useMutation(followUser, {
+    onSuccess: (data) => {
+      userQueryRefetch();
+    },
+  });
+  const { mutate: mutateUnfollow } = useMutation(unfollowUser, {
+    onSuccess: (data) => {
+      userQueryRefetch();
+    },
+  });
+  const handleFollowUser = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
+    setIsFollowing(true);
+    mutateFollow({
+      userId: user?.sub,
+      authorId: userQuery[0]?.userId,
+      authorUsername: userQuery[0]?.username,
+      authorPicture: userQuery[0]?.picture,
+    });
+  };
+  const handleUnfollowUser = () => {
+    setIsFollowing(false);
+    mutateUnfollow({
+      userId: user?.sub,
+      authorId: userQuery[0]?.userId,
+      authorUsername: userQuery[0]?.username,
+      authorPicture: userQuery[0]?.picture,
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -52,21 +88,28 @@ const SinglePost = () => {
         <Stack direction="row" justifyContent="space-between">
           <Leftbar />
 
-          {isSuccess && (
-            <>
-              <PostContent
-                singlePostData={singlePostData}
-                setIsOpenCommentModal={setIsOpenCommentModal}
-                isOpenCommentModal={isOpenCommentModal}
-                refetchSinglePostData={refetchSinglePostData}
-              />
-              <PostRightbar
-                userQuery={userQuery}
-                userQueryRefetch={userQueryRefetch}
-                profile={true}
-              />
-            </>
+          {isSuccess && userQuerySuccess && (
+            <PostContent
+              handleFollowUser={handleFollowUser}
+              handleUnfollowUser={handleUnfollowUser}
+              isFollowing={isFollowing}
+              setIsFollowing={setIsFollowing}
+              userQuery={userQuery}
+              singlePostData={singlePostData}
+              setIsOpenCommentModal={setIsOpenCommentModal}
+              isOpenCommentModal={isOpenCommentModal}
+              refetchSinglePostData={refetchSinglePostData}
+            />
           )}
+          {isLoading && <SinglePostLoading />}
+          <PostRightbar
+            handleFollowUser={handleFollowUser}
+            isFollowing={isFollowing}
+            handleUnfollowUser={handleUnfollowUser}
+            userQuery={userQuery}
+            profile={true}
+            setIsFollowing={setIsFollowing}
+          />
         </Stack>
       </Box>
       <BottomBar />

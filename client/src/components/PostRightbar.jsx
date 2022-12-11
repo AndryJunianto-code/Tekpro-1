@@ -15,50 +15,17 @@ export const FollowingBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const PostRightbar = ({ userQuery, userQueryRefetch, profile }) => {
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+const PostRightbar = ({
+  isFollowing,
+  handleFollowUser,
+  userQuery,
+  profile,
+  handleUnfollowUser,
+  setIsFollowing,
+}) => {
+  const { user } = useAuth0();
   const theme = useTheme();
   const { colorMode } = useColorModeContext();
-  const [isFollowing, setIsFollowing] = useState(null);
-
-  const { mutate: mutateFollow } = useMutation(followUser, {
-    onSuccess: (data) => {
-      console.log(data);
-      userQueryRefetch();
-    },
-  });
-
-  const { mutate: mutateUnfollow } = useMutation(unfollowUser, {
-    onSuccess: (data) => {
-      console.log(data);
-      userQueryRefetch();
-    },
-  });
-
-  const handleFollowUser = () => {
-    if (!isAuthenticated) {
-      loginWithRedirect();
-      return;
-    }
-    setIsFollowing(true);
-    mutateFollow({
-      userId: user?.sub,
-      authorId: userQuery[0]?.userId,
-      authorUsername: userQuery[0]?.username,
-      authorPicture: userQuery[0]?.picture,
-    });
-  };
-
-  const handleUnfollowUser = () => {
-    setIsFollowing(false);
-    mutateUnfollow({
-      userId: user?.sub,
-      authorId: userQuery[0]?.userId,
-      authorUsername: userQuery[0]?.username,
-      authorPicture: userQuery[0]?.picture,
-    });
-  };
-
   useEffect(() => {
     if (userQuery) {
       if (userQuery[0]?.followers.includes(user?.sub)) {

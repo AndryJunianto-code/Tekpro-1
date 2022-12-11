@@ -6,6 +6,7 @@ import { BoxWrapper, CustomBox } from "../utilities/CustomBox";
 import { useQuery } from "react-query";
 import IndividualCardPost from "./individual/IndividualCardPost";
 import { fetchUserByUsername } from "../request/userRequest";
+import { fetchPostByTag } from "../request/postRequest";
 import IndividualUser from "./individual/IndividualUser";
 
 const Stories = () => {
@@ -25,6 +26,12 @@ const Stories = () => {
   } = useQuery(["fetchUserByUsername", query], fetchUserByUsername, {
     retryDelay: 3000,
   });
+
+  const { data: tagData, isSuccess: tagSuccess } = useQuery(
+    ["fetchPostByTag", query],
+    fetchPostByTag,
+    { retryDelay: 3000 }
+  );
 
   useEffect(() => {
     setSearchNavigation("Stories");
@@ -54,11 +61,21 @@ const Stories = () => {
           <Typography
             onClick={() => setSearchNavigation("People")}
             fontSize="0.9rem"
+            mr="1.5rem"
             sx={{ cursor: "pointer" }}
             fontWeight={searchNavigation === "People" && "500"}
             className={searchNavigation === "People" && "underline"}
           >
             People
+          </Typography>
+          <Typography
+            onClick={() => setSearchNavigation("Topics")}
+            fontSize="0.9rem"
+            sx={{ cursor: "pointer" }}
+            fontWeight={searchNavigation === "Topics" && "500"}
+            className={searchNavigation === "Topics" && "underline"}
+          >
+            Topics
           </Typography>
         </Stack>
         <Divider
@@ -85,6 +102,14 @@ const Stories = () => {
             ))
           ) : (
             <p>No people found</p>
+          ))}
+
+        {tagSuccess &&
+          searchNavigation === "Topics" &&
+          (tagData?.length > 0 ? (
+            tagData.map((s) => <IndividualCardPost key={s._id} post={s} />)
+          ) : (
+            <p>No topic found</p>
           ))}
       </BoxWrapper>
     </CustomBox>

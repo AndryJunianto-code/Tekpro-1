@@ -1,5 +1,5 @@
 import { Stack } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import BottomBar from "../components/BottomBar";
 import Leftbar from "../components/Leftbar";
 import UserProfile from "../components/UserProfile";
@@ -9,13 +9,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
 import OtherProfileRightbar from "../components/OtherProfileRightbar";
 import PostRightbar from "../components/PostRightbar";
-import { fetchUser } from "../request/userRequest";
-import { useQuery } from "react-query";
+import { fetchUser, followUser, unfollowUser } from "../request/userRequest";
+import { useQuery, useMutation } from "react-query";
 import useDocumentTitle from "../hook/useDocumentTitle";
 
 const Profile = () => {
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const { userId } = useParams();
+  const [isFollowing, setIsFollowing] = useState(null);
   const { data: userQuery, refetch: userQueryRefetch } = useQuery(
     ["fetchUser", userId],
     fetchUser,
@@ -24,6 +25,38 @@ const Profile = () => {
     }
   );
   useDocumentTitle(userQuery && userQuery[0]?.username);
+  const { mutate: mutateFollow } = useMutation(followUser, {
+    onSuccess: (data) => {
+      userQueryRefetch();
+    },
+  });
+  const { mutate: mutateUnfollow } = useMutation(unfollowUser, {
+    onSuccess: (data) => {
+      userQueryRefetch();
+    },
+  });
+  const handleFollowUser = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect();
+      return;
+    }
+    setIsFollowing(true);
+    mutateFollow({
+      userId: user?.sub,
+      authorId: userQuery[0]?.userId,
+      authorUsername: userQuery[0]?.username,
+      authorPicture: userQuery[0]?.picture,
+    });
+  };
+  const handleUnfollowUser = () => {
+    setIsFollowing(false);
+    mutateUnfollow({
+      userId: user?.sub,
+      authorId: userQuery[0]?.userId,
+      authorUsername: userQuery[0]?.username,
+      authorPicture: userQuery[0]?.picture,
+    });
+  };
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
@@ -40,12 +73,23 @@ const Profile = () => {
           </>
         ) : (
           <>
-            <OtherProfile userQuery={userQuery} />
+            {userQuery && (
+              <OtherProfile
+                userQuery={userQuery}
+                handleFollowUser={handleFollowUser}
+                handleUnfollowUser={handleUnfollowUser}
+                isFollowing={isFollowing}
+                setIsFollowing={setIsFollowing}
+              />
+            )}
             {userQuery && (
               <PostRightbar
                 userQuery={userQuery}
-                userQueryRefetch={userQueryRefetch}
                 profile={true}
+                handleFollowUser={handleFollowUser}
+                handleUnfollowUser={handleUnfollowUser}
+                isFollowing={isFollowing}
+                setIsFollowing={setIsFollowing}
               />
             )}
           </>

@@ -22,6 +22,7 @@ const YourList = () => {
     data: listsData,
     isSuccess: listsSuccess,
     refetch: listsRefetch,
+    isLoading: listsLoading,
   } = useQuery(["fetchAllLists", user?.sub], fetchAllLists, {
     retryDelay: 3000,
   });
@@ -48,6 +49,7 @@ const YourList = () => {
               handleOpenBookmarkModal={handleOpenBookmarkModal}
             />
           ))}
+        {listsLoading && <Typography>Fetching...</Typography>}
       </BoxWrapper>
       <DeleteBookmarkModal
         openBookmarkModal={openBookmarkModal}

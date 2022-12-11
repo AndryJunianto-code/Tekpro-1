@@ -13,10 +13,6 @@ const Feed = () => {
     { retryDelay: 3000 }
   );
 
-  useEffect(() => {
-    /* console.log(feedData); */
-  }, [feedSuccess]);
-
   return (
     <CustomBox flex={4} pt={2}>
       <BoxWrapper>

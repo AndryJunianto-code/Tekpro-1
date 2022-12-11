@@ -61,7 +61,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
   };
   const handleTags = (e) => {
     e.preventDefault();
-    setTags(e.target.value.split(","));
+    setTags(e.target.value.toLowerCase().split(","));
   };
   const buttonPost = async (e) => {
     e.preventDefault();
@@ -143,6 +143,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
               className="tagsInput"
               placeholder="ADD UP TO 4 TAGS COMMA SEPERATED  ex: coding,css,java "
               fullWidth={true}
+              low
             />
           </Stack>
         </Card>

@@ -70,6 +70,7 @@ export default function BasicModal({
               variant="outlined"
               size="small"
               sx={{ textTransform: "capitalize" }}
+              onClick={handleCloseBookmarkModal}
             >
               Cancel
             </Button>

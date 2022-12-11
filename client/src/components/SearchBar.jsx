@@ -17,7 +17,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.toLowerCase());
   };
 
   const handleKeyDown = (e) => {

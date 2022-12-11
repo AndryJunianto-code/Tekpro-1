@@ -66,6 +66,7 @@ const DeleteStoryModal = ({
               variant="outlined"
               size="small"
               sx={{ textTransform: "capitalize" }}
+              onClick={handleCloseDeleteStoryModal}
             >
               Cancel
             </Button>

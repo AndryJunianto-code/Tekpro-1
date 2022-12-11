@@ -30,6 +30,7 @@ const Stories = () => {
     data: storyData,
     isSuccess: storySuccess,
     refetch: storyRefetch,
+    isLoading: storyLoading,
   } = useQuery(["fetchPostByAuthor", user?.sub], fetchPostByAuthor, {
     retryDelay: 3000,
   });
@@ -84,6 +85,7 @@ const Stories = () => {
               handleCloseDeleteStoryModal={handleCloseDeleteStoryModal}
             />
           ))}
+        {storyLoading && <Typography>Fetching...</Typography>}
       </BoxWrapper>
       <DeleteStoryModal
         openStoryModal={openStoryModal}

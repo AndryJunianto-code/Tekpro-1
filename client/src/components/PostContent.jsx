@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   IconButton,
   Stack,
@@ -14,17 +15,23 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
-import { bookmarkedPost, likedPost } from "../request/postRequest";
+import { likedPost } from "../request/postRequest";
 import useDocumentTitle from "../hook/useDocumentTitle";
 import { useColorModeContext } from "../context/ColorModeContext";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 const PostContent = ({
   singlePostData,
   setIsOpenCommentModal,
   isOpenCommentModal,
   refetchSinglePostData,
+  handleFollowUser,
+  handleUnfollowUser,
+  isFollowing,
+  setIsFollowing,
+  userQuery,
 }) => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const {
@@ -116,15 +123,54 @@ const PostContent = ({
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Stack direction={"row"}>
-              <Avatar src={authorImage} alt="profile" />
-              <Stack ml={2}>
-                <Typography fontSize={"0.9rem"}>{authorName}</Typography>
-                <Typography fontSize={"0.8rem"} color={theme.palette.darkGrey}>
-                  {date}
-                </Typography>
-              </Stack>
-            </Stack>
+            {
+              <Link className="link" to={`/profile/${userQuery[0].userId}`}>
+                <Stack direction={"row"}>
+                  <Avatar src={authorImage} alt="profile" />
+                  <Stack ml={2}>
+                    <Typography
+                      fontSize={"0.9rem"}
+                      color={theme.palette.mainWhite}
+                    >
+                      {authorName}
+                    </Typography>
+                    <Typography
+                      fontSize={"0.8rem"}
+                      color={theme.palette.darkGrey}
+                    >
+                      {date}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Link>
+            }
+            {isFollowing && userQuery[0]?.userId !== user?.sub && (
+              <Button
+                size="small"
+                onClick={handleUnfollowUser}
+                variant="outlined"
+                sx={{
+                  display: { xs: "block", lg: "none" },
+                  textTransform: "capitalize",
+                }}
+              >
+                Following
+              </Button>
+            )}
+
+            {!isFollowing && userQuery[0]?.userId !== user?.sub && (
+              <Button
+                size="small"
+                onClick={handleFollowUser}
+                variant="contained"
+                sx={{
+                  display: { xs: "block", lg: "none" },
+                  textTransform: "capitalize",
+                }}
+              >
+                Follow
+              </Button>
+            )}
           </Box>
 
           {/*  */}

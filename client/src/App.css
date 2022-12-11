@@ -74,7 +74,8 @@
   border: none;
   padding: 9px;
   margin-right: 0.3rem;
-  letter-spacing: 0.7 px;
+  letter-spacing: 0.7px;
+  text-transform: lowercase;
 }
 .buttonTag:hover {
   background-color: #e0e0e0;
