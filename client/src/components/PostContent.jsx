@@ -234,7 +234,7 @@ const PostContent = ({
             sx={{ background: "white", marginTop: "2rem" }}
           />
 
-          {/* COMMENTS SECTION */}
+          {/* MORE SECTION */}
         </BoxWrapper>
       </CustomPostBox>
     </>

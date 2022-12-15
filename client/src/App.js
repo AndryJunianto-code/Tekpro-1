@@ -15,6 +15,7 @@ import Tag from "./pages/Tag";
 import { useColorModeContext } from "./context/ColorModeContext";
 import { createTheme } from "@mui/material";
 import { useEffect } from "react";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const { colorMode, setColorMode } = useColorModeContext();
@@ -57,6 +58,7 @@ function App() {
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/search/:query" element={<Search />} />
               <Route path="/tag/:tagName" element={<Tag />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>
         </AuthProvider>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Box, Button, Divider, Stack, Typography } from "@mui/material";
-import { theme } from "../../theme";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -63,29 +63,31 @@ const IndividualUser = ({ u, userSearchRefetch }) => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Stack direction="row" alignItems="center">
-              <Avatar
-                src={picture}
-                alt="image"
-                sx={{
-                  width: "50px",
-                  height: "50px",
-                }}
-              />
-              <Stack ml="1.5rem">
-                <Typography fontSize="0.8rem" fontWeight="600">
-                  {username}
-                </Typography>
-                <Typography fontSize="0.75rem" color="#707070">
-                  {description}
-                </Typography>
+            <Link to={`/profile/${userId}`} className="link">
+              <Stack direction="row" alignItems="center">
+                <Avatar
+                  src={picture}
+                  alt="image"
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                  }}
+                />
+                <Stack ml="1.5rem">
+                  <Typography fontSize="0.9rem" fontWeight="600">
+                    {username}
+                  </Typography>
+                  <Typography fontSize="0.75rem" color="#707070">
+                    {description}
+                  </Typography>
+                </Stack>
               </Stack>
-            </Stack>
+            </Link>
             {isFollowing ? (
               <Button
                 onClick={handleUnfollowUser}
                 variant="outlined"
-                sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+                sx={{ textTransform: "capitalize", fontSize: "0.8rem" }}
               >
                 Following
               </Button>
@@ -93,7 +95,7 @@ const IndividualUser = ({ u, userSearchRefetch }) => {
               <Button
                 onClick={handleFollowUser}
                 variant="contained"
-                sx={{ textTransform: "capitalize", fontSize: "0.7rem" }}
+                sx={{ textTransform: "capitalize", fontSize: "0.8rem" }}
               >
                 Follow
               </Button>

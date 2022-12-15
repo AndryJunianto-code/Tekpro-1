@@ -104,9 +104,14 @@ const PostRightbar = ({
 
           {profile && userQuery && userQuery[0]?.followings.length > 0 && (
             <Box mt="3rem">
-              <Typography mb="0.8rem" fontWeight="600">
-                Following
-              </Typography>
+              <Stack direction="row">
+                <Typography mb="0.8rem" mr="0.3rem" fontWeight="600">
+                  Following
+                </Typography>
+                <Typography fontSize="0.9rem">
+                  ({userQuery && userQuery[0]?.followings.length})
+                </Typography>
+              </Stack>
               <FollowingBox>
                 {userQuery &&
                   userQuery[0]?.followings.map((f) => (
