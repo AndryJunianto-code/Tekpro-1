@@ -15,6 +15,13 @@ export const fetchPostByAuthor = async (obj) => {
   return data;
 };
 
+export const fetchPostWithLimitByAuthor = async (obj) => {
+  const { data } = await axios.get(
+    `/posts/postWithLimitByAuthor/${obj.queryKey[1]}`
+  );
+  return data;
+};
+
 export const fetchSinglePost = async (obj) => {
   const postId = obj.queryKey[1];
   const { data } = await axios.get(`/posts/${postId}`);

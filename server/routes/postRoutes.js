@@ -27,6 +27,19 @@ router.get("/postWithLimit", async (req, res) => {
   }
 });
 
+//get post from author with limit
+router.get("/postWithLimitByAuthor/:userId", async (req, res) => {
+  let posts;
+  try {
+    posts = await Post.find({ authorId: req.params.userId })
+      .sort({ createdAt: -1 })
+      .limit(4);
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get one specific post
 router.get("/:postId", async (req, res) => {
   let post;

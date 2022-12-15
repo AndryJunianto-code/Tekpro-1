@@ -14,13 +14,14 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation } from "react-query";
-import { likedPost } from "../request/postRequest";
+import { useMutation, useQuery } from "react-query";
+import { fetchPostWithLimitByAuthor, likedPost } from "../request/postRequest";
 import useDocumentTitle from "../hook/useDocumentTitle";
 import { useColorModeContext } from "../context/ColorModeContext";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import IndividualMorePost from "./individual/IndividualMorePost";
 
 const PostContent = ({
   singlePostData,
@@ -41,6 +42,7 @@ const PostContent = ({
     postImage,
     authorImage,
     authorName,
+    authorId,
     numOfLike,
     numOfComment,
   } = singlePostData;
@@ -54,6 +56,12 @@ const PostContent = ({
   const linkQueryBookmarked = link.get("bookmarked");
   dayjs.extend(relativeTime);
   let date = dayjs(singlePostData.createdAt).format("MMM DD");
+
+  const { data: morePostsData, isSuccess: morePostsSuccess } = useQuery(
+    ["fetchPostWithLimitByAuthor", authorId],
+    fetchPostWithLimitByAuthor,
+    { retryDelay: 3000 }
+  );
 
   const { mutate: mutateLike } = useMutation(likedPost, {
     onSuccess: () => {
@@ -95,9 +103,10 @@ const PostContent = ({
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsPostLiked(linkQueryLiked);
     setIsPostBookmarked(linkQueryBookmarked);
-  }, []);
+  }, [link]);
 
   return (
     <>
@@ -231,10 +240,36 @@ const PostContent = ({
           {/*  */}
           <Divider
             variant="fullWidth"
-            sx={{ background: "white", marginTop: "2rem" }}
+            sx={{
+              background: "white",
+              marginTop: "2rem",
+              marginBottom: "2rem",
+            }}
           />
 
           {/* MORE SECTION */}
+          <Box
+            sx={{ backgroundColor: colorMode === "light" ? "#fafafa" : "" }}
+            py="2rem"
+            px="1rem"
+            borderRadius="5px"
+          >
+            <Typography
+              color={theme.palette.mainWhite}
+              fontSize={"1.3rem"}
+              mb="3rem"
+              fontWeight="500"
+            >
+              More from {authorName}
+            </Typography>
+            <Stack>
+              {morePostsSuccess &&
+                morePostsData &&
+                morePostsData.map((p) => (
+                  <IndividualMorePost key={p._id} post={p} />
+                ))}
+            </Stack>
+          </Box>
         </BoxWrapper>
       </CustomPostBox>
     </>
