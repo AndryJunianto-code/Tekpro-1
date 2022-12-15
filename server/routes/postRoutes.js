@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/postWithLimit", async (req, res) => {
   let posts;
   try {
-    posts = await Post.find().sort({ createdAt: -1 }).limit(3);
+    posts = await Post.find().sort({ createdAt: -1 }).limit(2);
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);

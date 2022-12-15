@@ -18,7 +18,7 @@ const CreateBlog = ({ setOpen, setMessage }) => {
   const [fileData, setFileData] = useState();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
-  const [tags, setTags] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const handleImage = (e) => {
     e.preventDefault();
@@ -61,7 +61,8 @@ const CreateBlog = ({ setOpen, setMessage }) => {
   };
   const handleTags = (e) => {
     e.preventDefault();
-    setTags(e.target.value.toLowerCase().split(","));
+    let tempTags = e.target.value.toLowerCase().split(",");
+    setTags(tempTags);
   };
   const buttonPost = async (e) => {
     e.preventDefault();
@@ -74,6 +75,9 @@ const CreateBlog = ({ setOpen, setMessage }) => {
     } else if (subtitle === "") {
       setOpen(true);
       setMessage("Please add a subtitle");
+    } else if (tags.length > 4) {
+      setOpen(true);
+      setMessage("Maximum up to 4 tags");
     } else if (content === "") {
       setOpen(true);
       setMessage("Please write a few words as content");

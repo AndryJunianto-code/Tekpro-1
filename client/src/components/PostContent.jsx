@@ -104,7 +104,7 @@ const PostContent = ({
       <style>
         {`
          blockquote {
-          background: ${colorMode === "light" ? "#f0f0f0;" : "#424242;"}
+          background: ${colorMode === "light" ? "#f0f0f0;" : "#23241f;"}
           border-left: ${
             colorMode === "light"
               ? "10px solid #1976d2;"
