@@ -140,20 +140,24 @@ const CreateBlog = ({ setOpen, setMessage }) => {
               placeholder="NEW POST TITLE HERE ..."
               fullWidth={true}
               required={true}
-              sx={{ fontSize: "2rem", fontWeight: 600, marginTop: "1rem" }}
+              sx={{
+                fontSize: { xs: "1.4rem", lg: "2rem" },
+                fontWeight: 600,
+                marginTop: "1rem",
+              }}
             />
             <InputBase
               onChange={handleSubtitle}
               placeholder="Subtitle"
               fullWidth={true}
-              sx={{ fontSize: "1.3rem", fontWeight: 400 }}
+              sx={{ fontSize: { xs: "1.1rem", lg: "1.3rem" }, fontWeight: 400 }}
             />
             <InputBase
               onChange={handleTags}
               className="tagsInput"
               placeholder="ADD UP TO 4 TAGS COMMA SEPERATED  ex: coding,css,java "
               fullWidth={true}
-              low
+              sx={{ fontSize: { xs: "0.7rem", lg: "1rem" } }}
             />
           </Stack>
         </Card>

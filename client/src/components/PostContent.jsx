@@ -104,10 +104,9 @@ const PostContent = ({
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     setIsPostLiked(linkQueryLiked);
     setIsPostBookmarked(linkQueryBookmarked);
-  }, [link]);
+  }, []);
 
   return (
     <>
@@ -200,7 +199,7 @@ const PostContent = ({
           {/*  */}
           <Stack direction="row" alignItems="center" mt={5}>
             <Box display="flex" alignItems="center" mr={3}>
-              {isPostLiked === "true" ? (
+              {isPostLiked == "true" ? (
                 <IconButton onClick={handleDislikePost}>
                   <FavoriteIcon
                     sx={{

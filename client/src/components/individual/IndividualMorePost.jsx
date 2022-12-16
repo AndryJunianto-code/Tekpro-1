@@ -4,6 +4,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { useColorModeContext } from "../../context/ColorModeContext";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const IndividualMorePost = ({ post }) => {
   const { createdAt, title, subtitle, _id, authorId } = post;
@@ -11,6 +12,7 @@ const IndividualMorePost = ({ post }) => {
   const theme = useTheme();
   dayjs.extend(relativeTime);
   let date = dayjs(post.createdAt).format("MMM DD");
+
   return (
     <Link to={`/p/${_id}/${authorId}`} className="link">
       <Box>

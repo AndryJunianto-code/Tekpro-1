@@ -6,7 +6,7 @@ import PostContent from "../components/PostContent";
 import PostRightbar from "../components/PostRightbar";
 import { fetchSinglePost, increasePostView } from "../request/postRequest";
 import { useQuery, useMutation } from "react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import BottomBar from "../components/BottomBar";
 import CommentModal from "../components/CommentModal";
@@ -20,6 +20,7 @@ const SinglePost = () => {
   const { isAuthenticated, loginWithRedirect, user } = useAuth0();
   const [isOpenCommentModal, setIsOpenCommentModal] = useState(false);
   const [isFollowing, setIsFollowing] = useState(null);
+  const { pathname } = useLocation();
 
   const {
     data: userQuery,
@@ -42,6 +43,9 @@ const SinglePost = () => {
   useEffect(() => {
     mutatePostView({ postId });
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const { mutate: mutateFollow } = useMutation(followUser, {
     onSuccess: (data) => {

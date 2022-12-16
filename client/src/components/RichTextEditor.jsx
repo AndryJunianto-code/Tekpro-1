@@ -25,15 +25,13 @@ export default function RichTextEditor({ content, setContent }) {
         "strike",
         "blockquote",
         "list",
-        "bullet",
-        "indent",
         "code-block",
       ]}
       modules={{
         toolbar: [
           [{ header: [1, 2, 3, 4, 5, 6] }],
           ["bold", "italic", "underline", "strike"],
-          [{ list: "ordered" }, { list: "bullet" }, { indent: "+1" }],
+          [{ list: "ordered" }, { list: "bullet" }],
           ["blockquote", "code-block"],
         ],
         syntax: true,
