@@ -22,9 +22,15 @@ const CreateBlog = ({ setOpen, setMessage }) => {
 
   const handleImage = (e) => {
     e.preventDefault();
-    setFileData(e.target.files[0]);
-    setPreviewImage(URL.createObjectURL(e.target.files[0]));
-    setImage(e.target.value);
+    if (e.target.files[0].size >= 2000000) {
+      setOpen(true);
+      setMessage("Image maximum 2MB");
+      setImage("");
+    } else {
+      setFileData(e.target.files[0]);
+      setPreviewImage(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.value);
+    }
   };
 
   const {

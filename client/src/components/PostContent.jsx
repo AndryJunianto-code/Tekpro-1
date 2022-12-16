@@ -37,6 +37,7 @@ const PostContent = ({
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const {
     title,
+    subtitle,
     _id,
     caption,
     postImage,
@@ -186,6 +187,9 @@ const PostContent = ({
           <Box mt={2} color={theme.palette.mainWhite}>
             <Typography fontSize={"2rem"} fontWeight="900" lineHeight={"37px"}>
               {title}
+            </Typography>
+            <Typography fontFamily={"David Libre,serif;"}>
+              {subtitle}
             </Typography>
             <img className="singlePostImage" src={postImage} />
             <Typography
